@@ -1,7 +1,7 @@
 {
-  "name": "pollbuilder",
+  "name": "picnic",
   "version": "1.0.0",
-  "description": "Build your own polls, share with your friends, vote in polls created by other users, and view results of any poll.",
+  "description": "An app for the serious picnicker. Will help you coordinate a picnic with your friends. That's... all it does.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,10 +13,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rifkegribenes/pollbuilder.git"
+    "url": "git+https://github.com/rifkegribenes/picnic.git"
   },
-  "bugs": "https://github.com/rifkegribenes/pollbuilder/issues",
-  "homepage": "https://github.com/rifkegribenes/pollbuilder#readme",
+  "bugs": "https://github.com/rifkegribenes/picnic/issues",
+  "homepage": "https://github.com/rifkegribenes/picnic#readme",
   "keywords": [
     "MongoDB",
     "Mongoose",

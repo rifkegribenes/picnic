@@ -3,7 +3,6 @@ import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 
-import Chart from "./Chart";
 import editIcon from "../img/edit.svg";
 import deleteIcon from "../img/delete.svg";
 import twIcon from "../img/twitter.svg";
@@ -43,38 +42,6 @@ const PollCard = props => {
     );
   };
 
-  const chartOptions = {
-    legend: { display: false },
-    legendCallback,
-    maintainAspectRatio: true
-  };
-
-  const chartData = {
-    labels: props.poll.options.map(option => option.text),
-    datasets: [
-      {
-        label: "Votes",
-        data: props.poll.options.map(option => option.votes),
-        backgroundColor: [
-          "rgba(130, 63, 178, 1)", // grape
-          "rgba(168, 54, 136, 1)",
-          "rgba(224, 41, 72, 1)", // raspberry
-          "rgba(250, 76, 53, 1)",
-          "rgba(250, 124, 66, 1)",
-          "rgba(250, 171, 79, 1)", // mango
-          "rgba(130, 63, 178, 1)", // grape
-          "rgba(168, 54, 136, 1)",
-          "rgba(224, 41, 72, 1)", // raspberry
-          "rgba(250, 76, 53, 1)",
-          "rgba(250, 124, 66, 1)",
-          "rgba(250, 171, 79, 1)" // mango
-        ],
-        borderColor: ["#ffffff"],
-        borderWidth: 1
-      }
-    ]
-  };
-
   const backgroundStyle = {
     backgroundImage: `url(${props.poll.ownerAvatar ||
       "https://raw.githubusercontent.com/rifkegribenes/pollbuilder/master/client/public/img/pollbuilder_icon.png"})`,
@@ -84,7 +51,7 @@ const PollCard = props => {
   const canonicalUrl = encodeURIComponent(`https://pollbuilder.glitch.me/poll/${props.poll._id}`);
   const questionUriEncoded = encodeURIComponent(props.poll.question);
   const tumblrUrl = `https://www.tumblr.com/widgets/share/tool?canonicalUrl=${canonicalUrl}&posttype=link&description=${questionUriEncoded}&caption=${questionUriEncoded}`
-  
+
   return (
     <div key={props.poll._id}>
       <div
@@ -110,9 +77,6 @@ const PollCard = props => {
                   {option._id !== undefined && option.text}
                 </button>
               ))}
-          </div>
-          <div className="polls-grid__chart-wrap">
-            <Chart data={chartData} options={chartOptions} />
           </div>
         </div>
         <div className="polls-grid__icon-wrap">

@@ -163,11 +163,9 @@ export const typewriterAnimation = () => {
   document.addEventListener("DOMContentLoaded", function(event) {
     // array with phrases to type in typewriter
     const dataText = [
-      "Create your own polls.",
-      "Share polls with anyone.",
-      "Vote in any public poll.",
-      "Analyze results.",
-      "Amaze your friends."
+      "Plan a picnic with friends.",
+      "Sorry that's all it does.",
+      "It's just for picnics."
     ];
 
     // type one phrase in the typwriter

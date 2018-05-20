@@ -75,7 +75,7 @@ class ComboBox extends React.Component {
             </button>
           )}
           <div className="combo__logo-wrap">
-            <img className="combo__logo" src={logo} alt="pollbuilder" />
+            <img className="combo__logo" src={logo} alt="picnic" />
           </div>
           <div className="combo__title">
             {reset || resetPwd ? "Reset your password" : ""}

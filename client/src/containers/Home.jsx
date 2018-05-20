@@ -6,8 +6,8 @@ import * as Actions from "../store/actions";
 import * as apiActions from "../store/actions/apiActions";
 import { typewriterAnimation } from "../utils";
 
-import logo from "../img/pollbuilder.svg";
-import icon from "../img/pollbuilder_icon.svg";
+import logo from "../img/picnic.svg";
+import icon from "../img/picnic_icon.svg";
 
 class Home extends React.Component {
   componentDidMount() {
@@ -44,8 +44,8 @@ class Home extends React.Component {
     return (
       <div className="splash">
         <div className="splash__logo-wrap">
-          <img className="splash__logo" src={logo} alt="pollbuilder" />
-          <img className="splash__icon" src={icon} alt="pollbuilder" />
+          <img className="splash__logo" src={logo} alt="picnic" />
+          <img className="splash__icon" src={icon} alt="picnic" />
           <div id="typewriter" className="splash__headline">
             Create your own polls.
           </div>

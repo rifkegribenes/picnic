@@ -161,7 +161,7 @@
       border-bottom: 1px solid transparent;
 
       &:hover, &:focus {
-        border-bottom: 1px solid $color_grape;
+        border-bottom: 1px solid $color_brown;
       }
 
       &--home {
@@ -202,7 +202,7 @@
   }
 
   &__item-link {
-    color: $color_grape;
+    color: $color_brown;
     font-family: $font-stack;
     letter-spacing: 1.5px;
     font-size: 16px;
@@ -241,7 +241,7 @@
       }
 
       &--menu {
-        color: $color_grape;
+        color: $color_brown;
         font-family: $font-stack;
         // text-transform: uppercase;
         letter-spacing: 1px;
@@ -251,7 +251,7 @@
         padding: 1px 0 0 36px;
 
         &-open {
-          color: $color_grape;
+          color: $color_brown;
           font-family: $font-stack;
           text-transform: uppercase;
           letter-spacing: 2px;
@@ -280,7 +280,7 @@
       margin-top: -40px;
       padding: 60px 0 0 0;
       background: white;
-      border-bottom: 1px solid $color_grape;
+      border-bottom: 1px solid $color_brown;
       box-shadow: 0 4px 2px 0 rgba(131,58,180,.2);
 
     }
@@ -374,7 +374,7 @@
       //   appearance: none;
       //   border: none;
       //   background: transparent;
-      //   color: $color_grape;
+      //   color: $color_brown;
       //   font-family: $font-stack;
       //   letter-spacing: 1.5px;
       //   text-transform: uppercase;
@@ -389,7 +389,7 @@
       //     border: none;
       //     background: transparent;
       //     outline: none;
-      //     color: $color_grape;
+      //     color: $color_brown;
       //     font-family: $font-stack;
       //     letter-spacing: 1.5px;
       //     text-transform: uppercase;
@@ -400,7 +400,7 @@
       // }
 
       &:hover, &:focus {
-        border-bottom: 3px solid $color_grape;
+        border-bottom: 3px solid $color_brown;
       }
     }
 
@@ -422,7 +422,7 @@
     }
 
     &__link {
-      color: $color_grape;
+      color: $color_brown;
       font-family: $font-stack;
       padding: 5px;
       font-size: 13px;
@@ -444,7 +444,7 @@
         }
 
         &:hover, &:focus {
-          border-bottom: 1px solid $color_grape;
+          border-bottom: 1px solid $color_brown;
           transition: $transition_button;
         }
       }
@@ -550,12 +550,12 @@
     transition: color 400ms ease-out;
 
     &--expanded {
-      color: $color_grape;
+      color: $color_brown;
       transition: color 400ms ease-in;
 
       &:hover, &:focus {
         // color: rgba(131,58,180, .5);
-        border-bottom: 1px solid $color_grape;
+        border-bottom: 1px solid $color_brown;
         transition: all 300ms ease-in-out;
       }
 

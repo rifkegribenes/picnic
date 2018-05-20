@@ -7,7 +7,7 @@ import * as Actions from "../store/actions";
 import ModalSm from "./ModalSm";
 
 import { skip } from "../utils";
-import logo from "../img/pollbuilder.svg";
+import logo from "../img/picnic.svg";
 import gear from "../img/gear.svg";
 
 class Header extends React.Component {
@@ -97,7 +97,7 @@ class Header extends React.Component {
     if (
       !avatarUrl ||
       avatarUrl ===
-        "https://raw.githubusercontent.com/rifkegribenes/pollbuilder/master/client/public/img/pollbuilder_icon.png"
+        "https://raw.githubusercontent.com/rifkegribenes/picnic/master/client/public/img/picnic_icon.png"
     ) {
       avatarUrl = gear;
     }
@@ -191,7 +191,7 @@ class Header extends React.Component {
                 className="h-nav__logo-wrap"
                 activeClassName="h-nav__logo-wrap--active"
               >
-                <img src={logo} className="h-nav__logo" alt="pollbuilder" />
+                <img src={logo} className="h-nav__logo" alt="picnic" />
               </NavLink>
             </div>
 

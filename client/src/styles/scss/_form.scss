@@ -22,7 +22,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
   text-align: center;
   }
   &__header {
-    color: $color_grape;;
+    color: $color_brown;;
     font-weight: 100;
     font-family: $font-stack;
     text-transform: uppercase;
@@ -38,39 +38,12 @@ input:not([type=checkbox]):not([type=radio]), textarea {
   &__footer {
     margin: 0 -20px;
   }
-  &__connection-header {
-    color: $color_sky;
-    font-weight: 100;
-    font-family: $font-stack;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 28px;
-    padding: 30px 0 0 0;
-    @include for-tablet-portrait-up {
-      font-size: 29px;
-    }
-    @include for-tablet-landscape-up {
-      font-size: 45px;
-    }
-  }
 
-  &__btn--search {
-      color: $color_sky;
-      padding-top: 40px;
-
-    }
 
   &__label--checkbox {
       font-family: $font-stack;
       color: $color_gray_darker;
   }
-
-
-  &__icon--search {
-      color: $color_sky;
-      font-size: 1.5em;
-
-    }
 
 
   &__input-group {
@@ -160,7 +133,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
       z-index: 10;
 
       &:hover {
-        background: $color_aqua_lighter;
+        background: $color_green_lighter;
       }
 
       &:checked {
@@ -175,7 +148,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
           content: '';
           display: inline-block;
           border-radius: 100%;
-          background-color: $color_sky;
+          background-color: $color_green;
 
             &:focus {
             border-radius: 50%;
@@ -287,7 +260,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     margin-top: 10px;
     position: relative;
     top: 6px;
-    color: $color_sky;
+    color: $color_brown;
     font-weight: 300;
     letter-spacing: 2px;
   }
@@ -369,9 +342,9 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     font-weight: 400;
     border-radius: $btn_border-radius;
     padding: 10px 20px;
-    background: $color_grape;
-    background-image: -webkit-linear-gradient(-45deg, $color_grape 0px, $color_grape 50px, $color_raspberry, $color_mango 100%);
-    background-image: linear-gradient(135deg, $color_grape 0px, $color_grape 50px, $color_raspberry, $color_mango 100%);
+    background: $color_brown;
+    background-image: -webkit-linear-gradient(-45deg, $color_brown 0px, $color_brown 50px, $color_green, $color_green_lighter 100%);
+    background-image: linear-gradient(135deg, $color_brown 0px, $color_brown 50px, $color_green, $color_green_lighter 100%);
     background-size: 200% 200%;
     background-position: 0 0;
     transition: background-position 500ms ease-in-out;
@@ -414,7 +387,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
       border-bottom-right-radius: $btn_border-radius;
 
       &:hover, &:active, &:focus {
-        background-color: $color_aqua_darker;
+        background-color: $color_green_darker;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
         transition: all 300ms ease-in-out;
       }
@@ -555,13 +528,13 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     }
 
     &:hover, &:active, &:focus {
-      color: $color_aqua_darker;
-      border-bottom: 1px dotted $color_aqua_darker;
+      color: $color_green_darker;
+      border-bottom: 1px dotted $color_green_darker;
       transition: all 300ms ease-in-out;
     }
 
     &:focus {
-      box-shadow: inset 0 0 .2em $color_aqua, 0 0 1em $color_focus_ring !important;
+      box-shadow: inset 0 0 .2em $color_green, 0 0 1em $color_focus_ring !important;
       }
   }
 

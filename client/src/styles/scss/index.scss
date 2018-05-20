@@ -106,10 +106,10 @@ body.user-is-tabbing *:focus {
   padding-bottom: 5px;
   margin-bottom: 10px;
   text-decoration: none !important;
-  color: $color_grape;
+  color: $color_brown;
 
   &:hover, &:active, &:focus {
-    border-bottom: 1px dotted $color_grape;
+    border-bottom: 1px dotted $color_brown;
     cursor: pointer;
   }
 }
@@ -153,7 +153,7 @@ body.user-is-tabbing *:focus {
     text-decoration: none !important;
 
     &:hover, &:active, &:focus {
-      border-bottom: 1px dotted $color_grape;
+      border-bottom: 1px dotted $color_brown;
       cursor: pointer;
 
     }
@@ -238,7 +238,7 @@ input:invalid {
       border-radius: 20px;
       appearance: none;
       -webkit-appearance: none;
-      background: $color_grape;
+      background: $color_brown;
       z-index: 100;
       border: 1px solid white;
       color: white;
@@ -262,7 +262,7 @@ input:invalid {
   }
 
 .single-msg {
-  color: $color_grape;
+  color: $color_brown;
   font-weight: 100;
   font-size: 10vw;
   text-align: center;

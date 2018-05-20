@@ -2,7 +2,6 @@ import React from "react";
 import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-
 import editIcon from "../img/edit.svg";
 import deleteIcon from "../img/delete.svg";
 import twIcon from "../img/twitter.svg";
@@ -44,13 +43,15 @@ const PollCard = props => {
 
   const backgroundStyle = {
     backgroundImage: `url(${props.poll.ownerAvatar ||
-      "https://raw.githubusercontent.com/rifkegribenes/pollbuilder/master/client/public/img/pollbuilder_icon.png"})`,
+      "https://raw.githubusercontent.com/rifkegribenes/picnic/master/client/public/img/picnic_icon.png"})`,
     backgroundSize: "cover",
     backgroundPosition: "center center"
   };
-  const canonicalUrl = encodeURIComponent(`https://pollbuilder.glitch.me/poll/${props.poll._id}`);
+  const canonicalUrl = encodeURIComponent(
+    `https://picnic.glitch.me/poll/${props.poll._id}`
+  );
   const questionUriEncoded = encodeURIComponent(props.poll.question);
-  const tumblrUrl = `https://www.tumblr.com/widgets/share/tool?canonicalUrl=${canonicalUrl}&posttype=link&description=${questionUriEncoded}&caption=${questionUriEncoded}`
+  const tumblrUrl = `https://www.tumblr.com/widgets/share/tool?canonicalUrl=${canonicalUrl}&posttype=link&description=${questionUriEncoded}&caption=${questionUriEncoded}`;
 
   return (
     <div key={props.poll._id}>

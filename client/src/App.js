@@ -39,6 +39,12 @@ const PrivateRoute = ({ component: Component, loggedIn, ...rest }) => {
 };
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.updateDimensions = this.updateDimensions.bind(this);
+  }
+
   componentWillMount() {
     this.updateDimensions();
   }

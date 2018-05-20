@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import logo from "../img/picnic.svg";
-import github from "../img/github-gradient.svg";
+import logo from "../img/picnic_notag.svg";
+import github from "../img/github-white.svg";
 
 const Footer = props => (
   <footer className="footer">

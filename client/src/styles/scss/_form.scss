@@ -342,9 +342,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     font-weight: 400;
     border-radius: $btn_border-radius;
     padding: 10px 20px;
-    background: $color_brown;
-    background-image: -webkit-linear-gradient(-45deg, $color_brown 0px, $color_brown 50px, $color_green, $color_green_lighter 100%);
-    background-image: linear-gradient(135deg, $color_brown 0px, $color_brown 50px, $color_green, $color_green_lighter 100%);
+    background: $color_green;
     background-size: 200% 200%;
     background-position: 0 0;
     transition: background-position 500ms ease-in-out;
@@ -362,8 +360,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     }
 
     &:hover, &:focus {
-      background-position: 100% 100%;
-      box-shadow: 0 5px 10px rgba(131,58,180, 0.4);
+      background: $color_green_lighter;
       transition: all 500ms ease-in-out;
     }
 

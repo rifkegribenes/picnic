@@ -5,9 +5,9 @@
   z-index: 3;
   justify-content: space-between;
   position: fixed;
+  background: $color_green;
 
   @include mobile-nav-breakpoint {
-    box-shadow: 0 1px 5px 2px rgba(131,58,180,.2);
     margin-bottom: 40px;
   }
 
@@ -27,6 +27,7 @@
   justify-content: flex-start;
   height: 30px;
   list-style: none;
+  color: white;
 
   &__logo {
     width: 200px;
@@ -50,7 +51,7 @@
     margin: 0 auto;
     z-index: 2;
     min-height: 60px;
-    background: white;
+    background: $color_green;
   }
   &__icon {
       height: 14px;
@@ -202,7 +203,7 @@
   }
 
   &__item-link {
-    color: $color_brown;
+    color: white;
     font-family: $font-stack;
     letter-spacing: 1.5px;
     font-size: 16px;
@@ -227,10 +228,12 @@
         padding: 4px 20px 6px 20px;
         text-transform: capitalize;
         width: 92px;
-      }
+        background: $color_green_lighter;
 
-      &:hover, &:focus {
-        // text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        &:hover, &:focus {
+          background: $color_green_lightest;
+          transition: $transition_button;
+        }
       }
 
       &--logout {
@@ -369,38 +372,8 @@
       height: 53px;
       cursor: pointer;
 
-      // &--button {
-      //   -webkit-appearance: none;
-      //   appearance: none;
-      //   border: none;
-      //   background: transparent;
-      //   color: $color_brown;
-      //   font-family: $font-stack;
-      //   letter-spacing: 1.5px;
-      //   text-transform: uppercase;
-      //   font-weight: inherit;
-      //   cursor: pointer;
-      //   margin-top: -8px !important;
-      //   border-bottom: 3px transparent;
-
-      //   &:hover, &:focus, &:active {
-      //     -webkit-appearance: none;
-      //     appearance: none;
-      //     border: none;
-      //     background: transparent;
-      //     outline: none;
-      //     color: $color_brown;
-      //     font-family: $font-stack;
-      //     letter-spacing: 1.5px;
-      //     text-transform: uppercase;
-      //     font-weight: inherit;
-      //     cursor: pointer;
-
-      //   }
-      // }
-
       &:hover, &:focus {
-        border-bottom: 3px solid $color_brown;
+        border-bottom: 3px solid white;
       }
     }
 
@@ -408,6 +381,7 @@
       display: flex;
       font-weight: 200;
       text-decoration: none;
+      margin-top: -21px;
     }
 
     &__logo {
@@ -439,14 +413,21 @@
           height: 50px;
         }
 
-        &--login {
-          border: 1px solid rgba(255, 255, 255, 0.6);
-        }
-
         &:hover, &:focus {
           border-bottom: 1px solid $color_brown;
           transition: $transition_button;
         }
+
+        &--login {
+          background: $color_green_lighter;
+          border: 1px solid rgba(255, 255, 255, 0.6);
+
+          &:hover, &:focus {
+            background: 1px solid $color_green_lightest;
+            transition: $transition_button;
+          }
+        }
+
       }
     }
 }

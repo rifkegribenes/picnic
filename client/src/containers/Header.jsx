@@ -7,7 +7,7 @@ import * as Actions from "../store/actions";
 import ModalSm from "./ModalSm";
 
 import { skip } from "../utils";
-import logo from "../img/picnic.svg";
+import logo from "../img/picnic_notag.svg";
 import gear from "../img/gear.svg";
 
 class Header extends React.Component {

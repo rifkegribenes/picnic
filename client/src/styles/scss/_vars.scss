@@ -8,10 +8,11 @@ $color_gray_darker: #2B2B2B;
 $color_gray_medium: #ccc;
 
 $color_green: #006838;
-$color_green_lighter: lighten($color_green,20%);
-$color_green_darker: darken($color_green,20%);
+$color_green_lighter: lighten($color_green,10%);
+$color_green_lightest: lighten($color_green,20%);
+$color_green_darker: darken($color_green,10%);
 $color_brown: #6a3f24;
-$color_brown_lighter: lighten($color_brown,20%);
+$color_brown_lighter: lighten($color_brown,10%);
 $color_cream: #fffdb7;
 $color_cream_lighter: lighten($color_cream,5%);
 $color_pink: #f72359;

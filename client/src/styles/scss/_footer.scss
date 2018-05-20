@@ -3,7 +3,7 @@
 	margin: auto;
 	position: fixed;
 	bottom: 0;
-	background: white;
+	background: $color_green;
 	text-align: center;
 	padding: 20px;
 	display: flex;
@@ -13,7 +13,7 @@
   box-shadow: 0 1px 5px 2px rgba(131,58,180,.2);
 
 	&__left {
-		color: $color_brown;
+		color: white;
 		position: absolute;
 		left: 20px;
 	}

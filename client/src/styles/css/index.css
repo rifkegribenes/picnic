@@ -117,7 +117,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
       position: relative;
       z-index: 10; }
       .form__input--option:hover {
-        background: #00ce6f; }
+        background: #009b53; }
       .form__input--option:checked {
         background: transparent; }
         .form__input--option:checked::before {
@@ -262,9 +262,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     font-weight: 400;
     border-radius: 4px;
     padding: 10px 20px;
-    background: #6a3f24;
-    background-image: -webkit-linear-gradient(-45deg, #6a3f24 0px, #6a3f24 50px, #006838, #00ce6f 100%);
-    background-image: linear-gradient(135deg, #6a3f24 0px, #6a3f24 50px, #006838, #00ce6f 100%);
+    background: #006838;
     background-size: 200% 200%;
     background-position: 0 0;
     transition: background-position 500ms ease-in-out;
@@ -278,8 +276,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
         font-size: 20px;
         font-weight: 400; } }
     .form__button:hover, .form__button:focus {
-      background-position: 100% 100%;
-      box-shadow: 0 5px 10px rgba(131, 58, 180, 0.4);
+      background: #009b53;
       transition: all 500ms ease-in-out; }
     .form__button span {
       position: relative; }
@@ -296,7 +293,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
       border-bottom-left-radius: 4px;
       border-bottom-right-radius: 4px; }
       .form__button--bottom:hover, .form__button--bottom:active, .form__button--bottom:focus {
-        background-color: #000201;
+        background-color: #00351d;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
         transition: all 300ms ease-in-out; }
     .form__button--sm {
@@ -358,8 +355,8 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     .form__login-link:last-child {
       text-align: right; }
     .form__login-link:hover, .form__login-link:active, .form__login-link:focus {
-      color: #000201;
-      border-bottom: 1px dotted #000201;
+      color: #00351d;
+      border-bottom: 1px dotted #00351d;
       transition: all 300ms ease-in-out; }
     .form__login-link:focus {
       box-shadow: inset 0 0 0.2em #006838, 0 0 1em #4b6cb7 !important; }
@@ -417,10 +414,10 @@ input:not([type=checkbox]):not([type=radio]), textarea {
   min-height: 77px;
   z-index: 3;
   justify-content: space-between;
-  position: fixed; }
+  position: fixed;
+  background: #006838; }
   @media (min-width: 670px) {
     .header {
-      box-shadow: 0 1px 5px 2px rgba(131, 58, 180, 0.2);
       margin-bottom: 40px; } }
 
 .h-nav {
@@ -436,7 +433,8 @@ input:not([type=checkbox]):not([type=radio]), textarea {
   display: flex;
   justify-content: flex-start;
   height: 30px;
-  list-style: none; }
+  list-style: none;
+  color: white; }
   .h-nav__logo {
     width: 200px;
     height: auto; }
@@ -453,7 +451,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     margin: 0 auto;
     z-index: 2;
     min-height: 60px;
-    background: white; }
+    background: #006838; }
   .h-nav__icon {
     height: 14px;
     width: 16px;
@@ -553,7 +551,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
       color: rgba(255, 255, 255, 0);
       width: 56px; }
   .h-nav__item-link {
-    color: #6a3f24;
+    color: white;
     font-family: "Titillium Web", Helvetica, Arial, sans-serif;
     letter-spacing: 1.5px;
     font-size: 16px;
@@ -575,7 +573,11 @@ input:not([type=checkbox]):not([type=radio]), textarea {
       font-size: 20px;
       padding: 4px 20px 6px 20px;
       text-transform: capitalize;
-      width: 92px; }
+      width: 92px;
+      background: #009b53; }
+      .h-nav__item-link--login:hover, .h-nav__item-link--login:focus {
+        background: #00ce6f;
+        transition: all 300ms ease-in-out; }
     @media (min-width: 670px) {
       .h-nav__item-link--logout {
         display: none; } }
@@ -675,11 +677,12 @@ input:not([type=checkbox]):not([type=radio]), textarea {
         height: 53px;
         cursor: pointer; }
         .h-nav__item-link:hover, .h-nav__item-link:focus {
-          border-bottom: 3px solid #6a3f24; }
+          border-bottom: 3px solid white; }
       .h-nav__logo-wrap {
         display: flex;
         font-weight: 200;
-        text-decoration: none; }
+        text-decoration: none;
+        margin-top: -21px; }
       .h-nav__logo {
         margin-top: 0; }
         .h-nav__logo--text {
@@ -702,11 +705,15 @@ input:not([type=checkbox]):not([type=radio]), textarea {
         .h-nav__link--home {
           display: flex;
           height: 50px; }
-        .h-nav__link--login {
-          border: 1px solid rgba(255, 255, 255, 0.6); }
         .h-nav__link:hover, .h-nav__link:focus {
           border-bottom: 1px solid #6a3f24;
-          transition: all 300ms ease-in-out; } }
+          transition: all 300ms ease-in-out; }
+        .h-nav__link--login {
+          background: #009b53;
+          border: 1px solid rgba(255, 255, 255, 0.6); }
+          .h-nav__link--login:hover, .h-nav__link--login:focus {
+            background: 1px solid #00ce6f;
+            transition: all 300ms ease-in-out; } }
 
 .a-nav {
   padding-bottom: 20px;
@@ -853,7 +860,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
         margin: -250px 0 100px 0; } }
   .splash__caret {
     margin: 1em 0;
-    border-right: 0.05em solid #00ce6f;
+    border-right: 0.05em solid #009b53;
     animation: caret 1s steps(1) infinite;
     max-height: 2em; }
   .splash__button-wrap {
@@ -881,7 +888,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
   margin: auto;
   position: fixed;
   bottom: 0;
-  background: white;
+  background: #006838;
   text-align: center;
   padding: 20px;
   display: flex;
@@ -890,7 +897,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
   font-weight: 200;
   box-shadow: 0 1px 5px 2px rgba(131, 58, 180, 0.2); }
   .footer__left {
-    color: #6a3f24;
+    color: white;
     position: absolute;
     left: 20px; }
   .footer__logo-wrap {
@@ -1051,8 +1058,8 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     border-radius: 4px;
     transition: all 300ms ease-in-out;
     background: #6a3f24;
-    background-image: -webkit-linear-gradient(-45deg, #6a3f24 0px, #6a3f24 50px, #006838, #00ce6f 100%);
-    background-image: linear-gradient(135deg, #6a3f24 0px, #6a3f24 50px, #006838, #00ce6f 100%);
+    background-image: -webkit-linear-gradient(-45deg, #6a3f24 0px, #6a3f24 50px, #006838, #009b53 100%);
+    background-image: linear-gradient(135deg, #6a3f24 0px, #6a3f24 50px, #006838, #009b53 100%);
     background-size: 200% 200%;
     background-position: 0 0;
     transition: background-position 500ms ease-in-out;

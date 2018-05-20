@@ -12,7 +12,7 @@ import ResetPassword from "./ResetPassword";
 import * as Actions from "../store/actions";
 
 import envIcon from "../img/envelope.svg";
-import logo from "../img/bot-head_340.png";
+import logo from "../img/picnic_icon_horiz.svg";
 
 class ComboBox extends React.Component {
   constructor(props) {

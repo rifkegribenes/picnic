@@ -14,11 +14,9 @@ import NotFound from "./containers/NotFound";
 import Spinner from "./containers/Spinner";
 import ModalSm from "./containers/ModalSm";
 import VerifyEmail from "./containers/VerifyEmail";
-import CreatePoll from "./containers/CreatePoll";
 import ViewPoll from "./containers/ViewPoll";
 import Logout from "./containers/Logout";
 import AllPolls from "./containers/AllPolls";
-import UserPolls from "./containers/UserPolls";
 
 import * as apiActions from "./store/actions/apiActions";
 import * as Actions from "./store/actions";
@@ -39,8 +37,6 @@ const PrivateRoute = ({ component: Component, loggedIn, ...rest }) => {
     />
   );
 };
-
-const EditPoll = routeProps => <CreatePoll edit={true} {...routeProps} />;
 
 class App extends Component {
   componentWillMount() {
@@ -64,7 +60,7 @@ class App extends Component {
     ) {
       this.props.actions.setMenuState("closed");
     }
-  };
+  }
 
   componentDidMount() {
     window.addEventListener("resize", debounce(this.updateDimensions, 100));
@@ -178,21 +174,6 @@ class App extends Component {
                     match={routeProps.match}
                   />
                 )}
-              />
-              <PrivateRoute
-                loggedIn={this.props.appState.loggedIn}
-                path="/createpoll"
-                component={CreatePoll}
-              />
-              <Route
-                loggedIn={this.props.appState.loggedIn}
-                path="/edit/:id"
-                component={EditPoll}
-              />
-              <Route
-                exact
-                path="/userpolls/:id?"
-                render={routeProps => <UserPolls {...routeProps} />}
               />
               <Route
                 exact

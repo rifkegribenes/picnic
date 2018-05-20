@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 import Spinner from "./Spinner";
 import ModalSm from "./ModalSm";
 import FormInput from "./FormInput";
-import PollOptions from "./PollOptions";
 import { fieldValidations, run, validateEmail } from "../utils/";
 import * as Actions from "../store/actions";
 import * as apiActions from "../store/actions/apiActions";
@@ -177,16 +176,20 @@ class Form extends React.Component {
                 </button>
               </div>
             )}
-            {this.props.form === "create" && <PollOptions />}
             <div className="form__input-group">
-              <div className={
+              <div
+                className={
                   this.props[reducer].form.error ||
-                    (this.props[reducer].showFormError &&
-                      this.state.submit &&
-                      Object.values(this.props[reducer].form.validationErrors).length)
-                  ? "error"
-                  : "hidden"
-                }>{this.props[reducer].errorMsg}</div>
+                  (this.props[reducer].showFormError &&
+                    this.state.submit &&
+                    Object.values(this.props[reducer].form.validationErrors)
+                      .length)
+                    ? "error"
+                    : "hidden"
+                }
+              >
+                {this.props[reducer].errorMsg}
+              </div>
             </div>
           </div>
           <div className="form__footer">
@@ -196,9 +199,7 @@ class Form extends React.Component {
                   className={`form__button form__button--bottom ${buttonState}`}
                   id={`btn-${reducer}`}
                   type="button"
-                  onClick={
-                    () => this.props.formAction()
-                  }
+                  onClick={() => this.props.formAction()}
                 >
                   <span>{this.props.buttonText}</span>
                 </button>
@@ -223,8 +224,10 @@ class Form extends React.Component {
               this.props.toggleForm("reset");
               return;
             }
-            if (this.props[reducer].modal.title === "Check your Email" ||
-                this.props[reducer].modal.buttonText === "Sign in") {
+            if (
+              this.props[reducer].modal.title === "Check your Email" ||
+              this.props[reducer].modal.buttonText === "Sign in"
+            ) {
               this.props.history.push("/login");
               this.props.toggleForm("login");
               return;

@@ -1,27 +1,15 @@
-Welcome to the Glitch BETA
-==========================
+## picnic (Freecodecamp Project)
 
-Click `Show` in the header to see your app live. Updates to your code will instantly deploy and update live.
+### [picnic.glitch.me](https://picnic.glitch.me)
 
-**Glitch** is the friendly community where you'll build the app of your dreams. Glitch lets you instantly create, remix, edit, and host an app, bot or site, and you can invite collaborators or helpers to simultaneously edit code with you.
+![picnic screenshot](https://raw.githubusercontent.com/rifkegribenes/picnic/master/client/public/img/screenshot1.png)
 
-Find out more [about Glitch](https://glitch.com/about).
+### User stories:
 
+* As an unauthenticated user, I can view all parks in my area.
 
-Your Project
-------------
+* As an authenticated user, I can add myself to a park to indicate I am going there today.
 
-On the front-end,
-- edit `public/client.js`, `public/style.css` and `views/index.html`
-- drag in `assets`, like images or music, to add them to your project
+* As an authenticated user, I can remove myself from a park if I no longer want to go there.
 
-On the back-end,
-- your app starts at `server.js`
-- add frameworks and packages in `package.json`
-- safely store app secrets in `.env` (nobody can see this but you and people you invite)
-
-
-Made by [Fog Creek](https://fogcreek.com/)
--------------------
-
-\ ゜o゜)ノ
+* As an unauthenticated user, when I log in I should not have to search again.

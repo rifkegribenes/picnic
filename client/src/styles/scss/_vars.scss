@@ -15,7 +15,6 @@ $color_brown: #6a3f24;
 $color_brown_lighter: lighten($color_brown,10%);
 $color_cream: #fffdb7;
 $color_cream_lighter: lighten($color_cream,5%);
-$color_pink: #f72359;
 
 $color_error_text: #a94442;
 $color_error_bkg: #f2dede;
@@ -38,13 +37,13 @@ $btn_border-radius: 4px;
     background: -moz-linear-gradient(-45deg, $left 0%, $right 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(-45deg, $left 0%, $right 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(135deg,  $left 0%, $right 100%);  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00c4cc', endColorstr='#7d1ae8',GradientType=1 ); /* IE6-9 */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006838', endColorstr='#6a3f24',GradientType=1 ); /* IE6-9 */
 }
 
 // usage
 
 .example {
-    @include linearGradient(#00c4cc, #7d1ae8);
+    @include linearGradient(#006838, #6a3f24);
 }
 
 

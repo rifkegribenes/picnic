@@ -1,14 +1,14 @@
 /* MEDIA QUERIES */
 .example {
-  background: #00c4cc;
+  background: #006838;
   /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #00c4cc 0%, #7d1ae8 100%);
+  background: -moz-linear-gradient(-45deg, #006838 0%, #6a3f24 100%);
   /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg, #00c4cc 0%, #7d1ae8 100%);
+  background: -webkit-linear-gradient(-45deg, #006838 0%, #6a3f24 100%);
   /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg, #00c4cc 0%, #7d1ae8 100%);
+  background: linear-gradient(135deg, #006838 0%, #6a3f24 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00c4cc', endColorstr='#7d1ae8',GradientType=1 );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006838', endColorstr='#6a3f24',GradientType=1 );
   /* IE6-9 */ }
 
 .pointer {

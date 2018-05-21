@@ -300,7 +300,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
       margin-right: 0;
       padding: 0;
       margin-bottom: 10px;
-      color: #fffed1;
+      color: white;
       position: relative;
       display: flex;
       height: 44px;
@@ -528,7 +528,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     text-transform: capitalize;
     border-bottom: 1px solid transparent; }
     .h-nav__item:hover, .h-nav__item:focus {
-      border-bottom: 1px solid #6a3f24; }
+      border-bottom: 1px solid white; }
     .h-nav__item--home {
       display: none; }
   .h-nav__item-menu {
@@ -537,12 +537,18 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     height: 41px;
     padding: 3px 10px 5px 7px;
     cursor: pointer;
-    color: white; }
+    color: white;
+    background: #009b53; }
+    .h-nav__item-menu:hover, .h-nav__item-menu:focus {
+      background: #00ce6f; }
     .h-nav__item-menu--open {
       margin: 20px 0 0 20px;
       width: 40px;
       padding: 3px 10px 5px 7px;
-      cursor: pointer; }
+      cursor: pointer;
+      background: #009b53; }
+      .h-nav__item-menu--open:hover, .h-nav__item-menu--open:focus {
+        background: #00ce6f; }
   .h-nav__menuspan {
     color: white;
     width: 56px;
@@ -613,7 +619,6 @@ input:not([type=checkbox]):not([type=radio]), textarea {
       transition: opacity 300ms ease-in;
       margin-top: -40px;
       padding: 60px 0 0 0;
-      background: white;
       border-bottom: 1px solid #6a3f24;
       box-shadow: 0 4px 2px 0 rgba(131, 58, 180, 0.2); }
     .h-nav__nav--hidden {

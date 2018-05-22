@@ -21,22 +21,22 @@ import AllPolls from "./containers/AllPolls";
 import * as apiActions from "./store/actions/apiActions";
 import * as Actions from "./store/actions";
 
-const PrivateRoute = ({ component: Component, loggedIn, ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        loggedIn === true ? (
-          <Component {...rest} {...props} />
-        ) : (
-          <Redirect
-            to={{ pathname: "/login", state: { from: props.location } }}
-          />
-        )
-      }
-    />
-  );
-};
+// const PrivateRoute = ({ component: Component, loggedIn, ...rest }) => {
+//   return (
+//     <Route
+//       {...rest}
+//       render={props =>
+//         loggedIn === true ? (
+//           <Component {...rest} {...props} />
+//         ) : (
+//           <Redirect
+//             to={{ pathname: "/login", state: { from: props.location } }}
+//           />
+//         )
+//       }
+//     />
+//   );
+// };
 
 class App extends Component {
   constructor(props) {

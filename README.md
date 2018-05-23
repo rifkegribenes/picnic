@@ -2,7 +2,7 @@
 
 ### [picnic.glitch.me](https://picnic.glitch.me)
 
-![picnic screenshot](https://raw.githubusercontent.com/rifkegribenes/picnic/master/client/public/img/screenshot1.png)
+![picnic screenshot](#)
 
 ### User stories:
 

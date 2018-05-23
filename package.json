@@ -1,7 +1,7 @@
 {
   "name": "picnic",
   "version": "1.0.0",
-  "description": "An app for the serious picnicker. Will help you coordinate a picnic with your friends. That's... all it does.",
+  "description": "Find a park. Organize a picnic with your friends.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

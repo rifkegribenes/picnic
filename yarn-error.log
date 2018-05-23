@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/Cellar/node/10.0.0/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js dev
+  /usr/local/Cellar/node/10.0.0/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js client
 
 PATH: 
-  /Library/Frameworks/Python.framework/Versions/3.6/bin:/usr/local/sbin:/usr/local/bin:/Users/sarahschneider/node_modules/.bin/:/Users/sarahschneider/.npm-global/bin:/Users/sarahschneider/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+  /Users/sarahschneider/Documents/_Sarah/projects/freecodecamp/picnic/node_modules/.bin:/Users/sarahschneider/.config/yarn/link/node_modules/.bin:/Users/sarahschneider/Documents/_Sarah/projects/freecodecamp/picnic/node_modules/.bin:/Users/sarahschneider/.config/yarn/link/node_modules/.bin:/usr/local/Cellar/node/10.0.0/libexec/lib/node_modules/npm/bin/node-gyp-bin:/usr/local/Cellar/node/10.0.0/lib/node_modules/npm/bin/node-gyp-bin:/usr/local/Cellar/node/10.0.0/bin/node_modules/npm/bin/node-gyp-bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/usr/local/sbin:/usr/local/bin:/Users/sarahschneider/node_modules/.bin/:/Users/sarahschneider/.npm-global/bin:/Users/sarahschneider/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 Yarn version: 
   1.5.1
@@ -17,7 +17,7 @@ npm manifest:
   {
     "name": "picnic",
     "version": "1.0.0",
-    "description": "An app for the serious picnicker. Will help you coordinate a picnic with your friends. That's... all it does.",
+    "description": "Find a park. Organize a picnic with your friends.",
     "main": "server.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
@@ -1442,9 +1442,9 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 1
+  Exit signal: SIGHUP
   Command: sh
-  Arguments: -c concurrently --kill-others-on-fail "yarn server" "yarn client" "yarn sass"
+  Arguments: -c cd client && yarn build && yarn start
   Directory: /Users/sarahschneider/Documents/_Sarah/projects/freecodecamp/picnic
   Output:
   

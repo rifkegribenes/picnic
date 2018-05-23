@@ -32,8 +32,8 @@ app.use(morgan('dev')); // Log requests to API using morgan
 // Enable CORS from client side
 app.use(cors());
 
-app.use(session({ 
-  store: new MongoStore({ 
+app.use(session({
+  store: new MongoStore({
     mongooseConnection: mongoose.connection
   }),
   secret: process.env.JWT_SECRET,

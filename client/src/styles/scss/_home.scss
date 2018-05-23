@@ -34,7 +34,7 @@
       display: block;
       width: 100%;
       max-width: 600px;
-      margin: -40px auto 20px auto;
+      margin: 20px auto;
       z-index: -1;
 
     @include mobile-nav-breakpoint {
@@ -44,9 +44,13 @@
 
   &__icon {
     width: 100%;
-    max-width: 600px;
-    margin: -20px auto 0 auto;
+    max-width: 500px;
+    margin: 20px auto;
     z-index: -1;
+
+    @include mobile-nav-breakpoint {
+
+    }
   }
 
   &__headline {
@@ -61,16 +65,20 @@
     background: white;
     padding: 10px;
     // position: relative;
-    margin: -40vw 0 15vw 0;
+    margin: 20px 0;
 
 
     @include for-phone-landscape-up {
       font-size: 42px;
     }
 
+    @include mobile-nav-breakpoint {
+
+    }
+
     @include for-tablet-landscape-up {
       font-size: 50px;
-      margin: -250px 0 100px 0;
+      margin: -10px 0 20px 0;
     }
 
   }
@@ -82,22 +90,28 @@
     max-height: 2em;
    }
 
+   &__button {
+    font-size: 14px;
+    letter-spacing: auto;
+
+    @include for-phone-landscape-up {
+      font-size: 16px;
+      letter-spacing: 1px;
+    }
+
+   }
+
    &__button-wrap {
     width: 100%;
     display: flex;
     justify-content: center;
-    position: absolute;
-    bottom: 100px;
-    left: 0;
+
     @include for-short-viewports-only {
-      bottom: 60px;
+
     }
 
     @include for-tablet-landscape-up {
-      position: relative;
-      bottom: auto;
-      left: auto;
-      margin-top: 7vh;
+
     }
    }
   }

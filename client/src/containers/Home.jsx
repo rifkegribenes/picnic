@@ -46,7 +46,7 @@ class Home extends React.Component {
           <div className="splash__button-wrap">
             <NavLink
               to="/createpoll"
-              className="form__button form__button--big splash__login"
+              className="form__button form__button--big splash__button"
               activeClassName="h-nav__item-link--active"
             >
               Find a park

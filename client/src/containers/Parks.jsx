@@ -9,9 +9,8 @@ import * as apiActions from "../store/actions/apiPollActions";
 import Spinner from "./Spinner";
 import ModalSm from "./ModalSm";
 import PollCardMini from "./PollCardMini";
-// import editIcon from "../img/edit.svg";
 
-class AllPolls extends React.Component {
+class Parks extends React.Component {
   componentWillMount() {
     this.props.api.getAllPolls().then(result => {
       // console.log(result);
@@ -69,7 +68,7 @@ class AllPolls extends React.Component {
   }
 }
 
-AllPolls.propTypes = {
+Parks.propTypes = {
   appState: PropTypes.shape({
     loggedIn: PropTypes.bool,
     user: PropTypes.shape({
@@ -122,5 +121,5 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(AllPolls)
+  connect(mapStateToProps, mapDispatchToProps)(Parks)
 );

@@ -19,28 +19,6 @@ const deleteModal = (pollId, token, deletePoll) => {
 };
 
 const PollCard = props => {
-  const legendCallback = chart => {
-    return (
-      <ul className="polls-grid__legend">
-        {chart.data.datasets[0].data.map((item, idx) => (
-          <li className="polls-grid__legend--li" key={idx}>
-            <span
-              className="polls-grid__legend--bar"
-              style={{
-                backgroundColor: chart.data.datasets[0].backgroundColor[idx],
-                height: "20px",
-                width: "60px"
-              }}
-            />
-            <span className="polls-grid__legend--label">
-              {chart.data.labels[idx]}
-            </span>
-          </li>
-        ))}
-      </ul>
-    );
-  };
-
   const backgroundStyle = {
     backgroundImage: `url(${props.poll.ownerAvatar ||
       "https://raw.githubusercontent.com/rifkegribenes/picnic/master/client/public/img/picnic_icon.png"})`,

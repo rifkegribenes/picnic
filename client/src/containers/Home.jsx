@@ -41,22 +41,15 @@ class Home extends React.Component {
         <div className="splash__logo-wrap">
           <img className="splash__icon" src={icon} alt="picnic" />
           <div id="typewriter" className="splash__headline">
-            Create your own polls.
+            Find a park. Plan a picnic.
           </div>
           <div className="splash__button-wrap">
             <NavLink
-              to="/createpoll"
+              to="/parks"
               className="form__button form__button--big splash__button"
               activeClassName="h-nav__item-link--active"
             >
               Find a park
-            </NavLink>
-            <NavLink
-              to="/polls"
-              className="form__button form__button--big splash__button splash__button--polls"
-              activeClassName="h-nav__item-link--active"
-            >
-              Plan a picnic
             </NavLink>
           </div>
         </div>

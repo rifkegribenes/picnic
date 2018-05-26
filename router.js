@@ -4,7 +4,8 @@ const CLIENT_URL = process.env.NODE_ENV === 'production' ? APP_HOST : 'localhost
 const AuthController = require('./app/controllers/auth.ctrl');
 const UserController = require('./app/controllers/user.ctrl');
 const StaticController = require('./app/controllers/static.ctrl');
-const PollController = require('./app/controllers/poll.ctrl');
+const ParkController = require('./app/controllers/park.ctrl');
+const YelpController = require('./app/controllers/yelp.ctrl');
 
 const express = require('express');
 const passport = require('passport');
@@ -187,39 +188,39 @@ module.exports = function (app) {
 
 
   //= ========================
-  // Poll Routes
+  // Park Routes
   //= ========================
 
-  // Set poll routes as a subgroup/middleware to apiRoutes
-  apiRoutes.use('/poll', pollRoutes);
+  // Set park routes as a subgroup/middleware to apiRoutes
+  apiRoutes.use('/park', parkRoutes);
 
-  // Get all polls
-  // Returns fail status + message -or- array of all active polls & user
-  pollRoutes.get('/allpolls', PollController.getAllPolls);
+  // Get all parks
+  // Returns fail status + message -or- array of all parks
+  parkRoutes.get('/allparks/:city', YelpController.getParks);
 
-  // Get all polls for specific user
-  // Returns fail status + message -or- array of all active polls & user
-  pollRoutes.get('/userpolls/:userId', PollController.getUserPolls);
+  // // Get all polls for specific user
+  // // Returns fail status + message -or- array of all active polls & user
+  // pollRoutes.get('/userpolls/:userId', PollController.getUserPolls);
 
-  // View a single poll
-  // Returns fail status + message -or- poll object & user
-  pollRoutes.get('/:pollId', PollController.viewPollById);
+  // // View a single poll
+  // // Returns fail status + message -or- poll object & user
+  // pollRoutes.get('/:pollId', PollController.viewPollById);
 
-  // Create a poll
-  // Returns fail status + message -or- poll object & user
-  pollRoutes.post('/createpoll', requireAuth, PollController.newPoll);
+  // // Create a poll
+  // // Returns fail status + message -or- poll object & user
+  // pollRoutes.post('/createpoll', requireAuth, PollController.newPoll);
 
-  // Update a poll
-  // Returns fail status + message -or- poll object
-  pollRoutes.put('/update/:pollId', requireAuth, PollController.updatePoll);
+  // // Update a poll
+  // // Returns fail status + message -or- poll object
+  // pollRoutes.put('/update/:pollId', requireAuth, PollController.updatePoll);
 
-  // Delete a poll
-  // Returns fail status + message -or- success message
-  pollRoutes.delete('/delete/:pollId', requireAuth, PollController.deletePoll);
+  // // Delete a poll
+  // // Returns fail status + message -or- success message
+  // pollRoutes.delete('/delete/:pollId', requireAuth, PollController.deletePoll);
 
-  // Vote in a poll
-  // Returns fail status + message -or- poll object & user
-  pollRoutes.post('/vote/:pollId/:optionId', PollController.vote);
+  // // Vote in a poll
+  // // Returns fail status + message -or- poll object & user
+  // pollRoutes.post('/vote/:pollId/:optionId', PollController.vote);
 
   // Reset votes
 
@@ -231,5 +232,5 @@ module.exports = function (app) {
   // Catch client-side routes that don't exist on the back-end.
   // Redirects to /#/redirect={route}/{optional_id}
   app.get('/:client_route/:id?', StaticController.redirectHash);
-  
+
 };

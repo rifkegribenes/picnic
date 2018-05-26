@@ -8,61 +8,56 @@ import * as apiActions from "../store/actions/apiPollActions";
 
 import Spinner from "./Spinner";
 import ModalSm from "./ModalSm";
-import PollCardMini from "./PollCardMini";
+import CardMini from "./CardMini";
 
 class Parks extends React.Component {
   componentWillMount() {
-    this.props.api.getAllPolls().then(result => {
+    this.props.api.getAllParks().then(result => {
       // console.log(result);
-      if (result.type === "GET_ALL_POLLS_SUCCESS") {
+      if (result.type === "GET_ALL_PARKS_SUCCESS") {
         // this.props.actions.setLoggedIn();
       }
     });
   }
 
   render() {
-    const polls = this.props.poll.polls.map((poll, idx) => {
+    const parks = this.props.park.parks.map((park, idx) => {
       return (
-        <PollCardMini
-          key={poll._id}
-          owner={poll.ownerId === this.props.profile.user._id}
-          poll={poll}
-          history={this.props.history}
-        />
+        <CardMini key={park._id} park={park} history={this.props.history} />
       );
     });
     return (
       <div>
-        <Spinner cssClass={this.props.poll.spinnerClass} />
+        <Spinner cssClass={this.props.park.spinnerClass} />
         <ModalSm
-          modalClass={this.props.poll.modal.class}
-          modalText={this.props.poll.modal.text}
-          modalType={this.props.poll.modal.type}
-          modalTitle={this.props.poll.modal.title}
-          inputName={this.props.poll.modal.inputName}
-          inputPlaceholder={this.props.poll.modal.inputPlaceholder}
-          inputLabel={this.props.poll.modal.inputLabel}
-          inputType={this.props.poll.modal.inputType}
-          buttonText={this.props.poll.modal.buttonText}
+          modalClass={this.props.park.modal.class}
+          modalText={this.props.park.modal.text}
+          modalType={this.props.park.modal.type}
+          modalTitle={this.props.park.modal.title}
+          inputName={this.props.park.modal.inputName}
+          inputPlaceholder={this.props.park.modal.inputPlaceholder}
+          inputLabel={this.props.park.modal.inputLabel}
+          inputType={this.props.park.modal.inputType}
+          buttonText={this.props.park.modal.buttonText}
           dismiss={() => {
             this.props.actions.dismissModal();
-            if (this.props.poll.modal.type === "modal__error") {
+            if (this.props.park.modal.type === "modal__error") {
               this.props.history.push("/login");
             }
           }}
-          redirect={this.props.poll.modal.redirect}
+          redirect={this.props.park.modal.redirect}
           action={() => {
-            if (this.props.poll.modal.action) {
-              this.props.poll.modal.action();
+            if (this.props.park.modal.action) {
+              this.props.park.modal.action();
             } else {
               this.props.actions.dismissModal();
-              if (this.props.poll.modal.type === "modal__error") {
+              if (this.props.park.modal.type === "modal__error") {
                 this.props.history.push("/login");
               }
             }
           }}
         />
-        <div className="polls-grid">{polls}</div>
+        <div className="polls-grid">{parks}</div>
       </div>
     );
   }
@@ -120,6 +115,4 @@ const mapDispatchToProps = dispatch => ({
   api: bindActionCreators(apiActions, dispatch)
 });
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Parks)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Parks));

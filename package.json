@@ -53,6 +53,7 @@
     "passport-jwt": "^3.0.1",
     "passport-local": "^1.0.0",
     "sanitize-html": "^1.18.2",
-    "slugify": "^1.2.9"
+    "slugify": "^1.2.9",
+    "yelp-fusion": "^2.0.3"
   }
 }

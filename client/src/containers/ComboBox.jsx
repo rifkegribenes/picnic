@@ -164,7 +164,7 @@ ComboBox.propTypes = {
 const mapStateToProps = state => ({
   appState: state.appState,
   profile: state.profile,
-  poll: state.poll
+  park: state.park
 });
 
 const mapDispatchToProps = dispatch => ({

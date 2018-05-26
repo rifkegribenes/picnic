@@ -14,4 +14,6 @@ exports.getParks = (req, res, next) => {
   }).catch(err => {
     console.log(err);
     res.send(err.data);
-  });
+  })
+
+}

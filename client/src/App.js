@@ -14,7 +14,7 @@ import NotFound from "./containers/NotFound";
 import Spinner from "./containers/Spinner";
 import ModalSm from "./containers/ModalSm";
 import VerifyEmail from "./containers/VerifyEmail";
-import ViewPoll from "./containers/ViewPoll";
+import ViewPark from "./containers/ViewPark";
 import Logout from "./containers/Logout";
 import Parks from "./containers/Parks";
 
@@ -127,8 +127,8 @@ class App extends Component {
                 render={routeProps => <Profile {...routeProps} />}
               />
               <Route
-                path="/poll/:id"
-                render={routeProps => <ViewPoll {...routeProps} />}
+                path="/park/:id"
+                render={routeProps => <ViewPark {...routeProps} />}
               />
               <Route
                 exact

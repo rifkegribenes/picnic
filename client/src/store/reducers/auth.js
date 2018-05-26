@@ -86,7 +86,7 @@ function auth(state = INITIAL_STATE, action) {
     *  Called From: <Form />
     *  Payload: Field Name
     *  Purpose: Set bool for error visibility for field
-    *  (this action also handled in poll reducer for <PollOptions />)
+    *  (this action also handled in park reducer for <ParkOptions />)
     */
     case SET_SHOW_ERROR:
       return update(state, {
@@ -101,7 +101,7 @@ function auth(state = INITIAL_STATE, action) {
     *  Called From: <Form />
     *  Payload: Validation errors object
     *  Purpose: Set validation errors object
-    *  (this action also handled in poll reducer for <PollOptions />)
+    *  (this action also handled in park reducer for <ParkOptions />)
     */
     case SET_VALIDATION_ERRORS:
       return update(state, {
@@ -117,7 +117,7 @@ function auth(state = INITIAL_STATE, action) {
     *  Called From: <Form />
     *  Payload: Field Name
     *  Purpose: Set field "touched" for validation error display logic
-    *  (this action also handled in poll reducer for <PollOptions />)
+    *  (this action also handled in park reducer for <ParkOptions />)
     */
     case SET_TOUCHED:
       return update(state, {

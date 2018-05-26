@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
 import * as Actions from "../store/actions";
-import * as apiActions from "../store/actions/apiPollActions";
+import * as apiActions from "../store/actions/apiParkActions";
 
 import Spinner from "./Spinner";
 import ModalSm from "./ModalSm";
@@ -57,7 +57,7 @@ class Parks extends React.Component {
             }
           }}
         />
-        <div className="polls-grid">{parks}</div>
+        <div className="parks-grid">{parks}</div>
       </div>
     );
   }
@@ -76,10 +76,10 @@ Parks.propTypes = {
     dismissModal: PropTypes.func
   }).isRequired,
   api: PropTypes.shape({
-    viewPoll: PropTypes.func,
-    deletePoll: PropTypes.func
+    viewPark: PropTypes.func,
+    deletePark: PropTypes.func
   }).isRequired,
-  poll: PropTypes.shape({
+  park: PropTypes.shape({
     form: PropTypes.shape({
       question: PropTypes.string,
       options: PropTypes.arrayOf(
@@ -106,7 +106,7 @@ Parks.propTypes = {
 
 const mapStateToProps = state => ({
   appState: state.appState,
-  poll: state.poll,
+  park: state.park,
   profile: state.profile
 });
 

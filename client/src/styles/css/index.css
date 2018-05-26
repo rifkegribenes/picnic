@@ -1360,7 +1360,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
       .verify__text {
         font-size: 1.2em; } }
 
-.poll__container {
+.park__container {
   width: calc(100% + 40px);
   max-width: 880px !important;
   margin: 0 -20px 80px -20px !important;
@@ -1368,11 +1368,11 @@ input:not([type=checkbox]):not([type=radio]), textarea {
   margin-bottom: 80px;
   padding: 0; }
   @media (min-width: 400px) {
-    .poll__container {
+    .park__container {
       width: 100%;
       margin: auto !important;
       margin-bottom: 80px !important; } }
-.poll__icon-button {
+.park__icon-button {
   appearance: none;
   -webkit-appearance: none;
   background: transparent;
@@ -1384,50 +1384,50 @@ input:not([type=checkbox]):not([type=radio]), textarea {
   top: 34px;
   border-radius: 100%;
   color: #d6d6d6; }
-  .poll__icon-button:hover, .poll__icon-button:active, .poll__icon-button:focus {
+  .park__icon-button:hover, .park__icon-button:active, .park__icon-button:focus {
     background: #d6d6d6;
     color: white; }
-  .poll__icon-button--error {
+  .park__icon-button--error {
     color: #a94442;
     top: 3px;
     right: 3px; }
-    .poll__icon-button--error:hover, .poll__icon-button--error:active, .poll__icon-button--error:focus {
+    .park__icon-button--error:hover, .park__icon-button--error:active, .park__icon-button--error:focus {
       background: #a94442; }
-.poll__button-wrap {
+.park__button-wrap {
   margin-top: 10px;
   display: flex;
   justify-content: flex-end; }
-.poll__add {
+.park__add {
   font-size: .85em;
   text-transform: capitalize;
   letter-spacing: 0;
   display: flex;
   padding: 8px 15px 9px 15px; }
-.poll__icon-wrap {
+.park__icon-wrap {
   font-size: 1.2em; }
-.poll__icon {
+.park__icon {
   width: 20px;
   height: auto; }
-  .poll__icon--plus {
+  .park__icon--plus {
     right: -10px;
     top: 118px; }
-  .poll__icon:hover {
+  .park__icon:hover {
     opacity: .6; }
-.poll__option-group {
+.park__option-group {
   position: relative; }
 
-.polls-grid {
+.parks-grid {
   width: 100%;
   max-width: 1800px;
   padding-bottom: 60px; }
   @media (min-width: 480px) {
-    .polls-grid {
+    .parks-grid {
       column-count: 2;
       column-gap: 1.5em; } }
   @media (min-width: 901px) {
-    .polls-grid {
+    .parks-grid {
       column-count: 3; } }
-  .polls-grid__empty {
+  .parks-grid__empty {
     width: 100%;
     height: 100%;
     display: flex;
@@ -1436,49 +1436,49 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     font-size: 1.3em;
     text-align: center;
     color: #6a3f24; }
-  .polls-grid__header {
+  .parks-grid__header {
     text-align: center;
     font-size: 1.5em;
     color: #6a3f24;
     margin-bottom: 20px;
     display: flex;
     justify-content: center; }
-  .polls-grid__link {
+  .parks-grid__link {
     width: auto !important; }
-  .polls-grid__btn--icon {
+  .parks-grid__btn--icon {
     padding: 0 !important;
     height: 43px;
     margin-right: 10px; }
-  .polls-grid__icon-wrap {
+  .parks-grid__icon-wrap {
     display: flex;
     position: absolute;
     bottom: 20px; }
-  .polls-grid__icon {
+  .parks-grid__icon {
     width: 20px;
     height: 20px; }
-  .polls-grid__admin-buttons {
+  .parks-grid__admin-buttons {
     position: absolute;
     right: 20px;
     bottom: 20px;
     display: flex; }
-  .polls-grid__avatar {
+  .parks-grid__avatar {
     position: absolute;
     right: 0;
     bottom: 20px; }
-    .polls-grid__avatar--empty {
+    .parks-grid__avatar--empty {
       position: relative;
       display: inline-block; }
-  .polls-grid__edit {
+  .parks-grid__edit {
     width: 43px;
     height: 43px;
     position: relative; }
-    .polls-grid__edit .polls-grid__icon {
+    .parks-grid__edit .parks-grid__icon {
       width: 100%;
       height: auto;
       position: absolute;
       top: -9px;
       left: -12px; }
-  .polls-grid__card {
+  .parks-grid__card {
     font-size: 1em;
     padding: 20px 20px 10px 20px;
     display: inline-block;
@@ -1492,11 +1492,11 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     -webkit-column-break-inside: avoid;
     page-break-inside: avoid;
     break-inside: avoid; }
-    .polls-grid__card:after {
+    .parks-grid__card:after {
       content: '';
       display: block;
       height: 20px; }
-  .polls-grid__title {
+  .parks-grid__title {
     font-size: 32px;
     line-height: 1em;
     margin-bottom: 1em;
@@ -1504,35 +1504,35 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     font-weight: 400;
     position: relative;
     text-decoration: none !important; }
-    .polls-grid__title--sm {
+    .parks-grid__title--sm {
       margin-bottom: 0; }
-  .polls-grid__inner-wrap {
+  .parks-grid__inner-wrap {
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 43px; }
     @media (min-width: 901px) {
-      .polls-grid__inner-wrap {
+      .parks-grid__inner-wrap {
         flex-wrap: nowrap; } }
-  .polls-grid__chart-wrap {
+  .parks-grid__chart-wrap {
     width: 100%;
     position: relative;
     min-height: 400px; }
     @media (min-width: 901px) {
-      .polls-grid__chart-wrap {
+      .parks-grid__chart-wrap {
         min-height: 300px; } }
-  .polls-grid__options-wrap {
+  .parks-grid__options-wrap {
     width: 100%;
     display: flex;
     flex-wrap: wrap; }
     @media (min-width: 480px) {
-      .polls-grid__options-wrap {
+      .parks-grid__options-wrap {
         max-width: 100%; } }
     @media (min-width: 901px) {
-      .polls-grid__options-wrap {
+      .parks-grid__options-wrap {
         display: block;
         max-width: 320px;
         margin-right: 20px; } }
-  .polls-grid__option {
+  .parks-grid__option {
     color: white;
     text-transform: none !important;
     letter-spacing: normal;
@@ -1544,43 +1544,43 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     line-height: 1.2em;
     margin-right: 0; }
     @media (min-width: 480px) {
-      .polls-grid__option {
+      .parks-grid__option {
         max-width: 46%;
         margin-right: 20px; }
-        .polls-grid__option:nth-of-type(2) {
+        .parks-grid__option:nth-of-type(2) {
           margin-right: 0; } }
     @media (min-width: 670px) {
-      .polls-grid__option {
+      .parks-grid__option {
         max-width: 31%; }
-        .polls-grid__option:nth-of-type(2) {
+        .parks-grid__option:nth-of-type(2) {
           margin-right: 20px; }
-        .polls-grid__option:nth-of-type(3) {
+        .parks-grid__option:nth-of-type(3) {
           margin-right: 0; } }
     @media (min-width: 901px) {
-      .polls-grid__option {
+      .parks-grid__option {
         max-width: 100%;
         text-align: left;
         margin-right: 0 !important; } }
-  .polls-grid__legend {
+  .parks-grid__legend {
     display: flex;
     flex-wrap: wrap;
     margin-top: 20px;
     width: 100%; }
-    .polls-grid__legend--li {
+    .parks-grid__legend--li {
       list-style-type: none;
       display: flex;
       width: 100%;
       margin-bottom: 10px; }
-    .polls-grid__legend--bar {
+    .parks-grid__legend--bar {
       display: inline-block;
       flex-shrink: 0; }
-    .polls-grid__legend--label {
+    .parks-grid__legend--label {
       display: inline-block;
       padding: 0 10px;
       color: #545454;
       line-height: 1em; }
 
-a > .polls-grid__card:hover, a > .polls-grid__card:active, a > .polls-grid__card:focus {
+a > .parks-grid__card:hover, a > .parks-grid__card:active, a > .parks-grid__card:focus {
   box-shadow: 0 0 1em #4b6cb7; }
 
 * {

@@ -35,7 +35,7 @@ const findDupes = options => {
 const _isRequired = fieldName => `${fieldName} is required`;
 
 const _atLeastTwoRequired = fieldName =>
-  `Polls must have at least two ${fieldName}s`;
+  `Parks must have at least two ${fieldName}s`;
 
 const _mustMatch = otherFieldName => fieldName =>
   `${fieldName} must match ${otherFieldName}`;
@@ -137,7 +137,7 @@ export const fieldValidations = {
   create: [ruleRunner("question", "Question", required)]
 };
 
-export const pollOptionsValidation = (errorsObj, options, fieldName) => {
+export const parkOptionsValidation = (errorsObj, options, fieldName) => {
   return checkDupes(errorsObj, options, fieldName);
 };
 

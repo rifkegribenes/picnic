@@ -4,18 +4,18 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
 import * as Actions from "../store/actions";
-import * as apiActions from "../store/actions/apiPollActions";
+import * as apiActions from "../store/actions/apiParkActions";
 
 import Spinner from "./Spinner";
 import ModalSm from "./ModalSm";
 import Card from "./Card";
 
-class ViewPoll extends React.Component {
+class ViewPark extends React.Component {
   componentWillMount() {
-    const pollId = this.props.match.params.id;
-    // retrieve requested poll & save to app state
-    this.props.api.viewPoll(pollId).then(result => {
-      if (result.type === "VIEW_POLL_SUCCESS") {
+    const parkId = this.props.match.params.id;
+    // retrieve requested park & save to app state
+    this.props.api.viewPark(parkId).then(result => {
+      if (result.type === "VIEW_PARK_SUCCESS") {
       }
     });
   }
@@ -23,53 +23,53 @@ class ViewPoll extends React.Component {
   render() {
     return (
       <div>
-        <Spinner cssClass={this.props.poll.spinnerClass} />
+        <Spinner cssClass={this.props.park.spinnerClass} />
         <ModalSm
-          modalClass={this.props.poll.modal.class}
-          modalText={this.props.poll.modal.text}
-          modalType={this.props.poll.modal.type}
-          modalTitle={this.props.poll.modal.title}
-          inputName={this.props.poll.modal.inputName}
-          inputPlaceholder={this.props.poll.modal.inputPlaceholder}
-          inputLabel={this.props.poll.modal.inputLabel}
-          inputType={this.props.poll.modal.inputType}
-          buttonText={this.props.poll.modal.buttonText}
-          modalDanger={this.props.poll.modal.modalDanger}
+          modalClass={this.props.park.modal.class}
+          modalText={this.props.park.modal.text}
+          modalType={this.props.park.modal.type}
+          modalTitle={this.props.park.modal.title}
+          inputName={this.props.park.modal.inputName}
+          inputPlaceholder={this.props.park.modal.inputPlaceholder}
+          inputLabel={this.props.park.modal.inputLabel}
+          inputType={this.props.park.modal.inputType}
+          buttonText={this.props.park.modal.buttonText}
+          modalDanger={this.props.park.modal.modalDanger}
           dismiss={() => {
             this.props.actions.dismissModal();
             if (
-              this.props.poll.modal.text ===
-              "You have already voted in this poll"
+              this.props.park.modal.text ===
+              "You have already voted in this park"
             ) {
-              this.props.history.push("/polls");
+              this.props.history.push("/parks");
             } else if (
-              this.props.poll.modal.type === "modal__error" &&
-              this.props.poll.modal.buttonText !== "Delete"
+              this.props.park.modal.type === "modal__error" &&
+              this.props.park.modal.buttonText !== "Delete"
             ) {
               this.props.history.push("/login");
             }
           }}
-          redirect={this.props.poll.modal.redirect}
+          redirect={this.props.park.modal.redirect}
           action={() => {
-            if (this.props.poll.modal.action) {
-              this.props.poll.modal.action();
+            if (this.props.park.modal.action) {
+              this.props.park.modal.action();
             } else {
               this.props.actions.dismissModal();
             }
           }}
         />
-        <div className="container poll__container">
+        <div className="container park__container">
           <Card
             single={true}
-            owner={this.props.profile.user._id === this.props.poll.form.ownerId}
-            poll={this.props.poll.form}
+            owner={this.props.profile.user._id === this.props.park.form.ownerId}
+            park={this.props.park.form}
             history={this.props.history}
             appState={this.props.appState}
-            deletePoll={this.props.api.deletePoll}
+            deletePark={this.props.api.deletePark}
             token={this.props.appState.authToken}
             setModalError={this.props.actions.setModalError}
             vote={this.props.api.vote}
-            voted={this.props.poll.voted}
+            voted={this.props.park.voted}
           />
         </div>
       </div>
@@ -77,7 +77,7 @@ class ViewPoll extends React.Component {
   }
 }
 
-ViewPoll.propTypes = {
+ViewPark.propTypes = {
   appState: PropTypes.shape({
     loggedIn: PropTypes.bool,
     user: PropTypes.shape({
@@ -90,8 +90,8 @@ ViewPoll.propTypes = {
     dismissModal: PropTypes.func
   }).isRequired,
   api: PropTypes.shape({
-    viewPoll: PropTypes.func,
-    deletePoll: PropTypes.func,
+    viewPark: PropTypes.func,
+    deletePark: PropTypes.func,
     vote: PropTypes.func
   }).isRequired,
   profile: PropTypes.shape({
@@ -99,7 +99,7 @@ ViewPoll.propTypes = {
       _id: PropTypes.string
     })
   }).isRequired,
-  poll: PropTypes.shape({
+  park: PropTypes.shape({
     form: PropTypes.shape({
       question: PropTypes.string,
       options: PropTypes.arrayOf(
@@ -126,7 +126,7 @@ ViewPoll.propTypes = {
 
 const mapStateToProps = state => ({
   appState: state.appState,
-  poll: state.poll,
+  park: state.park,
   profile: state.profile
 });
 
@@ -136,5 +136,5 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(ViewPoll)
+  connect(mapStateToProps, mapDispatchToProps)(ViewPark)
 );

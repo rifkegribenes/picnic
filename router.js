@@ -95,7 +95,7 @@ module.exports = function (app) {
   const apiRoutes = express.Router(),
     authRoutes = express.Router(),
     userRoutes = express.Router(),
-    pollRoutes = express.Router();
+    parkRoutes = express.Router();
 
   app.use(passport.initialize());
   app.use(passport.session());
@@ -198,29 +198,29 @@ module.exports = function (app) {
   // Returns fail status + message -or- array of all parks
   parkRoutes.get('/allparks/:city', YelpController.getParks);
 
-  // // Get all polls for specific user
-  // // Returns fail status + message -or- array of all active polls & user
-  // pollRoutes.get('/userpolls/:userId', PollController.getUserPolls);
+  // // Get all parks for specific user
+  // // Returns fail status + message -or- array of all active parks & user
+  // parkRoutes.get('/userparks/:userId', ParkController.getUserParks);
 
-  // // View a single poll
-  // // Returns fail status + message -or- poll object & user
-  // pollRoutes.get('/:pollId', PollController.viewPollById);
+  // // View a single park
+  // // Returns fail status + message -or- park object & user
+  // parkRoutes.get('/:parkId', ParkController.viewParkById);
 
-  // // Create a poll
-  // // Returns fail status + message -or- poll object & user
-  // pollRoutes.post('/createpoll', requireAuth, PollController.newPoll);
+  // // Create a park
+  // // Returns fail status + message -or- park object & user
+  // parkRoutes.post('/createpark', requireAuth, ParkController.newPark);
 
-  // // Update a poll
-  // // Returns fail status + message -or- poll object
-  // pollRoutes.put('/update/:pollId', requireAuth, PollController.updatePoll);
+  // // Update a park
+  // // Returns fail status + message -or- park object
+  // parkRoutes.put('/update/:parkId', requireAuth, ParkController.updatePark);
 
-  // // Delete a poll
+  // // Delete a park
   // // Returns fail status + message -or- success message
-  // pollRoutes.delete('/delete/:pollId', requireAuth, PollController.deletePoll);
+  // parkRoutes.delete('/delete/:parkId', requireAuth, ParkController.deletePark);
 
-  // // Vote in a poll
-  // // Returns fail status + message -or- poll object & user
-  // pollRoutes.post('/vote/:pollId/:optionId', PollController.vote);
+  // // Vote in a park
+  // // Returns fail status + message -or- park object & user
+  // parkRoutes.post('/vote/:parkId/:optionId', ParkController.vote);
 
   // Reset votes
 

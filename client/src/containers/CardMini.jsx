@@ -2,20 +2,20 @@ import React from "react";
 import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const PollCardMini = props => (
+const CardMini = props => (
   <Link
-    to={`/poll/${props.poll._id}`}
-    className="polls-grid__card"
-    key={props.poll._id}
+    to={`/park/${props.park._id}`}
+    className="parks-grid__card"
+    key={props.park._id}
   >
-    <div className="polls-grid__title polls-grid__title--sm">
-      {props.poll.question}
+    <div className="parks-grid__title parks-grid__title--sm">
+      {props.park.question}
     </div>
   </Link>
 );
 
-PollCardMini.propTypes = {
-  poll: PropTypes.shape({
+CardMini.propTypes = {
+  park: PropTypes.shape({
     _id: PropTypes.string,
     question: PropTypes.string,
     options: PropTypes.arrayOf(
@@ -32,4 +32,4 @@ PollCardMini.propTypes = {
   }).isRequired
 };
 
-export default withRouter(PollCardMini);
+export default withRouter(CardMini);

@@ -281,7 +281,7 @@ Form.propTypes = {
     }).isRequired,
     spinnerClass: PropTypes.string
   }).isRequired,
-  poll: PropTypes.shape({
+  park: PropTypes.shape({
     errorMsg: PropTypes.string,
     form: PropTypes.shape({
       firstName: PropTypes.string,
@@ -326,7 +326,7 @@ Form.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  poll: state.poll,
+  park: state.park,
   appState: state.appState
 });
 

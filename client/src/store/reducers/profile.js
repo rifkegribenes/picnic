@@ -61,7 +61,7 @@ function profile(state = INITIAL_STATE, action) {
   switch (action.type) {
     /*
     * Called from: <ComboBox />, <VerifyEmail />, <Profile />,
-    * <ViewPoll />, <AllPolls />
+    * <ViewPark />, <AllParks />
     * Payload: User Profile
     * Purpose: Update user data in redux store with user object
     * returned from server when user successfully logs in,

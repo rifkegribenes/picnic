@@ -13,7 +13,7 @@ const OptionSchema = new Schema({
   addedBy: String
 });
 
-const PollSchema = new Schema({
+const ParkSchema = new Schema({
   question: {type: String, required: true, unique: true},
   slug: {type: String },
   options: [OptionSchema],
@@ -26,7 +26,7 @@ const PollSchema = new Schema({
 });
 
 // Sanitize HTML from inputs and generate slug on save
-PollSchema.pre('save', function(next) {
+ParkSchema.pre('save', function(next) {
   const sanitize = {
     allowedTags: [],
     allowedAttributes: []
@@ -46,7 +46,7 @@ PollSchema.pre('save', function(next) {
 });
 
 // Also do this on update i guess? no way to combine these functions?
-PollSchema.pre('update', function(next) {
+ParkSchema.pre('update', function(next) {
   const sanitize = {
     allowedTags: [],
     allowedAttributes: []
@@ -65,4 +65,4 @@ PollSchema.pre('update', function(next) {
   next();
 });
 
-module.exports = mongoose.model('Poll', PollSchema);
+module.exports = mongoose.model('Park', ParkSchema);

@@ -1,4 +1,4 @@
-.polls-grid {
+.parks-grid {
 	width: 100%;
 	max-width: 1800px;
 	padding-bottom: 60px;
@@ -76,7 +76,7 @@
 		height: 43px;
 		position: relative;
 
-		& .polls-grid__icon {
+		& .parks-grid__icon {
 			width: 100%;
 			height: auto;
 			position: absolute;
@@ -234,7 +234,7 @@
 
 }
 
-a > .polls-grid__card {
+a > .parks-grid__card {
 	&:hover, &:active, &:focus {
 		box-shadow: 0 0 1em $color_focus_ring;
 	}

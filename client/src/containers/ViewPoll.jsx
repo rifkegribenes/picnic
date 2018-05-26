@@ -8,7 +8,7 @@ import * as apiActions from "../store/actions/apiPollActions";
 
 import Spinner from "./Spinner";
 import ModalSm from "./ModalSm";
-import PollCard from "./PollCard";
+import Card from "./Card";
 
 class ViewPoll extends React.Component {
   componentWillMount() {
@@ -59,7 +59,7 @@ class ViewPoll extends React.Component {
           }}
         />
         <div className="container poll__container">
-          <PollCard
+          <Card
             single={true}
             owner={this.props.profile.user._id === this.props.poll.form.ownerId}
             poll={this.props.poll.form}

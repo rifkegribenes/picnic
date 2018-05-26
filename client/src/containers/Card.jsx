@@ -18,7 +18,7 @@ const deleteModal = (pollId, token, deletePoll) => {
   };
 };
 
-const PollCard = props => {
+const Card = props => {
   const backgroundStyle = {
     backgroundImage: `url(${props.poll.ownerAvatar ||
       "https://raw.githubusercontent.com/rifkegribenes/picnic/master/client/public/img/picnic_icon.png"})`,
@@ -145,7 +145,7 @@ const PollCard = props => {
   );
 };
 
-PollCard.propTypes = {
+Card.propTypes = {
   token: PropTypes.string.isRequired,
   poll: PropTypes.shape({
     _id: PropTypes.string,
@@ -170,4 +170,4 @@ PollCard.propTypes = {
   voted: PropTypes.bool
 };
 
-export default withRouter(PollCard);
+export default withRouter(Card);

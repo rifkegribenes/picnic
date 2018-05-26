@@ -4,13 +4,17 @@ const client = yelp.client(apiKey);
 
 
 exports.getParks = (req, res, next) => {
+  console.log('getParks');
   let city = req.params.city;
+  console.log(city);
   client.search({
     location: city,
-    category_filter: 'parks'
+    categories: 'parks'
   }).then(data => {
-    console.log(data.jsonBody.businesses[0].name);
-    res.send(data.jsonBody.businesses);
+    const firstResult = data.jsonBody.businesses[0];
+    const prettyJson = JSON.stringify(firstResult, null, 4);
+    console.log(prettyJson);
+    res.send(prettyJson);
   }).catch(err => {
     console.log(err);
     res.send(err.data);

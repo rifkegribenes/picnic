@@ -12,7 +12,7 @@ import CardMini from "./CardMini";
 
 class Parks extends React.Component {
   componentWillMount() {
-    this.props.api.getAllParks().then(result => {
+    this.props.api.getAllParks("Portland").then(result => {
       // console.log(result);
       if (result.type === "GET_ALL_PARKS_SUCCESS") {
         // this.props.actions.setLoggedIn();

@@ -11,10 +11,7 @@ exports.getParks = (req, res, next) => {
     location: city,
     categories: 'parks'
   }).then(data => {
-    const firstResult = data.jsonBody.businesses[0];
-    const prettyJson = JSON.stringify(firstResult, null, 4);
-    console.log(prettyJson);
-    res.send(prettyJson);
+    res.send(data.jsonBody.businesses);
   }).catch(err => {
     console.log(err);
     res.send(err.data);

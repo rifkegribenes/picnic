@@ -9,7 +9,10 @@ const CardMini = props => (
     key={props.park._id}
   >
     <div className="parks-grid__title parks-grid__title--sm">
-      {props.park.question}
+      {props.park.name}
+    </div>
+    <div className="parks-grid__image-wrap">
+      <img className="parks-grid__image" src={props.park.image_url} />
     </div>
   </Link>
 );

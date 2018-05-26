@@ -32,6 +32,11 @@
     justify-content: center;
 	}
 
+	&__image {
+		max-width: 100%;
+		height: auto;
+	}
+
 	&__link {
 		width: auto !important;
 	}

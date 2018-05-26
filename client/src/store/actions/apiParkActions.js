@@ -214,10 +214,10 @@ export function deletePark(token, parkId) {
 *     If database error,
 *     Hides spinner, displays error message in modal
 */
-export function getAllParks() {
+export function getAllParks(city) {
   return {
     [RSAA]: {
-      endpoint: `${BASE_URL}/api/park/allparks`,
+      endpoint: `${BASE_URL}/api/park/allparks/${city}`,
       method: "GET",
       types: [
         GET_ALL_PARKS_REQUEST,

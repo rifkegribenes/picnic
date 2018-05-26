@@ -358,7 +358,7 @@ function park(state = INITIAL_STATE, action) {
         modal: {
           class: "modal__hide"
         },
-        parks: [...action.payload.parks]
+        parks: [...action.payload]
       });
 
     /*

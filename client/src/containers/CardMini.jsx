@@ -3,9 +3,11 @@ import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const CardMini = props => (
-  <Link to={props.park.url} className="parks-grid__card" key={props.park.id}>
-    <div className="parks-grid__title parks-grid__title--sm">
-      {props.park.name}
+  <div key={props.park.id} className="parks-grid__card">
+    <div className="parks-grid__title--sm">
+      <Link to={props.park.url} className="parks-grid__title">
+        {props.park.name}
+      </Link>
     </div>
     <div className="parks-grid__image-wrap">
       <img
@@ -14,7 +16,17 @@ const CardMini = props => (
         alt={props.park.name}
       />
     </div>
-  </Link>
+    <div className="parks-grid__review-wrap" />
+    <div className="parks-grid__contact-info-wrap">
+      {props.park.location.display_address[0]}
+      <br />
+      {props.park.location.display_address[1]}
+      <br />
+      <a className="parks-grid__phone" href={`tel:${props.park.phone}`}>
+        {props.park.display_phone}
+      </a>
+    </div>
+  </div>
 );
 
 CardMini.propTypes = {

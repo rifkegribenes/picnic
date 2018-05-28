@@ -367,7 +367,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     flex-wrap: nowrap;
     max-width: 900px;
     position: relative;
-    margin: auto; } }
+    margin: 0 auto 20px auto; } }
 .search .form__body {
   width: 100%;
   display: block;
@@ -1563,6 +1563,14 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     text-decoration: none !important; }
     .parks-grid__title--sm {
       margin-bottom: 0; }
+    .parks-grid__title:hover {
+      color: #009b53; }
+  .parks-grid__phone {
+    color: #6a3f24;
+    text-decoration: none; }
+    .parks-grid__phone:hover {
+      color: #009b53;
+      border-bottom: 1px dotted #009b53; }
   .parks-grid__inner-wrap {
     display: flex;
     flex-wrap: wrap;

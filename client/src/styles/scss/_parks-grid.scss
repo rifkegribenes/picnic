@@ -128,6 +128,20 @@
 		&--sm {
 			margin-bottom: 0;
 		}
+
+		&:hover {
+			color: $color_green_lighter;
+		}
+	}
+
+	&__phone {
+		color: $color_brown;
+		text-decoration: none;
+
+		&:hover {
+			color: $color_green_lighter;
+			border-bottom: 1px dotted $color_green_lighter;
+		}
 	}
 
 	&__inner-wrap {

@@ -543,7 +543,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     flex-wrap: nowrap;
     max-width: 900px;
     position: relative;
-    margin: auto;
+    margin: 0 auto 20px auto;
   }
 
  & .form {

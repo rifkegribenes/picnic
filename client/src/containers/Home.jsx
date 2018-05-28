@@ -1,13 +1,12 @@
 import React from "react";
-import { NavLink, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../store/actions";
 import * as apiActions from "../store/actions/apiActions";
-// import { typewriterAnimation } from "../utils";
 
-import icon from "../img/picnic_crop.svg";
 import SearchBar from "./SearchBar";
+import Parks from "./Parks";
 
 class Home extends React.Component {
   componentDidMount() {
@@ -32,14 +31,16 @@ class Home extends React.Component {
     } else {
       // console.log("logged in");
     }
-
-    // typewriterAnimation();
   }
 
   render() {
     return (
       <div className="splash">
+        <h2 className="splash__header">
+          Enter your city and click 'Search' to find parks in your area.
+        </h2>
         <SearchBar />
+        {this.props.park.parks.length ? <Parks /> : null}
       </div>
     );
   }
@@ -47,7 +48,8 @@ class Home extends React.Component {
 
 const mapStateToProps = state => ({
   appState: state.appState,
-  profile: state.profile
+  profile: state.profile,
+  park: state.park
 });
 
 const mapDispatchToProps = dispatch => ({

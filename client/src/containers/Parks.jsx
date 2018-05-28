@@ -16,7 +16,7 @@ class Parks extends React.Component {
   render() {
     const parks = this.props.park.parks.map((park, idx) => {
       return (
-        <CardMini key={park._id} park={park} history={this.props.history} />
+        <CardMini key={park.id} park={park} history={this.props.history} />
       );
     });
     return (

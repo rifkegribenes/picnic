@@ -1,5 +1,3 @@
-import update from "immutability-helper";
-
 // //////// FORM VALIDATION FUNCTIONS //////////
 
 const _isRequired = fieldName => `${fieldName} is required`;

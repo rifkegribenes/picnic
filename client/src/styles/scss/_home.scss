@@ -83,6 +83,35 @@
 
   }
 
+  &__header {
+    text-align: center;
+    width: 100%;
+    max-width: 1170px;
+    margin: auto;
+    font-size: 24px;
+    color: $color_brown;
+    font-weight: 200;
+    z-index: 3;
+    background: white;
+    padding: 10px;
+    // position: relative;
+    margin: 20px 0;
+
+
+    @include for-phone-landscape-up {
+      font-size: 28px;
+    }
+
+    @include mobile-nav-breakpoint {
+
+    }
+
+    @include for-tablet-landscape-up {
+      font-size: 34px;
+    }
+
+  }
+
   &__caret {
     margin: 1em 0;
     border-right: .05em solid $color_green_lighter;

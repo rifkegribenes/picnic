@@ -194,19 +194,7 @@ class Header extends React.Component {
               </NavLink>
             </div>
 
-            <nav className={classObj[this.props.appState.menuState].nav}>
-              <ul className={classObj[this.props.appState.menuState].ul}>
-                <li className="h-nav__item">
-                  <NavLink
-                    to="/parks"
-                    className="h-nav__item-link"
-                    activeClassName="h-nav__item-link h-nav__item-link--active"
-                  >
-                    Find a park
-                  </NavLink>
-                </li>
-              </ul>
-            </nav>
+            <nav className={classObj[this.props.appState.menuState].nav} />
             {this.props.appState.loggedIn ? (
               <nav className="a-nav__outer-wrap">
                 <button

@@ -1445,7 +1445,8 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     justify-content: center; }
   .parks-grid__image {
     max-width: 100%;
-    height: auto; }
+    height: auto;
+    margin-top: 10px; }
   .parks-grid__link {
     width: auto !important; }
   .parks-grid__btn--icon {

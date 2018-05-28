@@ -56,23 +56,12 @@ const INITIAL_STATE = {
     text: ""
   },
   form: {
-    question: "",
-    options: [
-      {
-        text: ""
-      },
-      {
-        text: ""
-      }
-    ],
-    voters: [],
-    error: false,
-    touched: {},
-    showFieldErrors: {},
+    city: "",
+    showFieldErrors: {
+      city: false
+    },
     validationErrors: {},
-    ownerId: "",
-    ownerName: "",
-    ownerAvatar: ""
+    touched: {}
   },
   parks: [],
   showFormError: false,

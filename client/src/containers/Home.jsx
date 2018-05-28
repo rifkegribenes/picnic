@@ -4,9 +4,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../store/actions";
 import * as apiActions from "../store/actions/apiActions";
-import { typewriterAnimation } from "../utils";
+// import { typewriterAnimation } from "../utils";
 
 import icon from "../img/picnic_crop.svg";
+import SearchBar from "./SearchBar";
 
 class Home extends React.Component {
   componentDidMount() {
@@ -32,27 +33,13 @@ class Home extends React.Component {
       // console.log("logged in");
     }
 
-    typewriterAnimation();
+    // typewriterAnimation();
   }
 
   render() {
     return (
       <div className="splash">
-        <div className="splash__logo-wrap">
-          <img className="splash__icon" src={icon} alt="picnic" />
-          <div id="typewriter" className="splash__headline">
-            Find a park. Plan a picnic.
-          </div>
-          <div className="splash__button-wrap">
-            <NavLink
-              to="/parks"
-              className="form__button form__button--big splash__button"
-              activeClassName="h-nav__item-link--active"
-            >
-              Find a park
-            </NavLink>
-          </div>
-        </div>
+        <SearchBar />
       </div>
     );
   }

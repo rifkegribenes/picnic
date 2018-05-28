@@ -538,32 +538,47 @@ input:not([type=checkbox]):not([type=radio]), textarea {
 }
 
 .search {
-  flex-direction: row;
-  flex-wrap: nowrap;
-  max-width: 900px;
-  position: relative;
+  @include for-phone-portrait-up {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    max-width: 900px;
+    position: relative;
+    margin: auto;
+  }
 
  & .form {
 
   &__body {
-    width: 75%;
-    margin: 0 20px 0 0;
-    display: inline-block;
+    width: 100%;
+    display: block;
+    margin: 0;
+
+    @include for-phone-portrait-up {
+      max-width: calc(100% - 180px);
+      margin: 0 20px 0 0;
+      display: inline-block;
+    }
   }
 
   &__footer {
-    margin: 0 0;
-    width: 20%;
-    display: inline-block;
-    position: absolute;
-    top: 29px;
-    right: 0;
+    width: 100%;
+    display: block;
+    margin: 0;
+
+    @include for-phone-portrait-up {
+      margin: 0 0;
+      width: 160px;
+      display: inline-block;
+      position: relative;
+      top: 2px;
+    }
   }
 
   &__button {
     padding: 0;
     height: 43px;
     border-radius: 4px;
+    min-width: 160px;
   }
 
   &__button-wrap {

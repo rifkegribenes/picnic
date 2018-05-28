@@ -35,9 +35,11 @@ class SearchBar extends React.Component {
     return (
       <Form
         fields={fields}
+        form="search"
         reducer="park"
         buttonText="Search"
         formAction={this.search}
+        className="search"
       />
     );
   }

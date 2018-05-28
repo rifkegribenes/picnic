@@ -145,7 +145,7 @@ class Form extends React.Component {
         : "hidden";
     return (
       <div>
-        <form className="form">
+        <form className={`form ${this.props.className || ""}`}>
           <div className="form__body">
             {(this.props.form === "reset" ||
               this.props.form === "resetPwd") && (
@@ -281,6 +281,7 @@ Form.propTypes = {
     }).isRequired,
     spinnerClass: PropTypes.string
   }).isRequired,
+  className: PropTypes.string,
   park: PropTypes.shape({
     errorMsg: PropTypes.string,
     form: PropTypes.shape({

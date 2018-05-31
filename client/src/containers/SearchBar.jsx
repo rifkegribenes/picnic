@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 
 import * as Actions from "../store/actions";
 import * as apiActions from "../store/actions/apiParkActions";
+import { fieldValidations, run } from "../utils/";
 
 import Form from "./Form";
 
@@ -28,11 +29,45 @@ class SearchBar extends React.Component {
 
   search() {
     const { city } = this.props.park.form;
-    this.props.api.getAllParks(city).then(result => {
-      if (result.type === "GET_ALL_PARKS_SUCCESS") {
-        // this.props.actions.setLoggedIn();
-      }
-    });
+    console.log(city);
+    // show validation errors
+    this.props.actions.showFormError();
+    this.props.actions.setSubmit();
+
+    const validationErrors = run(this.props.park.form, fieldValidations.search);
+
+    this.props.actions.setValidationErrors(validationErrors);
+    console.log(validationErrors);
+    console.log(this.props.park.form.validationErrors);
+
+    if (!this.props.park.form.validationErrors.city) {
+      this.props.api
+        .getAllParks(city)
+        .then(result => {
+          if (result.type === "GET_ALL_PARKS_FAILURE") {
+            console.log("get parks failure");
+            this.props.actions.showFormError();
+            this.props.actions.setSubmit();
+          }
+        })
+        .catch(err => {
+          let error;
+          typeof err.message === "string"
+            ? (error = err.message)
+            : (error = undefined);
+          console.log(error);
+          this.props.actions.setFormError(error);
+          this.props.actions.setFormField({
+            error: err
+          });
+          // show validation errors
+          this.props.actions.showFormError();
+          this.props.actions.setSubmit();
+        });
+    } else {
+      console.log(this.props.park.form.validationErrors);
+      this.props.actions.setFormError("Please enter your location");
+    }
   }
 
   render() {

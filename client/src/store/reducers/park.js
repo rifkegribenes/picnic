@@ -4,8 +4,6 @@ import {
   SET_FORM_FIELD,
   SET_FORM_ERROR,
   SHOW_FORM_ERROR,
-  SET_OPTION,
-  DELETE_OPTION,
   RESET_FORM,
   DISMISS_MODAL,
   SET_MODAL_ERROR,
@@ -84,29 +82,6 @@ function park(state = INITIAL_STATE, action) {
       });
 
     /*
-    * Called from: <CreatePark />
-    * Payload: Form field Name and Value
-    * Purpose: Update the connected form field.
-    */
-    case SET_OPTION:
-      // console.log(action.payload);
-      return update(state, {
-        form: { options: { $set: action.payload } }
-      });
-
-    case DELETE_OPTION:
-      const { options, errors, idx } = action.payload;
-      const newOptions = options.filter((item, index) => index !== idx);
-      const newErrors = { ...errors };
-      delete newErrors[idx];
-      return update(state, {
-        form: {
-          options: { $set: newOptions },
-          validationErrors: { $set: newErrors }
-        }
-      });
-
-    /*
     *  Called From: <Login />, <Register />, <ResetPassword />
     *  Payload: Text - error message
     *  Purpose: Show error message on form
@@ -160,6 +135,7 @@ function park(state = INITIAL_STATE, action) {
     *  Purpose: Set validation errors object
     */
     case SET_VALIDATION_ERRORS:
+      console.log(action.payload);
       return update(state, {
         form: {
           validationErrors: { $set: { ...action.payload } }

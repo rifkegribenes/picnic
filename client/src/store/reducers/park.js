@@ -136,6 +136,7 @@ function park(state = INITIAL_STATE, action) {
     */
     case SET_VALIDATION_ERRORS:
       console.log(action.payload);
+      console.log("validation errors");
       return update(state, {
         form: {
           validationErrors: { $set: { ...action.payload } }

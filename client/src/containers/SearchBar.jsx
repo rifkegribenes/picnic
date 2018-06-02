@@ -33,41 +33,43 @@ class SearchBar extends React.Component {
     // show validation errors
     this.props.actions.showFormError();
     this.props.actions.setSubmit();
+    this.props.actions.setTouched("city");
+    this.props.actions.setShowError("city", true);
 
     const validationErrors = run(this.props.park.form, fieldValidations.search);
 
     this.props.actions.setValidationErrors(validationErrors);
-    console.log(validationErrors);
-    console.log(this.props.park.form.validationErrors);
-
-    if (!this.props.park.form.validationErrors.city) {
-      this.props.api
-        .getAllParks(city)
-        .then(result => {
-          if (result.type === "GET_ALL_PARKS_FAILURE") {
-            console.log("get parks failure");
+    // workaround for race condition
+    // redux is not updating validation errors in time for next function call
+    setTimeout(() => {
+      if (!this.props.park.form.validationErrors.city) {
+        this.props.api
+          .getAllParks(city)
+          .then(result => {
+            if (result.type === "GET_ALL_PARKS_FAILURE") {
+              console.log("get parks failure");
+              this.props.actions.showFormError();
+              this.props.actions.setSubmit();
+            }
+          })
+          .catch(err => {
+            let error;
+            typeof err.message === "string"
+              ? (error = err.message)
+              : (error = undefined);
+            console.log(error);
+            this.props.actions.setFormError(error);
+            this.props.actions.setFormField({
+              error: err
+            });
+            // show validation errors
             this.props.actions.showFormError();
             this.props.actions.setSubmit();
-          }
-        })
-        .catch(err => {
-          let error;
-          typeof err.message === "string"
-            ? (error = err.message)
-            : (error = undefined);
-          console.log(error);
-          this.props.actions.setFormError(error);
-          this.props.actions.setFormField({
-            error: err
           });
-          // show validation errors
-          this.props.actions.showFormError();
-          this.props.actions.setSubmit();
-        });
-    } else {
-      console.log(this.props.park.form.validationErrors);
-      this.props.actions.setFormError("Please enter your location");
-    }
+      } else {
+        this.props.actions.setFormError("Please enter your location");
+      }
+    }, 200);
   }
 
   render() {

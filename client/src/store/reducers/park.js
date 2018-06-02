@@ -59,7 +59,8 @@ const INITIAL_STATE = {
       city: false
     },
     validationErrors: {},
-    touched: {}
+    touched: {},
+    error: ""
   },
   parks: [],
   showFormError: false,
@@ -96,10 +97,16 @@ function park(state = INITIAL_STATE, action) {
       } else {
         error = "Sorry, something went wrong :( \n Please try again.";
       }
+
       return Object.assign({}, state, { errorMsg: error });
 
     case SHOW_FORM_ERROR:
-      return Object.assign({}, state, { showFormError: action.payload });
+      return update(state, {
+        showFormError: { $set: action.payload },
+        form: {
+          error: { $set: action.payload }
+        }
+      });
 
     /*
     *  Called From: <ParkOptions />, <Form />
@@ -135,8 +142,6 @@ function park(state = INITIAL_STATE, action) {
     *  Purpose: Set validation errors object
     */
     case SET_VALIDATION_ERRORS:
-      console.log(action.payload);
-      console.log("validation errors");
       return update(state, {
         form: {
           validationErrors: { $set: { ...action.payload } }

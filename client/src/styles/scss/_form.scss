@@ -539,6 +539,7 @@ input:not([type=checkbox]):not([type=radio]), textarea {
 
 .search {
   @include for-phone-portrait-up {
+    display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     max-width: 900px;
@@ -556,7 +557,6 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     @include for-phone-portrait-up {
       max-width: calc(100% - 180px);
       margin: 0 20px 0 0;
-      display: inline-block;
     }
   }
 
@@ -568,9 +568,8 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     @include for-phone-portrait-up {
       margin: 0 0;
       width: 160px;
-      display: inline-block;
-      position: relative;
-      top: 2px;
+      align-self: flex-start;
+      margin-top: 29px;
     }
   }
 

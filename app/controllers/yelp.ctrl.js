@@ -6,7 +6,6 @@ const client = yelp.client(apiKey);
 exports.getParks = (req, res, next) => {
   console.log('getParks');
   let city = req.params.city;
-  console.log(city);
   client.search({
     location: city,
     categories: 'parks'

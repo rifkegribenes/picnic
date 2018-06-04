@@ -4,6 +4,8 @@
 
 ![picnic screenshot](#)
 
+This was supposed to be a nightlife coordination app but I don't drink, or leave my house after dark, so it's this instead.
+
 ### User stories:
 
 * As an unauthenticated user, I can view all parks in my area.

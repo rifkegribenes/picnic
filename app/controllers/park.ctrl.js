@@ -1,4 +1,5 @@
 const Park = require('../models/park');
+const User = require('../models/user');
 const helpers = require('../utils/index');
 
 // Get all parks
@@ -136,9 +137,9 @@ exports.updatePark = (user, req, res, next) => {
   });
 };
 
-// add voter to park
-exports.vote = (req, res, next) => {
-  const { parkId, optionId } = req.params;
+// add user to park
+exports.checkIn = (req, res, next) => {
+  const { parkId, userId } = req.params;
   const target = {
     _id: parkId
   };
@@ -146,33 +147,8 @@ exports.vote = (req, res, next) => {
   const updates = { ...req.body };
   const options = { new: true };
 
-  // get voter IP
-  let voterIP = (req.headers['x-forwarded-for'] ||
-     req.connection.remoteAddress ||
-     req.socket.remoteAddress ||
-     req.connection.socket.remoteAddress).split(",")[0];
-
-  // only allow one vote per IP address
-  if (updates.voters.indexOf(voterIP) !== -1) {
-    console.log('already voted');
-    return res
-      .status(404)
-      .json({message: 'You have already voted in this park'});
-  }
-
-  // add voter IP to voters array
-  updates.voters.push(voterIP);
-
-  // map through options and increase votes on matching option
-  const parkOptions = [ ...updates.options ];
-  updates.options = parkOptions.map((option) => {
-    if (option._id === optionId) {
-      option.votes++;
-      return option;
-    } else {
-      return option;
-    }
-  })
+  // add user ID to guests array
+  updates.guests.push(userId);
 
   Park.findOneAndUpdate(target, updates, options)
     .exec()
@@ -185,7 +161,7 @@ exports.vote = (req, res, next) => {
         return res
           .status(200)
           .json({
-            message: 'Vote recorded successfully',
+            message: 'User checked in successfully',
             park
           });
       }
@@ -197,29 +173,74 @@ exports.vote = (req, res, next) => {
     });
 };
 
-// reset votes on a park
-exports.resetVotes = (req, res, next) => {
-  // if(req.body._id) { delete req.body._id; } ????
-  Park.findById(req.params.id, function (err, park) {
-    if (err) { return handleError(res, err); }
-    if(!park) { return res.status(404).send('Not Found'); }
+exports.GuestLists = function(req, res, next){
+  const userId = req.params.userId;
+  const parkId = req.params.parkId;
+  // if user is not logged in, skip of going through the database
+  if (userId !== 'null'){
+    User.findOne({ _id: userId}, (err, existingUser) => {
+      if (err) { handleError(res, err) }
+      if (existingUser.parks.includes(parkId)){
+        console.log('current user is checked in')
+        return res.send({'isCurrentUserCheckedIn': true})
+      } else {
+        console.log('current user is not checked in')
+        return res.send({'isCurrentUserCheckedIn': false})
+      }
+    })
+  } else{
+    res.send({'message' : 'user is not logged in'})
+    next()
+  }
+}
 
-    // Only owners and admins may clear votes
-    if(park.owner.toString() === req.user._id.toString() || req.user.role === 'admin') {
-      var updated = _.extend(park, req.body);
+exports.UpdateGuestList = function(req, res, next){
+  const parkId = req.params.parkId;
+  const userId = req.params.userId;
 
-      updated.voters = [];
-      updated.votes = Array.apply(null, Array(updated.votes.length)).map(Number.prototype.valueOf,0);
-      updated.totalVotes = 0;
-      updated.save(function (err) {
-        if (err) { return handleError(res, err); }
-        return res.status(200).json(park);
-      });
-    } else {
-      return res.status(403).send('You do not have permission to clear votes');
-    }
-  });
-};
+  const updatePark = () => {
+    return new Promise((resolve, reject) => {
+      Park.findOne({ parkId: parkId }, (err, existingPark) => {
+        if (err) { return next(err) ;}
+        // if parkId exist in the db
+        if (existingPark){
+          //1) if current user in guests array, remove it
+          if (existingPark.guests.includes(userId)){
+            console.log('Remove guest')
+            Park.findOneAndUpdate({parkId: parkId}, {$pull: {guests: userId}}, (err, doc) => {
+                if(err) {console.error(err)}
+                resolve()
+              console.log(doc)
+              return res.send({"message": "removed from guest list"})
+            })
+
+          } else {
+            //2) if current user not in guests array, add it
+            console.log('Add guest')
+            Park.findOneAndUpdate({parkId: parkId}, {$push: {guests: userId}}, (err, doc) => {
+              if(err) {console.error(err)}
+              console.log(doc)
+              resolve()
+            })
+          }
+          resolve()
+          return res.send({"message": "done"})
+        }
+        // If parkId does not exist, create and save park
+        const park = new Park({
+          parkId: parkId,
+          guests: [userId]
+        })
+
+        park.save((err, doc) => {
+          if (err) {return next(err)}
+          // console.log(doc)
+          resolve()
+        })
+      })
+    })
+
+  }
 
 // Deletes a park from the DB.
 exports.deletePark = (user, req, res, next) => {

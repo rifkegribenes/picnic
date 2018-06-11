@@ -194,53 +194,66 @@ exports.GuestLists = function(req, res, next){
   }
 }
 
+// add or remove a user from a park guest list
 exports.UpdateGuestList = (req, res, next) => {
+  console.log('UpdateGuestList');
   const parkId = req.params.parkId;
   const userId = req.params.userId;
 
-  const updatePark = () => {
-    return new Promise((resolve, reject) => {
-      Park.findOne({ parkId: parkId }, (err, existingPark) => {
-        if (err) { return next(err) ;}
-        // if parkId exist in the db
-        if (existingPark){
-          //1) if current user in guests array, remove it
-          if (existingPark.guests.includes(userId)){
-            console.log('Remove guest')
-            Park.findOneAndUpdate({parkId: parkId}, {$pull: {guests: userId}}, (err, doc) => {
-                if(err) {console.error(err)}
-                resolve()
-              console.log(doc)
-              return res.send({"message": "removed from guest list"})
+  Park.findOne({ parkId: parkId })
+    .then((existingPark) => {
+      // if parkId exists
+      if (existingPark) {
+        // if current user is already in the guests array, remove it
+        if (existingPark.guests.includes(userId)) {
+          console.log('Remove user from guestlist')
+          Park.findOneAndUpdate({parkId: parkId}, {$pull: {guests: userId}})
+            .then((doc) => {
+              console.log(doc);
+              return res.send({"park": doc});
             })
-
-          } else {
-            //2) if current user not in guests array, add it
-            console.log('Add guest')
-            Park.findOneAndUpdate({parkId: parkId}, {$push: {guests: userId}}, (err, doc) => {
-              if(err) {console.error(err)}
-              console.log(doc)
-              resolve()
+            .catch((err) => {
+                console.log('error at line 216 park.ctrl.js');
+                handleError(res, err);
+            });
+        } else {
+          //if current user not in guests array, add it
+          console.log('Add user to guestlist')
+          Park.findOneAndUpdate({parkId: parkId}, {$push: {guests: userId}})
+            .then((doc) => {
+              console.log(doc);
+              return res.send({"park": doc});
             })
-          }
-          resolve()
-          return res.send({"message": "done"})
+            .catch((err) => {
+                console.log('error at line 228 park.ctrl.js');
+                handleError(res, err);
+            });
         }
-        // If parkId does not exist, create and save park
+      } else {
+        console.log('park does not exist in db');
+        // If parkId does not exist, create park, check in current user, save
         const park = new Park({
           parkId: parkId,
           guests: [userId]
         })
+        console.log(park);
 
-        park.save((err, doc) => {
-          if (err) {return next(err)}
-          // console.log(doc)
-          resolve()
-        })
-      })
-    })
-
-  }
+        park.save()
+          .then((doc) => {
+            console.log('new park saved');
+            console.log(doc);
+            return res.send({"park": doc});
+          })
+          .catch((err) => {
+            console.log('error at line 248 park.ctrl.js');
+            handleError(res, err);
+          });
+        }
+    }) // Park.findOne .then
+    .catch((err) => {
+      console.log('error at line 253 park.ctrl.js');
+      handleError(res, err);
+    });
 }
 
 // Deletes a park from the DB.

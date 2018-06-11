@@ -63,6 +63,10 @@ const INITIAL_STATE = {
     error: ""
   },
   parks: [],
+  park: {
+    parkId: "",
+    guestList: []
+  },
   showFormError: false
 };
 
@@ -307,12 +311,14 @@ function park(state = INITIAL_STATE, action) {
     *  Purpose: Display park, set loggedin user to checked in
     */
     case CHECKIN_SUCCESS:
+      console.log("checkin success");
+      console.log(action.payload);
       return update(state, {
         spinnerClass: { $set: "spinner__hide" },
         modal: {
           class: { $set: "modal__hide" }
         },
-        form: { $merge: action.payload.park }
+        park: { $merge: action.payload.park }
       });
 
     /*

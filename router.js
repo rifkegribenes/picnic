@@ -202,9 +202,9 @@ module.exports = function (app) {
   // // Returns fail status + message -or- array of all active parks & user
   // parkRoutes.get('/userparks/:userId', ParkController.getUserParks);
 
-  // // View a single park
-  // // Returns fail status + message -or- park object & user
-  // parkRoutes.get('/:parkId', ParkController.viewParkById);
+  // View a single park
+  // Returns fail status + message -or- park object & user
+  parkRoutes.get('/:parkId', ParkController.viewParkByYelpId);
 
   // // Create a park
   // // Returns fail status + message -or- park object & user

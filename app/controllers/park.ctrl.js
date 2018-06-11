@@ -28,12 +28,25 @@ exports.getUserParks = (req, res, next) => {
 };
 
 // Get a single park by id
-exports.viewParkById = (req, res, next) => {
-  Park.findById( req.params.parkId,  (err, park) => {
-    if (err) { return handleError(res, err); }
-    if (!park) { return res.status(404).send({message: 'Error: Park not found'}); }
-    return res.status(200).json({park});
-  });
+exports.viewParkByYelpId = (req, res, next) => {
+  Park.find({ parkId: req.params.parkId })
+    .then((park) => {
+      if (park) {
+        return res
+          .status(200)
+          .json({
+            message: 'Existing park retrieved',
+            park
+          });
+        } else {
+          return next;
+        }
+    })
+    .catch(err => {
+      console.log('catch block park.ctrl.js > 46');
+      console.log(err);
+      return handleError(res, err);
+    });
 };
 
 // Create a new park

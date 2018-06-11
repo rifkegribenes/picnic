@@ -76,6 +76,7 @@ function park(state = INITIAL_STATE, action) {
   let message;
   let idx;
   let parks;
+  let guests;
   switch (action.type) {
     /*
     * Called from: <Form />, <ModalSm />, <CreatePark />
@@ -276,20 +277,6 @@ function park(state = INITIAL_STATE, action) {
       });
 
     /*
-    *  Called from: <ViewPark />
-    *  Payload: park object
-    *  Purpose: Display park
-    */
-    case VIEW_PARK_SUCCESS:
-      return update(state, {
-        spinnerClass: { $set: "spinner__hide" },
-        modal: {
-          class: { $set: "modal__hide" }
-        },
-        form: { $merge: action.payload.park }
-      });
-
-    /*
     *  Called from: <UserParks />
     *  Payload: partial user object (name and avatar only)
     *  Purpose: Display name and avatar of park owner
@@ -310,10 +297,9 @@ function park(state = INITIAL_STATE, action) {
     /*
     *  Called from: <ParkCard />
     *  Payload: park object
-    *  Purpose: Display park, set loggedin user to checked in
+    *  Purpose: Merge mongo guestlist with yelp park data, display park
     */
     case CHECKIN_SUCCESS:
-      console.log("checkin success");
       idx = state.parks.findIndex(park => {
         return park.id === action.payload.park.parkId;
       });
@@ -321,8 +307,48 @@ function park(state = INITIAL_STATE, action) {
       console.log(parks);
       console.log(action.payload.park);
       console.log(action.payload.park.guests);
-      parks[idx].guests = [...action.payload.park.guests];
+      if (action.payload.park.guests) {
+        guests = [...action.payload.park.guests];
+      } else {
+        guests = [];
+      }
+      if (parks && idx) {
+        console.log("why is parks[idx] undefined here?");
+        console.log(parks);
+        console.log(parks[idx]);
+        parks[idx].guests = guests;
+      }
       console.log(parks);
+
+      return update(state, {
+        spinnerClass: { $set: "spinner__hide" },
+        modal: {
+          class: { $set: "modal__hide" }
+        },
+        parks: { $set: parks }
+      });
+
+    case VIEW_PARK_SUCCESS:
+      idx = state.parks.findIndex(park => {
+        return park.id === action.payload.park.parkId;
+      });
+      parks = [...state.parks];
+      // console.log('view park success:');
+      // console.log(idx);
+      // console.log(parks);
+      // console.log(action.payload.park);
+      // console.log(action.payload.park.guests);
+      if (action.payload.park.guests) {
+        guests = [...action.payload.park.guests];
+      } else {
+        guests = [];
+      }
+      if (parks && idx !== -1) {
+        console.log("why is parks[idx] undefined here?");
+        console.log(parks);
+        console.log(parks[idx]);
+        parks[idx].guests = guests;
+      }
 
       return update(state, {
         spinnerClass: { $set: "spinner__hide" },

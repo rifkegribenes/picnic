@@ -31,7 +31,9 @@ const CardMini = props => (
         className="form__button"
         onClick={() => props.checkIn(props.park.id, props.userId)}
       >
-        Check In
+        {props.park.guests && props.park.guests.indexOf(props.userId) !== -1
+          ? "Check Out"
+          : "Check In"}
       </button>
     </div>
     <div className="parks-grid__guestlist">

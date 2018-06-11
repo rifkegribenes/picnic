@@ -65,7 +65,7 @@ const INITIAL_STATE = {
   parks: [],
   park: {
     parkId: "",
-    guestList: []
+    guests: []
   },
   showFormError: false
 };
@@ -74,6 +74,8 @@ function park(state = INITIAL_STATE, action) {
   let error;
   let title;
   let message;
+  let idx;
+  let parks;
   switch (action.type) {
     /*
     * Called from: <Form />, <ModalSm />, <CreatePark />
@@ -312,13 +314,22 @@ function park(state = INITIAL_STATE, action) {
     */
     case CHECKIN_SUCCESS:
       console.log("checkin success");
-      console.log(action.payload);
+      idx = state.parks.findIndex(park => {
+        return park.id === action.payload.park.parkId;
+      });
+      parks = [...state.parks];
+      console.log(parks);
+      console.log(action.payload.park);
+      console.log(action.payload.park.guests);
+      parks[idx].guests = [...action.payload.park.guests];
+      console.log(parks);
+
       return update(state, {
         spinnerClass: { $set: "spinner__hide" },
         modal: {
           class: { $set: "modal__hide" }
         },
-        park: { $merge: action.payload.park }
+        parks: { $set: parks }
       });
 
     /*

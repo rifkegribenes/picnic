@@ -34,6 +34,9 @@ const CardMini = props => (
         Check In
       </button>
     </div>
+    <div className="parks-grid__guestlist">
+      {`${props.park.guests ? props.park.guests.length : "0"} users checked in`}
+    </div>
   </div>
 );
 

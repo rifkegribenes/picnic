@@ -197,36 +197,63 @@ exports.GuestLists = function(req, res, next){
 // add or remove a user from a park guest list
 exports.UpdateGuestList = (req, res, next) => {
   console.log('UpdateGuestList');
-  const parkId = req.params.parkId;
-  const userId = req.params.userId;
+  const { parkId, userId } = req.params;
 
   Park.findOne({ parkId: parkId })
     .then((existingPark) => {
       // if parkId exists
       if (existingPark) {
+        const target = {
+          parkId: parkId
+        };
+        const options = { new: true };
         // if current user is already in the guests array, remove it
         if (existingPark.guests.includes(userId)) {
           console.log('Remove user from guestlist')
-          Park.findOneAndUpdate({parkId: parkId}, {$pull: {guests: userId}})
-            .then((doc) => {
-              console.log(doc);
-              return res.send({"park": doc});
+          const updates = { $pull: {guests: userId} };
+          Park.findOneAndUpdate(target, updates, options)
+            .exec()
+            .then((park) => {
+              if (!park) {
+                return res
+                  .status(404)
+                  .json({message: 'Park not found'});
+              } else {
+                return res
+                  .status(200)
+                  .json({
+                    message: 'User removed successfully',
+                    park
+                  });
+              }
             })
-            .catch((err) => {
-                console.log('error at line 216 park.ctrl.js');
-                handleError(res, err);
+            .catch(err => {
+              console.log('catch block park.ctrl.js > 231');
+              return handleError(res, err);
             });
         } else {
           //if current user not in guests array, add it
           console.log('Add user to guestlist')
-          Park.findOneAndUpdate({parkId: parkId}, {$push: {guests: userId}})
-            .then((doc) => {
-              console.log(doc);
-              return res.send({"park": doc});
+          const updates = { $push: {guests: userId} };
+          Park.findOneAndUpdate(target, updates, options)
+            .exec()
+            .then((park) => {
+              if (!park) {
+                return res
+                  .status(404)
+                  .json({message: 'Park not found'});
+              } else {
+                return res
+                  .status(200)
+                  .json({
+                    message: 'User added successfully',
+                    park
+                  });
+              }
             })
-            .catch((err) => {
-                console.log('error at line 228 park.ctrl.js');
-                handleError(res, err);
+            .catch(err => {
+              console.log('catch block park.ctrl.js > 255');
+              return handleError(res, err);
             });
         }
       } else {
@@ -239,20 +266,25 @@ exports.UpdateGuestList = (req, res, next) => {
         console.log(park);
 
         park.save()
-          .then((doc) => {
+          .then((park) => {
             console.log('new park saved');
-            console.log(doc);
-            return res.send({"park": doc});
+            console.log(park);
+            return res
+              .status(200)
+              .json({
+                message: 'Park saved successfully',
+                park
+              });
           })
           .catch((err) => {
-            console.log('error at line 248 park.ctrl.js');
-            handleError(res, err);
+            console.log('error at line 280 park.ctrl.js');
+            return handleError(res, err);
           });
         }
     }) // Park.findOne .then
     .catch((err) => {
-      console.log('error at line 253 park.ctrl.js');
-      handleError(res, err);
+      console.log('error at line 286 park.ctrl.js');
+      return handleError(res, err);
     });
 }
 

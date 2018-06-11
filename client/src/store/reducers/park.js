@@ -31,9 +31,9 @@ import {
   GET_USER_PARKS_REQUEST,
   GET_USER_PARKS_SUCCESS,
   GET_USER_PARKS_FAILURE,
-  VOTE_REQUEST,
-  VOTE_SUCCESS,
-  VOTE_FAILURE
+  CHECKIN_REQUEST,
+  CHECKIN_SUCCESS,
+  CHECKIN_FAILURE
 } from "../actions/apiParkActions";
 import {
   RESEND_VLINK_REQUEST,
@@ -63,8 +63,7 @@ const INITIAL_STATE = {
     error: ""
   },
   parks: [],
-  showFormError: false,
-  voted: false
+  showFormError: false
 };
 
 function park(state = INITIAL_STATE, action) {
@@ -169,7 +168,7 @@ function park(state = INITIAL_STATE, action) {
     case RESEND_VLINK_REQUEST:
     case CREATE_PARK_REQUEST:
     case VIEW_PARK_REQUEST:
-    case VOTE_REQUEST:
+    case CHECKIN_REQUEST:
       return Object.assign({}, state, {
         spinnerClass: "spinner__show",
         modal: {
@@ -305,16 +304,15 @@ function park(state = INITIAL_STATE, action) {
     /*
     *  Called from: <ParkCard />
     *  Payload: park object
-    *  Purpose: Display park, set 'voted' to true
+    *  Purpose: Display park, set loggedin user to checked in
     */
-    case VOTE_SUCCESS:
+    case CHECKIN_SUCCESS:
       return update(state, {
         spinnerClass: { $set: "spinner__hide" },
         modal: {
           class: { $set: "modal__hide" }
         },
-        form: { $merge: action.payload.park },
-        voted: { $set: true }
+        form: { $merge: action.payload.park }
       });
 
     /*
@@ -360,7 +358,7 @@ function park(state = INITIAL_STATE, action) {
         }
       });
 
-    case VOTE_FAILURE:
+    case CHECKIN_FAILURE:
       if (typeof action.payload.message === "string") {
         error = action.payload.message;
       } else {
@@ -374,8 +372,7 @@ function park(state = INITIAL_STATE, action) {
           text: error,
           title,
           buttonText: "Try again"
-        },
-        voted: true
+        }
       });
 
     /*

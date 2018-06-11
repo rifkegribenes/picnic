@@ -194,7 +194,7 @@ exports.GuestLists = function(req, res, next){
   }
 }
 
-exports.UpdateGuestList = function(req, res, next){
+exports.UpdateGuestList = (req, res, next) => {
   const parkId = req.params.parkId;
   const userId = req.params.userId;
 
@@ -241,6 +241,7 @@ exports.UpdateGuestList = function(req, res, next){
     })
 
   }
+}
 
 // Deletes a park from the DB.
 exports.deletePark = (user, req, res, next) => {

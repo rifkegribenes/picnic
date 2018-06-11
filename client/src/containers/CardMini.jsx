@@ -26,6 +26,14 @@ const CardMini = props => (
         {props.park.display_phone}
       </a>
     </div>
+    <div className="parks-grid__button-wrap">
+      <button
+        className="form__button"
+        onClick={() => props.checkIn(props.park.id, props.userId)}
+      >
+        Check In
+      </button>
+    </div>
   </div>
 );
 

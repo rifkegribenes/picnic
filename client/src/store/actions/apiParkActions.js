@@ -19,9 +19,9 @@ export const GET_ALL_PARKS_FAILURE = "GET_ALL_PARKS_FAILURE";
 export const GET_USER_PARKS_REQUEST = "GET_USER_PARKS_REQUEST";
 export const GET_USER_PARKS_SUCCESS = "GET_USER_PARKS_SUCCESS";
 export const GET_USER_PARKS_FAILURE = "GET_USER_PARKS_FAILURE";
-export const VOTE_REQUEST = "VOTE_REQUEST";
-export const VOTE_SUCCESS = "VOTE_SUCCESS";
-export const VOTE_FAILURE = "VOTE_FAILURE";
+export const CHECKIN_REQUEST = "CHECKIN_REQUEST";
+export const CHECKIN_SUCCESS = "CHECKIN_SUCCESS";
+export const CHECKIN_FAILURE = "CHECKIN_FAILURE";
 
 /*
 * Function: createPark - create a new park
@@ -285,27 +285,27 @@ export function getUserParks(userId) {
 }
 
 /*
-* Function: vote - vote for an option in a park
+* Function: checkIn - check in the logged in user to a park
 * @param {string} token
 * This action dispatches additional actions as it executes:
-*   VOTE_REQUEST:
+*   CHECKIN_REQUEST:
 *     Initiates a spinner on the home page.
-*   VOTE_SUCCESS:
+*   CHECKIN_SUCCESS:
 *     If vote succesfully recorded, hides spinner
-*   VOTE_FAILURE:
+*   CHECKIN_FAILURE:
 *     If database error,
 *     Hides spinner, displays error message in modal
 */
-export function vote(parkId, optionId, body) {
+export function checkIn(parkId, userId) {
   return {
     [RSAA]: {
-      endpoint: `${BASE_URL}/api/park/vote/${parkId}/${optionId}`,
+      endpoint: `${BASE_URL}/api/park/checkin/${parkId}/${userId}`,
       method: "POST",
       types: [
-        VOTE_REQUEST,
-        VOTE_SUCCESS,
+        CHECKIN_REQUEST,
+        CHECKIN_SUCCESS,
         {
-          type: VOTE_FAILURE,
+          type: CHECKIN_FAILURE,
           payload: (action, state, res) => {
             return res.json().then(data => {
               let message = "Sorry, something went wrong :(";
@@ -323,8 +323,7 @@ export function vote(parkId, optionId, body) {
       ],
       headers: {
         "Content-Type": "application/json"
-      },
-      body: JSON.stringify(body)
+      }
     }
   };
 }

@@ -218,9 +218,9 @@ module.exports = function (app) {
   // // Returns fail status + message -or- success message
   // parkRoutes.delete('/delete/:parkId', requireAuth, ParkController.deletePark);
 
-  // // Vote in a park
-  // // Returns fail status + message -or- park object & user
-  // parkRoutes.post('/vote/:parkId/:optionId', ParkController.vote);
+  // Check in to a park
+  // Returns fail status + message -or- park object & user
+  parkRoutes.post('/checkin/:parkId/:userId', ParkController.UpdateGuestList);
 
   // Reset votes
 

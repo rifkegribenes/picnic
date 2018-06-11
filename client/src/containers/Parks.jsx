@@ -16,7 +16,13 @@ class Parks extends React.Component {
   render() {
     const parks = this.props.park.parks.map((park, idx) => {
       return (
-        <CardMini key={park.id} park={park} history={this.props.history} />
+        <CardMini
+          key={park.id}
+          park={park}
+          userId={this.props.profile.user._id}
+          history={this.props.history}
+          checkIn={this.props.api.checkIn}
+        />
       );
     });
     return (
@@ -70,7 +76,8 @@ Parks.propTypes = {
   }).isRequired,
   api: PropTypes.shape({
     viewPark: PropTypes.func,
-    deletePark: PropTypes.func
+    deletePark: PropTypes.func,
+    checkIn: PropTypes.func
   }).isRequired,
   park: PropTypes.shape({
     form: PropTypes.shape({
@@ -94,6 +101,11 @@ Parks.propTypes = {
   }).isRequired,
   history: PropTypes.shape({
     push: PropTypes.func
+  }).isRequired,
+  profile: PropTypes.shape({
+    user: PropTypes.shape({
+      _id: PropTypes.string
+    })
   }).isRequired
 };
 

@@ -333,12 +333,13 @@ function park(state = INITIAL_STATE, action) {
         return park.id === action.payload.park.parkId;
       });
       parks = [...state.parks];
-      // console.log('view park success:');
+      console.log("view park success:");
       // console.log(idx);
       // console.log(parks);
       // console.log(action.payload.park);
       // console.log(action.payload.park.guests);
       if (action.payload.park.guests) {
+        console.log(`${action.payload.park.name} has guests`);
         guests = [...action.payload.park.guests];
       } else {
         guests = [];

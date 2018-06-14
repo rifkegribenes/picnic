@@ -10,19 +10,41 @@ class CardMini extends React.Component {
     this.props.api
       .viewPark(this.props.park.id)
       .then(result => {
-        if (result === "VIEW_PARK_SUCCESS") {
-          console.log(
-            `parks array successfully updated with mongo data for park ID = ${
-              this.props.park.id
-            }`
-          );
-          console.log(this.props.park.parks);
-        }
+        console.log(this.props.parkState.parks);
       })
       .catch(err => {
         console.log(err);
         return null;
       });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // check to see if guestlist has changed
+    // this still isn't working but try this tomorrow -- force rerender
+    // if guestList changes... or save 'checked in' value to component state?
+    if (
+      this.props.park.guestList &&
+      this.props.park.guestList.length !== nextProps.park.guestList.length
+    ) {
+      this.props.api
+        .viewPark(this.props.park.id)
+        .then(result => {
+          console.log("cWU");
+          console.log(result);
+          if (result === "VIEW_PARK_SUCCESS") {
+            console.log(
+              `parks array successfully updated with mongo data for park ID = ${
+                this.props.park.id
+              }`
+            );
+            console.log(this.props.park.parks);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          return null;
+        });
+    }
   }
 
   render() {
@@ -96,7 +118,8 @@ CardMini.propTypes = {
 
 const mapStateToProps = state => ({
   appState: state.appState,
-  profile: state.profile
+  profile: state.profile,
+  parkState: state.park
 });
 
 const mapDispatchToProps = dispatch => ({

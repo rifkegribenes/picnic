@@ -67,9 +67,6 @@ const INITIAL_STATE = {
 function park(state = INITIAL_STATE, action) {
   let error;
   let title;
-  let idx;
-  let parks;
-  let guestList;
   switch (action.type) {
     /*
     * Called from: <Form />, <ModalSm />, <CreatePark />
@@ -248,7 +245,12 @@ function park(state = INITIAL_STATE, action) {
     *  Payload: guestList array
     *  Purpose: save mongo guestlist to currentPark
     */
+    case CHECKIN_SUCCESS:
     case GET_GUESTLIST_SUCCESS:
+      if (action.type === "CHECKIN_SUCCESS") {
+        console.log("checkin success");
+        console.log(action.payload);
+      }
       return update(state, {
         spinnerClass: { $set: "spinner__hide" },
         modal: {
@@ -260,69 +262,15 @@ function park(state = INITIAL_STATE, action) {
         }
       });
 
-    /*
-    *  Called from: <CardMini />
-    *  Payload: guestList array and parkId
-    *  Purpose: Return mongo guestlist, display park
-    */
-    case CHECKIN_SUCCESS:
-      idx = state.parks.findIndex(park => {
-        return park.id === action.payload.parkId;
-      });
-      parks = [...state.parks];
-      console.log(parks);
-      console.log(action.payload.parkId);
-      console.log(action.payload.guestList);
-      if (action.payload.guestList) {
-        guestList = [...action.payload.guestList];
-      } else {
-        guestList = [];
-      }
-      if (parks && idx) {
-        console.log("why is parks[idx] undefined here?");
-        console.log(parks);
-        console.log(parks[idx]);
-        parks[idx].guestList = guestList;
-      }
-      console.log(parks);
-
-      return update(state, {
-        spinnerClass: { $set: "spinner__hide" },
-        modal: {
-          class: { $set: "modal__hide" }
-        },
-        parks: { $set: parks }
-      });
-
     case VIEW_PARK_SUCCESS:
-      idx = state.parks.findIndex(park => {
-        return park.id === action.payload.park.parkId;
-      });
-      parks = [...state.parks];
-      console.log("view park success:");
-      // console.log(idx);
-      // console.log(parks);
-      // console.log(action.payload.park);
-      // console.log(action.payload.park.guestList);
-      if (action.payload.park.guestList) {
-        console.log(`${action.payload.park.name} has guestList`);
-        guestList = [...action.payload.park.guestList];
-      } else {
-        guestList = [];
-      }
-      if (parks && idx !== -1) {
-        console.log("why is parks[idx] undefined here?");
-        console.log(parks);
-        console.log(parks[idx]);
-        parks[idx].guestList = guestList;
-      }
+      // is this even being used ???
+      console.log("view park");
 
       return update(state, {
         spinnerClass: { $set: "spinner__hide" },
         modal: {
           class: { $set: "modal__hide" }
-        },
-        parks: { $set: parks }
+        }
       });
 
     /*

@@ -35,6 +35,19 @@ class CardMini extends React.Component {
       });
   }
 
+  // componentWillReceiveProps(nextProps) {
+  //   if (this.state.guestList.length !==
+  //     nextProps.parkState.currentPark.guestList.length) {
+  //       this.setState(
+  //         {
+  //           parkId: this.props.parkState.currentPark.id,
+  //           guestList: this.props.parkState.currentPark.guestList
+  //         }, () => {
+  //           console.log('guestList updated');
+  //         });
+  //   }
+  // }
+
   render() {
     return (
       <div key={this.props.park.id} className="parks-grid__card">
@@ -66,9 +79,17 @@ class CardMini extends React.Component {
         <div className="parks-grid__button-wrap">
           <button
             className="form__button"
-            onClick={() =>
-              this.props.checkIn(this.props.park.id, this.props.userId)
-            }
+            onClick={() => {
+              console.log("checkin");
+              this.props.api
+                .checkIn(this.props.park.id, this.props.userId)
+                .then(() =>
+                  this.setState({
+                    parkId: this.props.parkState.currentPark.id,
+                    guestList: this.props.parkState.currentPark.guestList
+                  })
+                );
+            }}
           >
             {this.state.guestList &&
             this.state.guestList.indexOf(this.props.userId) !== -1

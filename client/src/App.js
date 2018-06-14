@@ -14,7 +14,6 @@ import NotFound from "./containers/NotFound";
 import Spinner from "./containers/Spinner";
 import ModalSm from "./containers/ModalSm";
 import VerifyEmail from "./containers/VerifyEmail";
-import ViewPark from "./containers/ViewPark";
 import Logout from "./containers/Logout";
 import Parks from "./containers/Parks";
 
@@ -108,10 +107,6 @@ class App extends Component {
               <Route
                 path="/profile/:id?/:token?"
                 render={routeProps => <Profile {...routeProps} />}
-              />
-              <Route
-                path="/park/:id"
-                render={routeProps => <ViewPark {...routeProps} />}
               />
               <Route
                 exact

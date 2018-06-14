@@ -203,26 +203,17 @@ module.exports = function (app) {
   // parkRoutes.get('/userparks/:userId', ParkController.getUserParks);
 
   // View a single park
-  // Returns fail status + message -or- park object & user
+  // Returns fail status + message -or- park object
   parkRoutes.get('/:parkId', ParkController.viewParkByYelpId);
 
-  // // Create a park
-  // // Returns fail status + message -or- park object & user
-  // parkRoutes.post('/createpark', requireAuth, ParkController.newPark);
+  // Get guestlist for a park by yelpId
+  // Returns fail status + message -or- guestlist
+  parkRoutes.get('/guestlist/:parkId', ParkController.getGuestListByYelpId);
 
-  // // Update a park
-  // // Returns fail status + message -or- park object
-  // parkRoutes.put('/update/:parkId', requireAuth, ParkController.updatePark);
 
-  // // Delete a park
-  // // Returns fail status + message -or- success message
-  // parkRoutes.delete('/delete/:parkId', requireAuth, ParkController.deletePark);
-
-  // Check in to a park
+  // Check in to (or out of) a park
   // Returns fail status + message -or- park object & user
-  parkRoutes.post('/checkin/:parkId/:userId', ParkController.UpdateGuestList);
-
-  // Reset votes
+  parkRoutes.put('/checkin/:parkId/:userId', ParkController.updateGuestList);
 
 
 

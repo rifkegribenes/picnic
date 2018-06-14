@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ParkSchema = new Schema({
-  guests: [String],
+  guestList: [String],
   parkId: String // yelp park id, separate from auto-assigned mongo _id
 },{
   timestamps: true

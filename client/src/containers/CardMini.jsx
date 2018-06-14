@@ -6,45 +6,33 @@ import { bindActionCreators } from "redux";
 import * as apiActions from "../store/actions/apiParkActions";
 
 class CardMini extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      parkId: "",
+      guestList: []
+    };
+  }
   componentWillMount() {
     this.props.api
-      .viewPark(this.props.park.id)
+      .getGuestlist(this.props.park.id)
       .then(result => {
-        console.log(this.props.parkState.parks);
+        this.setState(
+          {
+            parkId: this.props.parkState.currentPark.id,
+            guestList: this.props.parkState.currentPark.guestList
+          },
+          () => {
+            if (this.state.guestList.length) {
+              console.log(this.state);
+            }
+          }
+        );
       })
       .catch(err => {
         console.log(err);
         return null;
       });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // check to see if guestlist has changed
-    // this still isn't working but try this tomorrow -- force rerender
-    // if guestList changes... or save 'checked in' value to component state?
-    if (
-      this.props.park.guestList &&
-      this.props.park.guestList.length !== nextProps.park.guestList.length
-    ) {
-      this.props.api
-        .viewPark(this.props.park.id)
-        .then(result => {
-          console.log("cWU");
-          console.log(result);
-          if (result === "VIEW_PARK_SUCCESS") {
-            console.log(
-              `parks array successfully updated with mongo data for park ID = ${
-                this.props.park.id
-              }`
-            );
-            console.log(this.props.park.parks);
-          }
-        })
-        .catch(err => {
-          console.log(err);
-          return null;
-        });
-    }
   }
 
   render() {
@@ -82,15 +70,15 @@ class CardMini extends React.Component {
               this.props.checkIn(this.props.park.id, this.props.userId)
             }
           >
-            {this.props.park.guests &&
-            this.props.park.guests.indexOf(this.props.userId) !== -1
+            {this.state.guestList &&
+            this.state.guestList.indexOf(this.props.userId) !== -1
               ? "Check Out"
               : "Check In"}
           </button>
         </div>
         <div className="parks-grid__guestlist">
           {`${
-            this.props.park.guests ? this.props.park.guests.length : "0"
+            this.state.guestList ? this.state.guestList.length : "0"
           } users checked in`}
         </div>
       </div>

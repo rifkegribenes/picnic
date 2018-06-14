@@ -13,15 +13,6 @@ import {
   SET_SHOW_ERROR
 } from "../actions";
 import {
-  CREATE_PARK_REQUEST,
-  CREATE_PARK_SUCCESS,
-  CREATE_PARK_FAILURE,
-  UPDATE_PARK_REQUEST,
-  UPDATE_PARK_SUCCESS,
-  UPDATE_PARK_FAILURE,
-  DELETE_PARK_REQUEST,
-  DELETE_PARK_SUCCESS,
-  DELETE_PARK_FAILURE,
   VIEW_PARK_REQUEST,
   VIEW_PARK_SUCCESS,
   VIEW_PARK_FAILURE,
@@ -33,7 +24,10 @@ import {
   GET_USER_PARKS_FAILURE,
   CHECKIN_REQUEST,
   CHECKIN_SUCCESS,
-  CHECKIN_FAILURE
+  CHECKIN_FAILURE,
+  GET_GUESTLIST_REQUEST,
+  GET_GUESTLIST_SUCCESS,
+  GET_GUESTLIST_FAILURE
 } from "../actions/apiParkActions";
 import {
   RESEND_VLINK_REQUEST,
@@ -63,9 +57,9 @@ const INITIAL_STATE = {
     error: ""
   },
   parks: [],
-  park: {
+  currentPark: {
     parkId: "",
-    guests: []
+    guestList: []
   },
   showFormError: false
 };
@@ -73,10 +67,9 @@ const INITIAL_STATE = {
 function park(state = INITIAL_STATE, action) {
   let error;
   let title;
-  let message;
   let idx;
   let parks;
-  let guests;
+  let guestList;
   switch (action.type) {
     /*
     * Called from: <Form />, <ModalSm />, <CreatePark />
@@ -168,14 +161,12 @@ function park(state = INITIAL_STATE, action) {
     *  Purpose: Activate spinner to indicates API request is in progress
     */
     case GET_PARTIAL_PROFILE_REQUEST:
-    case DELETE_PARK_REQUEST:
-    case UPDATE_PARK_REQUEST:
     case GET_USER_PARKS_REQUEST:
     case GET_ALL_PARKS_REQUEST:
     case RESEND_VLINK_REQUEST:
-    case CREATE_PARK_REQUEST:
     case VIEW_PARK_REQUEST:
     case CHECKIN_REQUEST:
+    case GET_GUESTLIST_REQUEST:
       return Object.assign({}, state, {
         spinnerClass: "spinner__show",
         modal: {
@@ -235,48 +226,6 @@ function park(state = INITIAL_STATE, action) {
       });
 
     /*
-    *  Called from: <CreatePark />
-    *  Payload: park id and title
-    *  Purpose: Display a success message with link to view park
-    */
-    case UPDATE_PARK_SUCCESS:
-    case CREATE_PARK_SUCCESS:
-      if (action.type === "UPDATE_PARK_SUCCESS") {
-        message = "updated";
-      } else if (action.type === "CREATE_PARK_SUCCESS") {
-        message = "created";
-      }
-      return Object.assign({}, state, {
-        spinnerClass: "spinner__hide",
-        modal: {
-          class: "modal__show",
-          type: "modal__success",
-          title: `Park ${message}`,
-          text: `Your park was ${message} successfully`,
-          buttonText: "View Park",
-          redirect: `/park/${action.payload.park._id}`
-        }
-      });
-
-    /*
-    *  Called from: <ParkCard />
-    *  Payload: success message
-    *  Purpose: Display status update on delete action
-    */
-    case DELETE_PARK_SUCCESS:
-      return Object.assign({}, state, {
-        spinnerClass: "spinner__hide",
-        modal: {
-          class: "modal__show",
-          type: "modal__success",
-          title: `Park Deleted`,
-          text: `Your park was deleted successfully`,
-          buttonText: "Continue",
-          redirect: `/parks`
-        }
-      });
-
-    /*
     *  Called from: <UserParks />
     *  Payload: partial user object (name and avatar only)
     *  Purpose: Display name and avatar of park owner
@@ -295,28 +244,45 @@ function park(state = INITIAL_STATE, action) {
       });
 
     /*
-    *  Called from: <ParkCard />
-    *  Payload: park object
-    *  Purpose: Merge mongo guestlist with yelp park data, display park
+    *  Called from: <CardMini />
+    *  Payload: guestList array
+    *  Purpose: save mongo guestlist to currentPark
+    */
+    case GET_GUESTLIST_SUCCESS:
+      return update(state, {
+        spinnerClass: { $set: "spinner__hide" },
+        modal: {
+          class: { $set: "modal__hide" }
+        },
+        currentPark: {
+          id: { $set: action.payload.parkId },
+          guestList: { $set: action.payload.guestList }
+        }
+      });
+
+    /*
+    *  Called from: <CardMini />
+    *  Payload: guestList array and parkId
+    *  Purpose: Return mongo guestlist, display park
     */
     case CHECKIN_SUCCESS:
       idx = state.parks.findIndex(park => {
-        return park.id === action.payload.park.parkId;
+        return park.id === action.payload.parkId;
       });
       parks = [...state.parks];
       console.log(parks);
-      console.log(action.payload.park);
-      console.log(action.payload.park.guests);
-      if (action.payload.park.guests) {
-        guests = [...action.payload.park.guests];
+      console.log(action.payload.parkId);
+      console.log(action.payload.guestList);
+      if (action.payload.guestList) {
+        guestList = [...action.payload.guestList];
       } else {
-        guests = [];
+        guestList = [];
       }
       if (parks && idx) {
         console.log("why is parks[idx] undefined here?");
         console.log(parks);
         console.log(parks[idx]);
-        parks[idx].guests = guests;
+        parks[idx].guestList = guestList;
       }
       console.log(parks);
 
@@ -337,18 +303,18 @@ function park(state = INITIAL_STATE, action) {
       // console.log(idx);
       // console.log(parks);
       // console.log(action.payload.park);
-      // console.log(action.payload.park.guests);
-      if (action.payload.park.guests) {
-        console.log(`${action.payload.park.name} has guests`);
-        guests = [...action.payload.park.guests];
+      // console.log(action.payload.park.guestList);
+      if (action.payload.park.guestList) {
+        console.log(`${action.payload.park.name} has guestList`);
+        guestList = [...action.payload.park.guestList];
       } else {
-        guests = [];
+        guestList = [];
       }
       if (parks && idx !== -1) {
         console.log("why is parks[idx] undefined here?");
         console.log(parks);
         console.log(parks[idx]);
-        parks[idx].guests = guests;
+        parks[idx].guestList = guestList;
       }
 
       return update(state, {
@@ -380,12 +346,10 @@ function park(state = INITIAL_STATE, action) {
     *  Purpose: Display error message
     */
     case GET_PARTIAL_PROFILE_FAILURE:
-    case DELETE_PARK_FAILURE:
-    case UPDATE_PARK_FAILURE:
     case GET_USER_PARKS_FAILURE:
     case GET_ALL_PARKS_FAILURE:
     case VIEW_PARK_FAILURE:
-    case CREATE_PARK_FAILURE:
+    case GET_GUESTLIST_FAILURE:
       if (typeof action.payload.message === "string") {
         error = action.payload.message;
       } else {

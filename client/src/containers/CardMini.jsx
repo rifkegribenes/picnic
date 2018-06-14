@@ -17,36 +17,16 @@ class CardMini extends React.Component {
     this.props.api
       .getGuestlist(this.props.park.id)
       .then(result => {
-        this.setState(
-          {
-            parkId: this.props.parkState.currentPark.id,
-            guestList: this.props.parkState.currentPark.guestList
-          },
-          () => {
-            if (this.state.guestList.length) {
-              console.log(this.state);
-            }
-          }
-        );
+        this.setState({
+          parkId: this.props.parkState.currentPark.id,
+          guestList: this.props.parkState.currentPark.guestList
+        });
       })
       .catch(err => {
         console.log(err);
         return null;
       });
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   if (this.state.guestList.length !==
-  //     nextProps.parkState.currentPark.guestList.length) {
-  //       this.setState(
-  //         {
-  //           parkId: this.props.parkState.currentPark.id,
-  //           guestList: this.props.parkState.currentPark.guestList
-  //         }, () => {
-  //           console.log('guestList updated');
-  //         });
-  //   }
-  // }
 
   render() {
     return (
@@ -80,7 +60,6 @@ class CardMini extends React.Component {
           <button
             className="form__button"
             onClick={() => {
-              console.log("checkin");
               this.props.api
                 .checkIn(this.props.park.id, this.props.userId)
                 .then(() =>

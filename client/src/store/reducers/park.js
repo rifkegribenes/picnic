@@ -247,10 +247,6 @@ function park(state = INITIAL_STATE, action) {
     */
     case CHECKIN_SUCCESS:
     case GET_GUESTLIST_SUCCESS:
-      if (action.type === "CHECKIN_SUCCESS") {
-        console.log("checkin success");
-        console.log(action.payload);
-      }
       return update(state, {
         spinnerClass: { $set: "spinner__hide" },
         modal: {

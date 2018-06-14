@@ -29,7 +29,6 @@ class SearchBar extends React.Component {
 
   search() {
     const { city } = this.props.park.form;
-    console.log(city);
     // show validation errors
     this.props.actions.showFormError();
     this.props.actions.setSubmit();

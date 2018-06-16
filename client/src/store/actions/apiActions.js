@@ -188,9 +188,6 @@ export const RESEND_VLINK_FAILURE = "RESEND_VLINK_FAILURE";
 *     Displays error to user, prompt to try again or register.
 */
 export function resendVerificationLink(body) {
-  console.log("apiActions > 193");
-  console.log(body);
-  console.log(JSON.stringify(body));
   return {
     [RSAA]: {
       endpoint: `${BASE_URL}/api/sendverifyemail`,

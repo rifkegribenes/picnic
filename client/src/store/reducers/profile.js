@@ -42,7 +42,8 @@ const EMPTY_USER = {
     id: "",
     email: ""
   },
-  verified: false
+  verified: false,
+  savedSearch: ""
 };
 
 const INITIAL_STATE = {

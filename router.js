@@ -29,31 +29,20 @@ const checkVerified = (req, res, next) => {
 }
 
 const requireAuth = (req, res, next) => {
-  console.log('requireAuth');
   passport.authenticate('jwt', { session: false },
     (err, user, info) => {
-      console.log(err);
-      console.log(`info: ${info}`);
       if (err) {
-        console.log('router.js > 37');
         return res.status(422).send({ success : false, message : err.message });
       }
       if (!user) {
-        console.log('router.js > 41');
         return res.status(422).send({ success : false, message : 'Sorry, you must log in to view this page.' });
       }
       if (user) {
-        console.log('router.js > 45');
         // const userInfo = helpers.setUserInfo(user);
         req.login(user, (loginErr) => {
           if (loginErr) {
-            console.log('router.js > 49');
-            console.log(loginErr);
             return next(loginErr);
           } else {
-            console.log('router.js > 53');
-            console.log('this is the user being passed to "next":');
-            console.log(user);
             return next(user);
           }
         }); // req.login
@@ -62,10 +51,8 @@ const requireAuth = (req, res, next) => {
   };
 
 const requireLogin = (req, res, next) => {
-  console.log('requireLogin');
   passport.authenticate('local', { session: false },
     (err, user) => {
-      console.log('requireLogin');
       if (err) {
         return res.status(422).send({ success : false, message : err.message });
       }
@@ -184,7 +171,6 @@ module.exports = function (app) {
   // Update a user's profile.
   // Returns fail status + message -or- updated user object
   userRoutes.put('/:userId', requireAuth, UserController.updateProfile);
-  // userRoutes.put('/:userId', UserController.updateProfile);
 
 
   //= ========================
@@ -194,13 +180,9 @@ module.exports = function (app) {
   // Set park routes as a subgroup/middleware to apiRoutes
   apiRoutes.use('/park', parkRoutes);
 
-  // Get all parks
+  // Get all parks by city
   // Returns fail status + message -or- array of all parks
   parkRoutes.get('/allparks/:city', YelpController.getParks);
-
-  // // Get all parks for specific user
-  // // Returns fail status + message -or- array of all active parks & user
-  // parkRoutes.get('/userparks/:userId', ParkController.getUserParks);
 
   // View a single park
   // Returns fail status + message -or- park object
@@ -210,11 +192,9 @@ module.exports = function (app) {
   // Returns fail status + message -or- guestlist
   parkRoutes.get('/guestlist/:parkId', ParkController.getGuestListByYelpId);
 
-
   // Check in to (or out of) a park
   // Returns fail status + message -or- park object & user
   parkRoutes.put('/checkin/:parkId/:userId', ParkController.updateGuestList);
-
 
 
   // Set url for API group routes

@@ -46,7 +46,7 @@ class SearchBar extends React.Component {
           .getAllParks(city)
           .then(result => {
             if (result.type === "GET_ALL_PARKS_FAILURE") {
-              console.log("get parks failure");
+              // console.log("get parks failure");
               this.props.actions.showFormError();
               this.props.actions.setSubmit();
             }

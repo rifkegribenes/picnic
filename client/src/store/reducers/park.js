@@ -294,6 +294,9 @@ function park(state = INITIAL_STATE, action) {
     case GET_ALL_PARKS_FAILURE:
     case VIEW_PARK_FAILURE:
     case GET_GUESTLIST_FAILURE:
+      if (action.type === GET_ALL_PARKS_FAILURE) {
+        console.log(action.payload);
+      }
       if (typeof action.payload.message === "string") {
         error = action.payload.message;
       } else {

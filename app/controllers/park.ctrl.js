@@ -195,7 +195,7 @@ exports.updateGuestList = (req, res, next) => {
     });
 }
 
-function handleError(res, err) {
+const handleError = (res, err) => {
   console.log(err);
-  return res.status(500).send(err);
+  return res.status(500).json({message: err});
 }

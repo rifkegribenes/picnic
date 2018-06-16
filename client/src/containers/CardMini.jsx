@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -32,9 +32,13 @@ class CardMini extends React.Component {
     return (
       <div key={this.props.park.id} className="parks-grid__card">
         <div className="parks-grid__title--sm">
-          <Link to={this.props.park.url} className="parks-grid__title">
+          <a
+            href={this.props.park.url}
+            className="parks-grid__title"
+            target="_blank"
+          >
             {this.props.park.name}
-          </Link>
+          </a>
         </div>
         <div className="parks-grid__image-wrap">
           <img
@@ -77,9 +81,7 @@ class CardMini extends React.Component {
           </button>
         </div>
         <div className="parks-grid__guestlist">
-          {`${
-            this.state.guestList ? this.state.guestList.length : "0"
-          } users checked in`}
+          {`${this.state.guestList.length} users checked in`}
         </div>
       </div>
     );

@@ -1512,11 +1512,8 @@ input:not([type=checkbox]):not([type=radio]), textarea {
   .parks-grid__icon {
     width: 20px;
     height: 20px; }
-  .parks-grid__admin-buttons {
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
-    display: flex; }
+  .parks-grid__button-wrap {
+    margin-bottom: 20px; }
   .parks-grid__avatar {
     position: absolute;
     right: 0;
@@ -1577,72 +1574,9 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     @media (min-width: 901px) {
       .parks-grid__inner-wrap {
         flex-wrap: nowrap; } }
-  .parks-grid__chart-wrap {
-    width: 100%;
-    position: relative;
-    min-height: 400px; }
-    @media (min-width: 901px) {
-      .parks-grid__chart-wrap {
-        min-height: 300px; } }
-  .parks-grid__options-wrap {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap; }
-    @media (min-width: 480px) {
-      .parks-grid__options-wrap {
-        max-width: 100%; } }
-    @media (min-width: 901px) {
-      .parks-grid__options-wrap {
-        display: block;
-        max-width: 320px;
-        margin-right: 20px; } }
-  .parks-grid__option {
-    color: white;
-    text-transform: none !important;
-    letter-spacing: normal;
-    position: relative;
-    margin-bottom: 20px;
-    text-decoration: none !important;
-    width: 100%;
-    text-align: center;
-    line-height: 1.2em;
-    margin-right: 0; }
-    @media (min-width: 480px) {
-      .parks-grid__option {
-        max-width: 46%;
-        margin-right: 20px; }
-        .parks-grid__option:nth-of-type(2) {
-          margin-right: 0; } }
-    @media (min-width: 670px) {
-      .parks-grid__option {
-        max-width: 31%; }
-        .parks-grid__option:nth-of-type(2) {
-          margin-right: 20px; }
-        .parks-grid__option:nth-of-type(3) {
-          margin-right: 0; } }
-    @media (min-width: 901px) {
-      .parks-grid__option {
-        max-width: 100%;
-        text-align: left;
-        margin-right: 0 !important; } }
-  .parks-grid__legend {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 20px;
-    width: 100%; }
-    .parks-grid__legend--li {
-      list-style-type: none;
-      display: flex;
-      width: 100%;
-      margin-bottom: 10px; }
-    .parks-grid__legend--bar {
-      display: inline-block;
-      flex-shrink: 0; }
-    .parks-grid__legend--label {
-      display: inline-block;
-      padding: 0 10px;
-      color: #545454;
-      line-height: 1em; }
+  .parks-grid__contact-info-wrap {
+    line-height: 1.1em;
+    margin-bottom: 20px; }
 
 a > .parks-grid__card:hover, a > .parks-grid__card:active, a > .parks-grid__card:focus {
   box-shadow: 0 0 1em #4b6cb7; }

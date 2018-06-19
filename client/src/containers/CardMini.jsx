@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as apiActions from "../store/actions/apiParkActions";
+import * as apiActions2 from "../store/actions/apiActions";
 
 class CardMini extends React.Component {
   constructor(props) {
@@ -13,14 +14,47 @@ class CardMini extends React.Component {
       guestList: []
     };
   }
-  componentWillMount() {
+  componentDidMount() {
     this.props.api
       .getGuestlist(this.props.park.id)
       .then(result => {
-        this.setState({
-          parkId: this.props.parkState.currentPark.id,
-          guestList: this.props.parkState.currentPark.guestList
-        });
+        const guestList = this.props.parkState.currentPark.guestList;
+        let updatedGuestList = [];
+        let avatarUrl =
+          "https://raw.githubusercontent.com/rifkegribenes/picnic/master/client/public/img/picnic_icon.png";
+        if (guestList.length) {
+          console.log("25");
+          async function getGuestAvatars() {
+            guestList.map(guest => {
+              this.props.api2
+                .getPartialProfile(guest)
+                .then(result => {
+                  avatarUrl = this.props.profile.currentProfile.avatarUrl;
+                  console.log(this.props.profile.currentProfile);
+                  return {
+                    id: guest,
+                    firstName: this.props.profile.currentProfile.firstName,
+                    avatarUrl
+                  };
+                })
+                .catch(err => {
+                  return console.log(err);
+                });
+              return null;
+            });
+          }
+          const updatedGuestList = getGuestAvatars();
+          console.log(`updatedGuestList: ${updatedGuestList}`);
+          getGuestAvatars().then(() =>
+            this.setState(
+              {
+                parkId: this.props.parkState.currentPark.id,
+                guestList: updatedGuestList
+              },
+              () => console.log(this.state.guestList)
+            )
+          );
+        }
       })
       .catch(err => {
         console.log(err);
@@ -29,6 +63,43 @@ class CardMini extends React.Component {
   }
 
   render() {
+    let guestList;
+    let checkedIn = false;
+    if (
+      this.state.guestList.length > 0 &&
+      this.state.guestList[0] !== null &&
+      this.state.guestList[0] !== undefined
+    ) {
+      console.log(this.state.guestList);
+      checkedIn = this.state.guestList.find(guest => {
+        return guest.id === this.props.userId;
+      });
+      guestList = this.state.guestList.map((guest, idx) => {
+        const backgroundStyle = {
+          backgroundImage: `url(${guest.avatarUrl})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center center"
+        };
+        return (
+          <div className="parks-grid__guest-wrap" key={`${guest.id}_${idx}`}>
+            <div className="h-nav__image-aspect">
+              <div className="h-nav__image-crop">
+                <div
+                  className="h-nav__image"
+                  style={backgroundStyle}
+                  role="img"
+                  aria-label={guest.firstName}
+                />
+              </div>
+            </div>
+          </div>
+        );
+      });
+    }
+
+    if (checkedIn) {
+      console.log(`${this.props.park.name}: checkedIn = ${checkedIn}`);
+    }
     return (
       <div key={this.props.park.id} className="parks-grid__card">
         <div className="parks-grid__title--sm">
@@ -74,14 +145,14 @@ class CardMini extends React.Component {
                 );
             }}
           >
-            {this.state.guestList &&
-            this.state.guestList.indexOf(this.props.userId) !== -1
-              ? "Check Out"
-              : "Check In"}
+            {checkedIn ? "Check Out" : "Check In"}
           </button>
         </div>
         <div className="parks-grid__guestlist">
           {`${this.state.guestList.length} users checked in`}
+        </div>
+        <div className="parks-grid__guestlist-wrap">
+          {this.state.guestList.length ? guestList : ""}
         </div>
       </div>
     );
@@ -113,7 +184,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  api: bindActionCreators(apiActions, dispatch)
+  api: bindActionCreators(apiActions, dispatch),
+  api2: bindActionCreators(apiActions2, dispatch)
 });
 
 export default withRouter(

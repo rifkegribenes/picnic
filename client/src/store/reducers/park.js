@@ -32,10 +32,7 @@ import {
 import {
   RESEND_VLINK_REQUEST,
   RESEND_VLINK_SUCCESS,
-  RESEND_VLINK_FAILURE,
-  GET_PARTIAL_PROFILE_REQUEST,
-  GET_PARTIAL_PROFILE_SUCCESS,
-  GET_PARTIAL_PROFILE_FAILURE
+  RESEND_VLINK_FAILURE
 } from "../actions/apiActions";
 
 const INITIAL_STATE = {
@@ -157,7 +154,7 @@ function park(state = INITIAL_STATE, action) {
     *  Payload: None
     *  Purpose: Activate spinner to indicates API request is in progress
     */
-    case GET_PARTIAL_PROFILE_REQUEST:
+
     case GET_USER_PARKS_REQUEST:
     case GET_ALL_PARKS_REQUEST:
     case RESEND_VLINK_REQUEST:
@@ -223,24 +220,6 @@ function park(state = INITIAL_STATE, action) {
       });
 
     /*
-    *  Called from: <UserParks />
-    *  Payload: partial user object (name and avatar only)
-    *  Purpose: Display name and avatar of park owner
-    */
-    case GET_PARTIAL_PROFILE_SUCCESS:
-      return update(state, {
-        spinnerClass: { $set: "spinner__hide" },
-        modal: {
-          class: { $set: "modal__hide" }
-        },
-        form: {
-          ownerName: { $set: action.payload.firstName },
-          ownerAvatar: { $set: action.payload.avatarUrl },
-          ownerId: { $set: action.payload.ownerId }
-        }
-      });
-
-    /*
     *  Called from: <CardMini />
     *  Payload: guestList array
     *  Purpose: save mongo guestlist to currentPark
@@ -289,7 +268,6 @@ function park(state = INITIAL_STATE, action) {
     *  Payload: Error message
     *  Purpose: Display error message
     */
-    case GET_PARTIAL_PROFILE_FAILURE:
     case GET_USER_PARKS_FAILURE:
     case GET_ALL_PARKS_FAILURE:
     case VIEW_PARK_FAILURE:

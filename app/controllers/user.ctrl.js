@@ -27,23 +27,29 @@ exports.viewProfile = (req, res, next) => {
 
 exports.partialProfile = (req, res, next) => {
   const userId = req.params.userId;
+  console.log('user.ctrl.js > 30');
+  console.log(userId);
+  if (userId) {
+    User.findById(userId)
+      .exec()
+      .then((user) => {
+          // Respond with first name and avatar from user object
+          const userInfo = helpers.setUserInfo(user);
+          return res.status(201).json({
+            avatarUrl: user.profile.avatarUrl,
+            firstName: user.profile.firstName,
+            ownerId: user._id
+          });
+       })
+      .catch((err) => {
+          console.log('user.ctrl.js > 44');
+          console.log(err);
+          return res.status(400).json({ message: 'No user found.' });
+       });
+  } else {
+    return next;
+  }
 
-  User.findById(userId, (err, user) => {
-    if (err) {
-      return res.status(400).json({ message: 'No user found.' });
-    } else if (user) {
-      // Respond with first name and avatar from user object
-      const userInfo = helpers.setUserInfo(user);
-      return res.status(201).json({
-        avatarUrl: user.profile.avatarUrl,
-        firstName: user.profile.firstName,
-        ownerId: user._id
-      });
-    } else {
-      return res.status(400).json({ message: 'No user found.' });
-    }
-
-  });
 };
 
 exports.updateProfile = (userObj, req, res, next) => {

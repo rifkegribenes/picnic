@@ -5,7 +5,7 @@ module.exports = {
   options: {
 		keepAlive: 1,
 		connectTimeoutMS: 30000,
-		reconnectTries: 30,
-		reconnectInterval: 5000
+		reconnectTries: Number.MAX_VALUE,
+		reconnectInterval: 1000
 		}
 };

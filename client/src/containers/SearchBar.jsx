@@ -29,7 +29,10 @@ class SearchBar extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.profile.user.savedSearch !== "") {
+    if (
+      this.props.profile.user.savedSearch &&
+      this.props.profile.user.savedSearch !== ""
+    ) {
       const setSavedCity = async () =>
         this.props.actions.setFormField(
           "city",

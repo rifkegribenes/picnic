@@ -4,6 +4,9 @@ import {
   GET_PROFILE_REQUEST,
   GET_PROFILE_SUCCESS,
   GET_PROFILE_FAILURE,
+  GET_PARTIAL_PROFILE_REQUEST,
+  GET_PARTIAL_PROFILE_SUCCESS,
+  GET_PARTIAL_PROFILE_FAILURE,
   MODIFY_PROFILE_REQUEST,
   MODIFY_PROFILE_SUCCESS,
   MODIFY_PROFILE_FAILURE,
@@ -53,7 +56,11 @@ const INITIAL_STATE = {
     type: "modal__info",
     text: ""
   },
-  user: { ...EMPTY_USER }
+  user: { ...EMPTY_USER },
+  currentProfile: {
+    avatarUrl: "",
+    firstName: ""
+  }
 };
 
 function profile(state = INITIAL_STATE, action) {
@@ -79,6 +86,19 @@ function profile(state = INITIAL_STATE, action) {
         $merge: {
           user,
           spinnerClass: "spinner__hide"
+        }
+      });
+
+    case GET_PARTIAL_PROFILE_SUCCESS:
+      console.log("GET_PARTIAL_PROFILE_SUCCESS");
+      console.log(action.payload);
+      return update(state, {
+        $merge: {
+          spinnerClass: "spinner__hide",
+          currentProfile: {
+            firstName: action.payload.firstName,
+            avatarUrl: action.payload.avatarUrl
+          }
         }
       });
 
@@ -112,12 +132,24 @@ function profile(state = INITIAL_STATE, action) {
         }
       });
 
+    case GET_PARTIAL_PROFILE_REQUEST:
+      return update(state, {
+        $merge: {
+          spinnerClass: "spinner__show",
+          currentProfile: {
+            avatarUrl: "",
+            firstName: ""
+          }
+        }
+      });
+
     /*
     * Called from: <Profile />
     * Payload: String - error msg
     * Purpose: Populate the Profile modal with an error message
     */
     case GET_PROFILE_FAILURE:
+    case GET_PARTIAL_PROFILE_FAILURE:
       if (typeof action.payload.message === "string") {
         error = action.payload.message;
       } else {

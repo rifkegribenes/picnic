@@ -18,41 +18,14 @@ class CardMini extends React.Component {
     this.props.api
       .getGuestlist(this.props.park.id)
       .then(result => {
-        const guestList = this.props.parkState.currentPark.guestList;
-        let updatedGuestList = [];
-        let avatarUrl =
-          "https://raw.githubusercontent.com/rifkegribenes/picnic/master/client/public/img/picnic_icon.png";
-        if (guestList.length) {
-          console.log("25");
-          async function getGuestAvatars() {
-            guestList.map(guest => {
-              this.props.api2
-                .getPartialProfile(guest)
-                .then(result => {
-                  avatarUrl = this.props.profile.currentProfile.avatarUrl;
-                  console.log(this.props.profile.currentProfile);
-                  return {
-                    id: guest,
-                    firstName: this.props.profile.currentProfile.firstName,
-                    avatarUrl
-                  };
-                })
-                .catch(err => {
-                  return console.log(err);
-                });
-              return null;
-            });
-          }
-          const updatedGuestList = getGuestAvatars();
-          console.log(`updatedGuestList: ${updatedGuestList}`);
-          getGuestAvatars().then(() =>
-            this.setState(
-              {
-                parkId: this.props.parkState.currentPark.id,
-                guestList: updatedGuestList
-              },
-              () => console.log(this.state.guestList)
-            )
+        if (this.props.parkState.currentPark.guestList.length) {
+          console.log(this.props.parkState.currentPark.guestList);
+          this.setState(
+            {
+              parkId: this.props.parkState.currentPark.id,
+              guestList: this.props.parkState.currentPark.guestList
+            },
+            () => console.log(this.state.guestList)
           );
         }
       })
@@ -68,7 +41,8 @@ class CardMini extends React.Component {
     if (
       this.state.guestList.length > 0 &&
       this.state.guestList[0] !== null &&
-      this.state.guestList[0] !== undefined
+      this.state.guestList[0] !== undefined &&
+      this.state.guestList[0] !== {}
     ) {
       console.log(this.state.guestList);
       checkedIn = this.state.guestList.find(guest => {

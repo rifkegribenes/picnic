@@ -73,7 +73,7 @@ module.exports = (passport) => {
     }
     return { firstName, lastName };
   }
-  
+
   const avatarFormula = (platform, profile) => {
     let avatarUrl;
     if (platform === 'facebook') {
@@ -194,7 +194,7 @@ module.exports = (passport) => {
     function(req, token, refreshToken, profile, done) {
       console.log(`Facebook login by ${profile.name.givenName} ${profile.name.familyName}, ID: ${profile.id}`);
       process.nextTick( () => {
-        console.log(req.user);
+        // console.log(req.user);
         // check if user is already logged in
         if (!req.user) {
           findExistingUser(profile, token, 'facebook', done)
@@ -232,7 +232,7 @@ module.exports = (passport) => {
     function(req, token, refreshToken, profile, done) {
       console.log(`Github login by ${profile.displayName}, ID: ${profile.id}`);
       process.nextTick( () => {
-        console.log(req.user);
+        // console.log(req.user);
         // check if user is already logged in
         if (!req.user) {
           findExistingUser(profile, token, 'github', done)
@@ -261,7 +261,7 @@ module.exports = (passport) => {
     function(req, token, refreshToken, profile, done) {
       console.log(`Google login by ${profile.name.givenName} ${profile.name.familyName}, ID: ${profile.id}`);
       process.nextTick( () => {
-        console.log(req.user);
+        // console.log(req.user);
         // check if user is already logged in
         if (!req.user) {
           findExistingUser(profile, token, 'google', done)

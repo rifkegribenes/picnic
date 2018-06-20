@@ -64,6 +64,7 @@ const INITIAL_STATE = {
 function park(state = INITIAL_STATE, action) {
   let error;
   let title;
+  let guestList;
   switch (action.type) {
     /*
     * Called from: <Form />, <ModalSm />, <CreatePark />
@@ -159,6 +160,15 @@ function park(state = INITIAL_STATE, action) {
     case GET_ALL_PARKS_REQUEST:
     case RESEND_VLINK_REQUEST:
     case VIEW_PARK_REQUEST:
+      return Object.assign({}, state, {
+        spinnerClass: "spinner__show",
+        modal: {
+          class: "modal__hide",
+          text: ""
+        },
+        errorMsg: ""
+      });
+
     case CHECKIN_REQUEST:
     case GET_GUESTLIST_REQUEST:
       return Object.assign({}, state, {
@@ -167,7 +177,11 @@ function park(state = INITIAL_STATE, action) {
           class: "modal__hide",
           text: ""
         },
-        errorMsg: ""
+        errorMsg: "",
+        currentPark: {
+          id: { $set: "" },
+          guestList: { $set: [] }
+        }
       });
 
     /*
@@ -226,6 +240,10 @@ function park(state = INITIAL_STATE, action) {
     */
     case CHECKIN_SUCCESS:
     case GET_GUESTLIST_SUCCESS:
+      guestList = [...action.payload.guestList];
+      if (guestList.length) {
+        console.log(guestList);
+      }
       return update(state, {
         spinnerClass: { $set: "spinner__hide" },
         modal: {
@@ -233,7 +251,7 @@ function park(state = INITIAL_STATE, action) {
         },
         currentPark: {
           id: { $set: action.payload.parkId },
-          guestList: { $set: action.payload.guestList }
+          guestList: { $set: guestList }
         }
       });
 

@@ -1,6 +1,7 @@
 const Park = require('../models/park');
 const User = require('../models/user');
 const helpers = require('../utils/index');
+const update = require("immutability-helper");
 
 // Get all parks
 exports.getAllParks = (req, res, next) => {
@@ -106,15 +107,25 @@ exports.updateGuestList = (req, res, next) => {
   Park.findOne({ parkId: parkId })
     .then((existingPark) => {
       // if parkId exists
+      console.log('park.ctrl.js > 110');
       if (existingPark) {
         const target = {
           parkId: parkId
         };
         const options = { new: true };
         // if current user is already in the guestList array, remove it
-        if (existingPark.guestList.includes(userId)) {
+        console.log('park.ctrl.js > 115: guestList');
+        const guestList = existingPark.guestList;
+        console.log(guestList);
+
+        const index = guestList.findIndex(guest => guest.id === userId);
+        if (index >= 0) {
           console.log('Remove user from guestlist')
-          const updates = { $pull: {guestList: userId} };
+          const userToPull = guestList[index]
+          console.log(userToPull);
+          const updates = { $pull: {guestList: userToPull} };
+          // update(guestlist, { $splice: [[index, 1]] } });
+
           Park.findOneAndUpdate(target, updates, options)
             .exec()
             .then((park) => {
@@ -139,58 +150,83 @@ exports.updateGuestList = (req, res, next) => {
         } else {
           //if current user not in guestList array, add it
           console.log('Add user to guestlist')
-          const updates = { $push: {guestList: userId} };
-          Park.findOneAndUpdate(target, updates, options)
+          let userToPush = {};
+          User.findById(userId)
             .exec()
-            .then((park) => {
-              if (!park) {
-                return res
-                  .status(404)
-                  .json({message: 'Park not found'});
-              } else {
-                return res
-                  .status(200)
-                  .json({
-                    message: 'User added successfully',
-                    guestList: park.guestList,
-                    parkId
-                  });
+            .then((user) => {
+              userToPush = {
+                id: user._id,
+                avatarUrl: user.profile.avatarUrl,
+                firstName: user.profile.firstName
               }
+              console.log(userToPush);
+              const updates = { $push: {guestList: userToPush} };
+              Park.findOneAndUpdate(target, updates, options)
+                .exec()
+                .then((park) => {
+                  if (!park) {
+                    return res
+                      .status(404)
+                      .json({message: 'Park not found'});
+                  } else {
+                    return res
+                      .status(200)
+                      .json({
+                        message: 'User added successfully',
+                        guestList: park.guestList,
+                        parkId
+                      });
+                  }
+                })
+                .catch(err => {
+                  console.log('catch block park.ctrl.js > 255');
+                  return handleError(res, err);
+                });
             })
-            .catch(err => {
-              console.log('catch block park.ctrl.js > 255');
-              return handleError(res, err);
-            });
-        }
+            .catch((err) => console.log(`park.ctrl.js > 162: ${err}`));
+          }
       } else {
         console.log('park does not exist in db');
         // If parkId does not exist, create park, check in current user, save
-        const park = new Park({
-          parkId: parkId,
-          guestList: [userId]
-        })
-        console.log(park);
-
-        park.save()
-          .then((park) => {
-            console.log('new park saved');
-            console.log(park);
-            return res
-              .status(200)
-              .json({
-                message: 'Park saved successfully',
-                guestList: park.guestList,
-                parkId
-              });
+        console.log('Add user to guestlist')
+        let newGuest = {};
+        User.findById(userId)
+          .exec()
+          .then((user) => {
+            newGuest = {
+              id: user._id,
+              avatarUrl: user.profile.avatarUrl,
+              firstName: user.profile.firstName
+            }
+          console.log(newGuest);
+          const park = new Park({
+            parkId: parkId,
+            guestList: [newGuest]
           })
-          .catch((err) => {
-            console.log('error at line 280 park.ctrl.js');
-            return handleError(res, err);
-          });
+          console.log(park);
+
+          park.save()
+            .then((park) => {
+              console.log('new park saved');
+              console.log(park);
+              return res
+                .status(200)
+                .json({
+                  message: 'Park saved successfully',
+                  guestList: park.guestList,
+                  parkId
+                });
+            })
+            .catch((err) => {
+              console.log('error at line 222 park.ctrl.js');
+              return handleError(res, err);
+            });
+          })
+          .catch((err) => console.log(`park.ctrl.js > 226: ${err}`));
         }
     }) // Park.findOne .then
     .catch((err) => {
-      console.log('error at line 286 park.ctrl.js');
+      console.log('error at line 230 park.ctrl.js');
       return handleError(res, err);
     });
 }

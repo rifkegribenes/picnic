@@ -19,14 +19,11 @@ class CardMini extends React.Component {
       .getGuestlist(this.props.park.id)
       .then(result => {
         if (this.props.parkState.currentPark.guestList.length) {
-          console.log(this.props.parkState.currentPark.guestList);
-          this.setState(
-            {
-              parkId: this.props.parkState.currentPark.id,
-              guestList: this.props.parkState.currentPark.guestList
-            },
-            () => console.log(this.state.guestList)
-          );
+          // console.log(this.props.parkState.currentPark.guestList);
+          this.setState({
+            parkId: this.props.parkState.currentPark.id,
+            guestList: this.props.parkState.currentPark.guestList
+          });
         }
       })
       .catch(err => {
@@ -38,16 +35,12 @@ class CardMini extends React.Component {
   render() {
     let guestList;
     let checkedIn = false;
-    if (
-      this.state.guestList.length > 0 &&
-      this.state.guestList[0] !== null &&
-      this.state.guestList[0] !== undefined &&
-      this.state.guestList[0] !== {}
-    ) {
-      console.log(this.state.guestList);
+    if (this.state.guestList.length > 0 && this.state.guestList[0] !== {}) {
+      // console.log(this.state.guestList);
       checkedIn = this.state.guestList.find(guest => {
-        return guest.id === this.props.userId;
+        return guest.id === this.props.profile.user._id;
       });
+      console.log(checkedIn);
       guestList = this.state.guestList.map((guest, idx) => {
         const backgroundStyle = {
           backgroundImage: `url(${guest.avatarUrl})`,
@@ -72,7 +65,7 @@ class CardMini extends React.Component {
     }
 
     if (checkedIn) {
-      console.log(`${this.props.park.name}: checkedIn = ${checkedIn}`);
+      // console.log(`${this.props.park.name}: checkedIn = ${checkedIn}`);
     }
     return (
       <div key={this.props.park.id} className="parks-grid__card">

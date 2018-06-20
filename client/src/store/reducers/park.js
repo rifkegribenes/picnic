@@ -241,9 +241,9 @@ function park(state = INITIAL_STATE, action) {
     case CHECKIN_SUCCESS:
     case GET_GUESTLIST_SUCCESS:
       guestList = [...action.payload.guestList];
-      if (guestList.length) {
-        console.log(guestList);
-      }
+      // if (guestList.length) {
+      //   console.log(guestList);
+      // }
       return update(state, {
         spinnerClass: { $set: "spinner__hide" },
         modal: {

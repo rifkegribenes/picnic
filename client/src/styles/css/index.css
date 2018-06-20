@@ -1521,6 +1521,8 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     .parks-grid__avatar--empty {
       position: relative;
       display: inline-block; }
+  .parks-grid__guestlist-wrap {
+    display: flex; }
   .parks-grid__edit {
     width: 43px;
     height: 43px;

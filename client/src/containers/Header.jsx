@@ -132,7 +132,7 @@ class Header extends React.Component {
       <div>
         <ModalSm
           modalClass={this.props.appState.modal.class}
-          modalText="You must log in to check in at a parl."
+          modalText="You must log in to check in at a park."
           modalType={this.props.appState.modal.type}
           modalTitle="Login required"
           buttonText={this.props.appState.modal.buttonText || "Continue"}

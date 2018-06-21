@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as apiActions from "../store/actions/apiParkActions";
 import * as apiActions2 from "../store/actions/apiActions";
+import * as actions from "../store/actions";
 
 class CardMini extends React.Component {
   constructor(props) {
@@ -35,6 +36,12 @@ class CardMini extends React.Component {
   render() {
     let guestList;
     let checkedIn = false;
+    const notLoggedInModal = {
+      title: "Login Required",
+      message: "You must log in to check into a park.",
+      redirect: "/login",
+      buttonText: "Log in"
+    };
     if (this.state.guestList.length > 0 && this.state.guestList[0] !== {}) {
       // console.log(this.state.guestList);
       checkedIn = this.state.guestList.find(guest => {
@@ -62,10 +69,6 @@ class CardMini extends React.Component {
           </div>
         );
       });
-    }
-
-    if (checkedIn) {
-      // console.log(`${this.props.park.name}: checkedIn = ${checkedIn}`);
     }
     return (
       <div key={this.props.park.id} className="parks-grid__card">
@@ -102,14 +105,18 @@ class CardMini extends React.Component {
           <button
             className="form__button"
             onClick={() => {
-              this.props.api
-                .checkIn(this.props.park.id, this.props.userId)
-                .then(() =>
-                  this.setState({
-                    parkId: this.props.parkState.currentPark.id,
-                    guestList: this.props.parkState.currentPark.guestList
-                  })
-                );
+              if (this.props.appState.loggedIn) {
+                this.props.api
+                  .checkIn(this.props.park.id, this.props.userId)
+                  .then(() =>
+                    this.setState({
+                      parkId: this.props.parkState.currentPark.id,
+                      guestList: this.props.parkState.currentPark.guestList
+                    })
+                  );
+              } else {
+                this.props.actions.setModalError(notLoggedInModal);
+              }
             }}
           >
             {checkedIn ? "Check Out" : "Check In"}
@@ -152,7 +159,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   api: bindActionCreators(apiActions, dispatch),
-  api2: bindActionCreators(apiActions2, dispatch)
+  api2: bindActionCreators(apiActions2, dispatch),
+  actions: bindActionCreators(actions, dispatch)
 });
 
 export default withRouter(

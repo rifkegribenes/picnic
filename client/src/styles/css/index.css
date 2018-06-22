@@ -564,7 +564,13 @@ input:not([type=checkbox]):not([type=radio]), textarea {
     .h-nav__item:hover, .h-nav__item:focus {
       border-bottom: 1px solid white; }
     .h-nav__item--home {
-      display: none; }
+      display: block;
+      position: relative;
+      top: auto;
+      left: auto;
+      padding: 5px 10px 10px 10px; }
+      .h-nav__item--home:hover {
+        border-bottom: 1px solid transparent; }
   .h-nav__item-menu {
     margin: 20px 0 0 20px;
     width: 110px;

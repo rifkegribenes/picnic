@@ -156,34 +156,6 @@ class Header extends React.Component {
             <button className="skip" onClick={() => skip("main")}>
               <span className="skip__text">Skip to content</span> &rsaquo;
             </button>
-            <div
-              className={classObj[this.props.appState.menuState].menu}
-              aria-expanded={classObj[this.props.appState.menuState].ariaE}
-              aria-controls="nav"
-              tabIndex="0"
-              role="button"
-              onClick={this.navToggle}
-            >
-              <span className={classObj[this.props.appState.menuState].span}>
-                <button className="h-nav__icon">
-                  <span className="sr-only">Toggle navigation</span>
-                  <div
-                    className={classObj[this.props.appState.menuState].bar1}
-                  />
-                  <div
-                    className={classObj[this.props.appState.menuState].bar2}
-                  />
-                  <div
-                    className={classObj[this.props.appState.menuState].bar3}
-                  />
-                </button>
-                <span
-                  className={classObj[this.props.appState.menuState].menuspan}
-                >
-                  Menu
-                </span>
-              </span>
-            </div>
             <div className="h-nav__item h-nav__item--home">
               <NavLink
                 to="/"

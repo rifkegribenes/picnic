@@ -5,7 +5,7 @@
 
 /* ================================= SETUP ================================= */
 
-// const prodUrl = 'https://picnic.glitch.me';
+const prodUrl = 'https://picnic.glitch.me';
 const devUrl = "http://localhost:3001"; // server url for local install
 
 /* ================================ EXPORTS ================================ */
@@ -13,7 +13,7 @@ const devUrl = "http://localhost:3001"; // server url for local install
 // ENVIRONMENT is a global variable defined by weback.config.js
 // defaults to DEVELOPMENT
 
-export const BASE_URL = devUrl;
-// export const BASE_URL = prodUrl;
+// export const BASE_URL = devUrl;
+export const BASE_URL = prodUrl;
 
 // export const BASE_URL = (ENVIRONMENT === 'PRODUCTION' ? prodUrl : devUrl);

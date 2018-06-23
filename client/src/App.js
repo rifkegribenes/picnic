@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route, withRouter, Redirect } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
@@ -14,29 +14,11 @@ import NotFound from "./containers/NotFound";
 import Spinner from "./containers/Spinner";
 import ModalSm from "./containers/ModalSm";
 import VerifyEmail from "./containers/VerifyEmail";
-import ViewPoll from "./containers/ViewPoll";
 import Logout from "./containers/Logout";
-import AllPolls from "./containers/AllPolls";
+import Parks from "./containers/Parks";
 
 import * as apiActions from "./store/actions/apiActions";
 import * as Actions from "./store/actions";
-
-const PrivateRoute = ({ component: Component, loggedIn, ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        loggedIn === true ? (
-          <Component {...rest} {...props} />
-        ) : (
-          <Redirect
-            to={{ pathname: "/login", state: { from: props.location } }}
-          />
-        )
-      }
-    />
-  );
-};
 
 class App extends Component {
   constructor(props) {
@@ -127,10 +109,6 @@ class App extends Component {
                 render={routeProps => <Profile {...routeProps} />}
               />
               <Route
-                path="/poll/:id"
-                render={routeProps => <ViewPoll {...routeProps} />}
-              />
-              <Route
                 exact
                 path="/login"
                 render={routeProps => (
@@ -183,8 +161,8 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/polls"
-                render={routeProps => <AllPolls {...routeProps} />}
+                path="/parks"
+                render={routeProps => <Parks {...routeProps} />}
               />
               <Route
                 exact

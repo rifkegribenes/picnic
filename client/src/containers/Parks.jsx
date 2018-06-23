@@ -4,72 +4,65 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
 import * as Actions from "../store/actions";
-import * as apiActions from "../store/actions/apiPollActions";
+import * as apiActions from "../store/actions/apiParkActions";
 
 import Spinner from "./Spinner";
 import ModalSm from "./ModalSm";
-import PollCardMini from "./PollCardMini";
-// import editIcon from "../img/edit.svg";
+import CardMini from "./CardMini";
 
-class AllPolls extends React.Component {
-  componentWillMount() {
-    this.props.api.getAllPolls().then(result => {
-      // console.log(result);
-      if (result.type === "GET_ALL_POLLS_SUCCESS") {
-        // this.props.actions.setLoggedIn();
-      }
-    });
-  }
+class Parks extends React.Component {
+  componentWillMount() {}
 
   render() {
-    const polls = this.props.poll.polls.map((poll, idx) => {
+    const parks = this.props.park.parks.map((park, idx) => {
       return (
-        <PollCardMini
-          key={poll._id}
-          owner={poll.ownerId === this.props.profile.user._id}
-          poll={poll}
+        <CardMini
+          key={park.id}
+          park={park}
+          userId={this.props.profile.user._id}
           history={this.props.history}
+          checkIn={this.props.api.checkIn}
         />
       );
     });
     return (
       <div>
-        <Spinner cssClass={this.props.poll.spinnerClass} />
+        <Spinner cssClass={this.props.park.spinnerClass} />
         <ModalSm
-          modalClass={this.props.poll.modal.class}
-          modalText={this.props.poll.modal.text}
-          modalType={this.props.poll.modal.type}
-          modalTitle={this.props.poll.modal.title}
-          inputName={this.props.poll.modal.inputName}
-          inputPlaceholder={this.props.poll.modal.inputPlaceholder}
-          inputLabel={this.props.poll.modal.inputLabel}
-          inputType={this.props.poll.modal.inputType}
-          buttonText={this.props.poll.modal.buttonText}
+          modalClass={this.props.park.modal.class}
+          modalText={this.props.park.modal.text}
+          modalType={this.props.park.modal.type}
+          modalTitle={this.props.park.modal.title}
+          inputName={this.props.park.modal.inputName}
+          inputPlaceholder={this.props.park.modal.inputPlaceholder}
+          inputLabel={this.props.park.modal.inputLabel}
+          inputType={this.props.park.modal.inputType}
+          buttonText={this.props.park.modal.buttonText}
           dismiss={() => {
             this.props.actions.dismissModal();
-            if (this.props.poll.modal.type === "modal__error") {
+            if (this.props.park.modal.type === "modal__error") {
               this.props.history.push("/login");
             }
           }}
-          redirect={this.props.poll.modal.redirect}
+          redirect={this.props.park.modal.redirect}
           action={() => {
-            if (this.props.poll.modal.action) {
-              this.props.poll.modal.action();
+            if (this.props.park.modal.action) {
+              this.props.park.modal.action();
             } else {
               this.props.actions.dismissModal();
-              if (this.props.poll.modal.type === "modal__error") {
+              if (this.props.park.modal.type === "modal__error") {
                 this.props.history.push("/login");
               }
             }
           }}
         />
-        <div className="polls-grid">{polls}</div>
+        <div className="parks-grid">{parks}</div>
       </div>
     );
   }
 }
 
-AllPolls.propTypes = {
+Parks.propTypes = {
   appState: PropTypes.shape({
     loggedIn: PropTypes.bool,
     user: PropTypes.shape({
@@ -82,10 +75,11 @@ AllPolls.propTypes = {
     dismissModal: PropTypes.func
   }).isRequired,
   api: PropTypes.shape({
-    viewPoll: PropTypes.func,
-    deletePoll: PropTypes.func
+    viewPark: PropTypes.func,
+    deletePark: PropTypes.func,
+    checkIn: PropTypes.func
   }).isRequired,
-  poll: PropTypes.shape({
+  park: PropTypes.shape({
     form: PropTypes.shape({
       question: PropTypes.string,
       options: PropTypes.arrayOf(
@@ -107,12 +101,17 @@ AllPolls.propTypes = {
   }).isRequired,
   history: PropTypes.shape({
     push: PropTypes.func
+  }).isRequired,
+  profile: PropTypes.shape({
+    user: PropTypes.shape({
+      _id: PropTypes.string
+    })
   }).isRequired
 };
 
 const mapStateToProps = state => ({
   appState: state.appState,
-  poll: state.poll,
+  park: state.park,
   profile: state.profile
 });
 
@@ -121,6 +120,4 @@ const mapDispatchToProps = dispatch => ({
   api: bindActionCreators(apiActions, dispatch)
 });
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(AllPolls)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Parks));

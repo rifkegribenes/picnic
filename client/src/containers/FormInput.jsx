@@ -92,6 +92,7 @@ class FormInput extends Component {
           autoComplete={this.props.autoComplete || null}
           placeholder={this.props.placeholder}
           value={this.props.value}
+          onKeyDown={this.props.handleKeydown}
           onChange={this.props.handleChange}
           onBlur={this.props.handleBlur}
           onFocus={this.props.handleFocus}

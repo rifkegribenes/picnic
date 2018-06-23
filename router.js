@@ -4,7 +4,8 @@ const CLIENT_URL = process.env.NODE_ENV === 'production' ? APP_HOST : 'localhost
 const AuthController = require('./app/controllers/auth.ctrl');
 const UserController = require('./app/controllers/user.ctrl');
 const StaticController = require('./app/controllers/static.ctrl');
-const PollController = require('./app/controllers/poll.ctrl');
+const ParkController = require('./app/controllers/park.ctrl');
+const YelpController = require('./app/controllers/yelp.ctrl');
 
 const express = require('express');
 const passport = require('passport');
@@ -28,31 +29,20 @@ const checkVerified = (req, res, next) => {
 }
 
 const requireAuth = (req, res, next) => {
-  console.log('requireAuth');
   passport.authenticate('jwt', { session: false },
     (err, user, info) => {
-      console.log(err);
-      console.log(`info: ${info}`);
       if (err) {
-        console.log('router.js > 37');
         return res.status(422).send({ success : false, message : err.message });
       }
       if (!user) {
-        console.log('router.js > 41');
         return res.status(422).send({ success : false, message : 'Sorry, you must log in to view this page.' });
       }
       if (user) {
-        console.log('router.js > 45');
         // const userInfo = helpers.setUserInfo(user);
         req.login(user, (loginErr) => {
           if (loginErr) {
-            console.log('router.js > 49');
-            console.log(loginErr);
             return next(loginErr);
           } else {
-            console.log('router.js > 53');
-            console.log('this is the user being passed to "next":');
-            console.log(user);
             return next(user);
           }
         }); // req.login
@@ -61,10 +51,8 @@ const requireAuth = (req, res, next) => {
   };
 
 const requireLogin = (req, res, next) => {
-  console.log('requireLogin');
   passport.authenticate('local', { session: false },
     (err, user) => {
-      console.log('requireLogin');
       if (err) {
         return res.status(422).send({ success : false, message : err.message });
       }
@@ -94,7 +82,7 @@ module.exports = function (app) {
   const apiRoutes = express.Router(),
     authRoutes = express.Router(),
     userRoutes = express.Router(),
-    pollRoutes = express.Router();
+    parkRoutes = express.Router();
 
   app.use(passport.initialize());
   app.use(passport.session());
@@ -183,46 +171,30 @@ module.exports = function (app) {
   // Update a user's profile.
   // Returns fail status + message -or- updated user object
   userRoutes.put('/:userId', requireAuth, UserController.updateProfile);
-  // userRoutes.put('/:userId', UserController.updateProfile);
 
 
   //= ========================
-  // Poll Routes
+  // Park Routes
   //= ========================
 
-  // Set poll routes as a subgroup/middleware to apiRoutes
-  apiRoutes.use('/poll', pollRoutes);
+  // Set park routes as a subgroup/middleware to apiRoutes
+  apiRoutes.use('/park', parkRoutes);
 
-  // Get all polls
-  // Returns fail status + message -or- array of all active polls & user
-  pollRoutes.get('/allpolls', PollController.getAllPolls);
+  // Get all parks by city
+  // Returns fail status + message -or- array of all parks
+  parkRoutes.get('/allparks/:city', YelpController.getParks);
 
-  // Get all polls for specific user
-  // Returns fail status + message -or- array of all active polls & user
-  pollRoutes.get('/userpolls/:userId', PollController.getUserPolls);
+  // View a single park
+  // Returns fail status + message -or- park object
+  parkRoutes.get('/:parkId', ParkController.viewParkByYelpId);
 
-  // View a single poll
-  // Returns fail status + message -or- poll object & user
-  pollRoutes.get('/:pollId', PollController.viewPollById);
+  // Get guestlist for a park by yelpId
+  // Returns fail status + message -or- guestlist
+  parkRoutes.get('/guestlist/:parkId', ParkController.getGuestListByYelpId);
 
-  // Create a poll
-  // Returns fail status + message -or- poll object & user
-  pollRoutes.post('/createpoll', requireAuth, PollController.newPoll);
-
-  // Update a poll
-  // Returns fail status + message -or- poll object
-  pollRoutes.put('/update/:pollId', requireAuth, PollController.updatePoll);
-
-  // Delete a poll
-  // Returns fail status + message -or- success message
-  pollRoutes.delete('/delete/:pollId', requireAuth, PollController.deletePoll);
-
-  // Vote in a poll
-  // Returns fail status + message -or- poll object & user
-  pollRoutes.post('/vote/:pollId/:optionId', PollController.vote);
-
-  // Reset votes
-
+  // Check in to (or out of) a park
+  // Returns fail status + message -or- park object & user
+  parkRoutes.put('/checkin/:parkId/:userId', ParkController.updateGuestList);
 
 
   // Set url for API group routes
@@ -231,5 +203,5 @@ module.exports = function (app) {
   // Catch client-side routes that don't exist on the back-end.
   // Redirects to /#/redirect={route}/{optional_id}
   app.get('/:client_route/:id?', StaticController.redirectHash);
-  
+
 };

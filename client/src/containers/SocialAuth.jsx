@@ -9,12 +9,14 @@ import ghIcon from "../img/github-white.svg";
 import fbIcon from "../img/facebook-white.svg";
 import ggIcon from "../img/google-white.svg";
 
+const serverUrl = "http://localhost:3001";
+
 const SocialAuth = props => (
   <div className="combo__social-wrap">
     <a
       className="form__button form__button--sm"
       id="btn-facebook"
-      href="/api/auth/facebook"
+      href={`${serverUrl}/api/auth/facebook`}
       target="_self"
       onClick={() => {
         props.actions.setSpinner("show");
@@ -35,7 +37,7 @@ const SocialAuth = props => (
     <a
       className="form__button form__button--sm"
       id="btn-google"
-      href="/api/auth/google"
+      href={`${serverUrl}/api/auth/google`}
       target="_self"
       onClick={() => {
         props.actions.setSpinner("show");
@@ -55,7 +57,7 @@ const SocialAuth = props => (
     </a>
     <a
       className="form__button form__button--sm"
-      href="/api/auth/github/"
+      href={`${serverUrl}/api/auth/github/`}
       target="_self"
       id="btn-github"
       onClick={() => {
@@ -86,7 +88,7 @@ SocialAuth.propTypes = {
 const mapStateToProps = state => ({
   appState: state.appState,
   profile: state.profile,
-  poll: state.poll
+  park: state.park
 });
 
 const mapDispatchToProps = dispatch => ({

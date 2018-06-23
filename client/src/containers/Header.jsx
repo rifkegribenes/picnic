@@ -106,11 +106,10 @@ class Header extends React.Component {
       backgroundSize: "cover",
       backgroundPosition: "center center"
     };
-    let adminLinks = ["my account", "my polls", "logout"];
+    let adminLinks = ["my account", "logout"];
 
     const linkmap = {
       "my account": "profile",
-      "my polls": "userpolls",
       logout: "logout",
       login: "login",
       about: "about"
@@ -133,7 +132,7 @@ class Header extends React.Component {
       <div>
         <ModalSm
           modalClass={this.props.appState.modal.class}
-          modalText="You must log in to create a new poll."
+          modalText="You must log in to check in at a park."
           modalType={this.props.appState.modal.type}
           modalTitle="Login required"
           buttonText={this.props.appState.modal.buttonText || "Continue"}
@@ -157,34 +156,6 @@ class Header extends React.Component {
             <button className="skip" onClick={() => skip("main")}>
               <span className="skip__text">Skip to content</span> &rsaquo;
             </button>
-            <div
-              className={classObj[this.props.appState.menuState].menu}
-              aria-expanded={classObj[this.props.appState.menuState].ariaE}
-              aria-controls="nav"
-              tabIndex="0"
-              role="button"
-              onClick={this.navToggle}
-            >
-              <span className={classObj[this.props.appState.menuState].span}>
-                <button className="h-nav__icon">
-                  <span className="sr-only">Toggle navigation</span>
-                  <div
-                    className={classObj[this.props.appState.menuState].bar1}
-                  />
-                  <div
-                    className={classObj[this.props.appState.menuState].bar2}
-                  />
-                  <div
-                    className={classObj[this.props.appState.menuState].bar3}
-                  />
-                </button>
-                <span
-                  className={classObj[this.props.appState.menuState].menuspan}
-                >
-                  Menu
-                </span>
-              </span>
-            </div>
             <div className="h-nav__item h-nav__item--home">
               <NavLink
                 to="/"
@@ -195,40 +166,7 @@ class Header extends React.Component {
               </NavLink>
             </div>
 
-            <nav className={classObj[this.props.appState.menuState].nav}>
-              <ul className={classObj[this.props.appState.menuState].ul}>
-                <li className="h-nav__item">
-                  <NavLink
-                    to="/polls"
-                    className="h-nav__item-link"
-                    activeClassName="h-nav__item-link h-nav__item-link--active"
-                  >
-                    Vote
-                  </NavLink>
-                </li>
-                <li className="h-nav__item">
-                  <a
-                    className={
-                      this.props.match.path === "/createpoll"
-                        ? "h-nav__item-link h-nav__item-link--active"
-                        : "h-nav__item-link"
-                    }
-                    onClick={() => {
-                      console.log("click");
-                      if (!this.props.appState.loggedIn) {
-                        this.props.actions.setModalErrorH(
-                          "You must log in to create a poll"
-                        );
-                      } else {
-                        this.props.history.push("/createpoll");
-                      }
-                    }}
-                  >
-                    New Poll
-                  </a>
-                </li>
-              </ul>
-            </nav>
+            <nav className={classObj[this.props.appState.menuState].nav} />
             {this.props.appState.loggedIn ? (
               <nav className="a-nav__outer-wrap">
                 <button

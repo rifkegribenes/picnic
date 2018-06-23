@@ -1,7 +1,7 @@
 {
   "name": "picnic",
   "version": "1.0.0",
-  "description": "An app for the serious picnicker. Will help you coordinate a picnic with your friends. That's... all it does.",
+  "description": "Find a park. Organize a picnic with your friends.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -39,6 +39,7 @@
     "express-jwt": "^5.3.0",
     "express-session": "^1.15.6",
     "hoek": "^5.0.3",
+    "immutability-helper": "^2.7.1",
     "jsonwebtoken": "^8.1.1",
     "method-override": "^2.3.10",
     "mongoose": "^5.0.1",
@@ -53,6 +54,7 @@
     "passport-jwt": "^3.0.1",
     "passport-local": "^1.0.0",
     "sanitize-html": "^1.18.2",
-    "slugify": "^1.2.9"
+    "slugify": "^1.2.9",
+    "yelp-fusion": "^2.0.3"
   }
 }

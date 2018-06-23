@@ -1,13 +1,12 @@
 import React from "react";
-import { NavLink, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../store/actions";
 import * as apiActions from "../store/actions/apiActions";
-import { typewriterAnimation } from "../utils";
 
-import logo from "../img/picnic.svg";
-import icon from "../img/picnic_icon.svg";
+import SearchBar from "./SearchBar";
+import Parks from "./Parks";
 
 class Home extends React.Component {
   componentDidMount() {
@@ -32,40 +31,20 @@ class Home extends React.Component {
     } else {
       // console.log("logged in");
     }
-
-    typewriterAnimation();
   }
 
   render() {
-    const voteText =
-      this.props.appState.windowSize.width < 400 ? "Vote" : "Vote in a poll";
-    const createText =
-      this.props.appState.windowSize.width < 400 ? "Create" : "Create a poll";
     return (
       <div className="splash">
-        <div className="splash__logo-wrap">
-          <img className="splash__logo" src={logo} alt="picnic" />
-          <img className="splash__icon" src={icon} alt="picnic" />
-          <div id="typewriter" className="splash__headline">
-            Create your own polls.
-          </div>
-          <div className="splash__button-wrap">
-            <NavLink
-              to="/createpoll"
-              className="form__button form__button--big splash__login"
-              activeClassName="h-nav__item-link--active"
-            >
-              {createText}
-            </NavLink>
-            <NavLink
-              to="/polls"
-              className="form__button form__button--big splash__button splash__button--polls"
-              activeClassName="h-nav__item-link--active"
-            >
-              {voteText}
-            </NavLink>
-          </div>
-        </div>
+        <h2 className="splash__header">
+          Enter your city and click 'Search' to find parks in your area.
+        </h2>
+        <p className="splash_text">
+          Check in at a park to let your friends know where to find you. Plan a
+          picnic.
+        </p>
+        <SearchBar />
+        {this.props.park.parks.length ? <Parks /> : null}
       </div>
     );
   }
@@ -73,7 +52,8 @@ class Home extends React.Component {
 
 const mapStateToProps = state => ({
   appState: state.appState,
-  profile: state.profile
+  profile: state.profile,
+  park: state.park
 });
 
 const mapDispatchToProps = dispatch => ({

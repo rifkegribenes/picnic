@@ -1,4 +1,4 @@
-.polls-grid {
+.parks-grid {
 	width: 100%;
 	max-width: 1800px;
 	padding-bottom: 60px;
@@ -32,6 +32,12 @@
     justify-content: center;
 	}
 
+	&__image {
+		max-width: 100%;
+		height: auto;
+		margin-top: 10px;
+	}
+
 	&__link {
 		width: auto !important;
 	}
@@ -53,11 +59,8 @@
 		height: 20px;
 	}
 
-	&__admin-buttons {
-		position: absolute;
-		right: 20px;
-		bottom: 20px;
-		display: flex;
+	&__button-wrap {
+		margin-bottom: 20px;
 	}
 
 	&__avatar {
@@ -71,12 +74,16 @@
 		}
 	}
 
+	&__guestlist-wrap {
+		  display: flex;
+	}
+
 	&__edit {
 		width: 43px;
 		height: 43px;
 		position: relative;
 
-		& .polls-grid__icon {
+		& .parks-grid__icon {
 			width: 100%;
 			height: auto;
 			position: absolute;
@@ -122,6 +129,20 @@
 		&--sm {
 			margin-bottom: 0;
 		}
+
+		&:hover {
+			color: $color_green_lighter;
+		}
+	}
+
+	&__phone {
+		color: $color_brown;
+		text-decoration: none;
+
+		&:hover {
+			color: $color_green_lighter;
+			border-bottom: 1px dotted $color_green_lighter;
+		}
 	}
 
 	&__inner-wrap {
@@ -134,107 +155,15 @@
 		}
 	}
 
-	&__chart-wrap {
-		width: 100%;
-		position: relative;
-		min-height: 400px;
-
-		@include for-tablet-landscape-up {
-			min-height: 300px;
-		}
-	}
-
-	&__options-wrap {
-		width: 100%;
-		display: flex;
-		flex-wrap: wrap;
-
-		@include for-phone-landscape-up {
-			max-width: 100%;
-		}
-
-		@include for-tablet-landscape-up {
-			display: block;
-			max-width: 320px;
-			margin-right: 20px;
-		}
-	}
-
-	&__option {
-		color: white;
-		text-transform: none !important;
-		letter-spacing: normal;
-		position: relative;
-		margin-bottom: 20px;
-		text-decoration: none !important;
-		width: 100%;
-		text-align: center;
-		line-height: 1.2em;
-		margin-right: 0;
-
-		@include for-phone-landscape-up {
-			max-width: 46%;
-			margin-right: 20px;
-
-			&:nth-of-type(2) {
-				margin-right: 0;
-			}
-
-		}
-
-		@include mobile-nav-breakpoint{
-			max-width: 31%;
-
-			&:nth-of-type(2) {
-				margin-right: 20px;
-			}
-
-			&:nth-of-type(3) {
-				margin-right: 0;
-			}
-		}
-
-		@include for-tablet-landscape-up {
-			max-width: 100%;
-			text-align: left;
-			margin-right: 0 !important;
-
-		}
-
-		&--button {
-
-		}
-	}
-
-	&__legend {
-		display: flex;
-		flex-wrap: wrap;
-		margin-top: 20px;
-		width: 100%;
-
-		&--li {
-			list-style-type: none;
-			display: flex;
-			width: 100%;
-			margin-bottom: 10px;
-		}
-
-		&--bar {
-			display: inline-block;
-			flex-shrink: 0;
-		}
-		&--label {
-			display: inline-block;
-			padding: 0 10px;
-			color: $color_gray_text;
-			line-height: 1em;
-		}
+	&__contact-info-wrap {
+		line-height: 1.1em;
+  	margin-bottom: 20px;
 	}
 
 
 }
 
-a > .polls-grid__card {
+a > .parks-grid__card {
 	&:hover, &:active, &:focus {
 		box-shadow: 0 0 1em $color_focus_ring;
 	}

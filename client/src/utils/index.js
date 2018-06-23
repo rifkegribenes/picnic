@@ -1,41 +1,6 @@
-import update from "immutability-helper";
-
 // //////// FORM VALIDATION FUNCTIONS //////////
 
-export const onlyUnique = (value, index, self) => {
-  return self.indexOf(value) === index;
-};
-
-export const isOptionInArray = (arr, option, index) => {
-  // loop through options in array, checking if the "text" key matches
-  // the "text" key on any other option at a different index
-  for (let i = 0; i < arr.length; i++) {
-    if (i !== index && arr[i]["text"] === option["text"]) {
-      return true;
-    }
-  }
-  return false;
-};
-
-const findDupes = options => {
-  let dupes = [];
-  options.forEach((option, index) => {
-    // check if dupe
-    if (isOptionInArray(options, option, index)) {
-      // if (options.indexOf(option, index + 1) > -1) {
-      // check if in dupes array
-      if (dupes.indexOf(option) === -1) {
-        dupes.push(option);
-      }
-    }
-  });
-  return dupes;
-};
-
 const _isRequired = fieldName => `${fieldName} is required`;
-
-const _atLeastTwoRequired = fieldName =>
-  `Polls must have at least two ${fieldName}s`;
 
 const _mustMatch = otherFieldName => fieldName =>
   `${fieldName} must match ${otherFieldName}`;
@@ -43,35 +8,11 @@ const _mustMatch = otherFieldName => fieldName =>
 const _minLength = length => fieldName =>
   `${fieldName} must be at least ${length} characters`;
 
-export const checkDupes = (errorsObj, options, fieldName) => {
-  if (options[fieldName].text.length) {
-    // don't run test if field is blank
-    if (findDupes(options).length) {
-      return update(errorsObj, {
-        [fieldName]: { $set: "Options must be unique" }
-      });
-    } else {
-      return errorsObj;
-    }
-  } else {
-    return update(errorsObj, {
-      [fieldName]: { $set: "Option cannot be blank" }
-    });
-  }
-};
-
 export const required = text => {
   if (text) {
     return null;
   }
   return _isRequired;
-};
-
-export const atLeastTwoRequired = text => {
-  if (text) {
-    return null;
-  }
-  return _atLeastTwoRequired;
 };
 
 export const validateEmail = validationErrors => {
@@ -128,17 +69,13 @@ export const fieldValidations = {
       mustMatch("password", "Password")
     )
   ],
+  search: [ruleRunner("city", "City", required)],
   avatarUrl: [ruleRunner("avatarUrl", "Image URL", required)],
   firstName: [
     ruleRunner("firstName", "First Name", required),
     ruleRunner("lastName", "Last Name", required)
   ],
-  email: [ruleRunner("email", "Email", required)],
-  create: [ruleRunner("question", "Question", required)]
-};
-
-export const pollOptionsValidation = (errorsObj, options, fieldName) => {
-  return checkDupes(errorsObj, options, fieldName);
+  email: [ruleRunner("email", "Email", required)]
 };
 
 // force focus on #main when using skip navigation link
@@ -163,6 +100,7 @@ export const typewriterAnimation = () => {
   document.addEventListener("DOMContentLoaded", function(event) {
     // array with phrases to type in typewriter
     const dataText = [
+      "Find a park.",
       "Plan a picnic with friends.",
       "Sorry that's all it does.",
       "It's just for picnics."

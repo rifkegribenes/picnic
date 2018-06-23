@@ -42,8 +42,8 @@
   }
 }
 
-@mixin grid-controls-breakpoint {
-  @media (min-width: 675px) {
+@mixin search-box-breakpoint {
+  @media (min-width: 6700px) {
     @content;
   }
 }

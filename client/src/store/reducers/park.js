@@ -4,8 +4,6 @@ import {
   SET_FORM_FIELD,
   SET_FORM_ERROR,
   SHOW_FORM_ERROR,
-  SET_OPTION,
-  DELETE_OPTION,
   RESET_FORM,
   DISMISS_MODAL,
   SET_MODAL_ERROR,
@@ -15,35 +13,26 @@ import {
   SET_SHOW_ERROR
 } from "../actions";
 import {
-  CREATE_POLL_REQUEST,
-  CREATE_POLL_SUCCESS,
-  CREATE_POLL_FAILURE,
-  UPDATE_POLL_REQUEST,
-  UPDATE_POLL_SUCCESS,
-  UPDATE_POLL_FAILURE,
-  DELETE_POLL_REQUEST,
-  DELETE_POLL_SUCCESS,
-  DELETE_POLL_FAILURE,
-  VIEW_POLL_REQUEST,
-  VIEW_POLL_SUCCESS,
-  VIEW_POLL_FAILURE,
-  GET_ALL_POLLS_REQUEST,
-  GET_ALL_POLLS_SUCCESS,
-  GET_ALL_POLLS_FAILURE,
-  GET_USER_POLLS_REQUEST,
-  GET_USER_POLLS_SUCCESS,
-  GET_USER_POLLS_FAILURE,
-  VOTE_REQUEST,
-  VOTE_SUCCESS,
-  VOTE_FAILURE
-} from "../actions/apiPollActions";
+  VIEW_PARK_REQUEST,
+  VIEW_PARK_SUCCESS,
+  VIEW_PARK_FAILURE,
+  GET_ALL_PARKS_REQUEST,
+  GET_ALL_PARKS_SUCCESS,
+  GET_ALL_PARKS_FAILURE,
+  GET_USER_PARKS_REQUEST,
+  GET_USER_PARKS_SUCCESS,
+  GET_USER_PARKS_FAILURE,
+  CHECKIN_REQUEST,
+  CHECKIN_SUCCESS,
+  CHECKIN_FAILURE,
+  GET_GUESTLIST_REQUEST,
+  GET_GUESTLIST_SUCCESS,
+  GET_GUESTLIST_FAILURE
+} from "../actions/apiParkActions";
 import {
   RESEND_VLINK_REQUEST,
   RESEND_VLINK_SUCCESS,
-  RESEND_VLINK_FAILURE,
-  GET_PARTIAL_PROFILE_REQUEST,
-  GET_PARTIAL_PROFILE_SUCCESS,
-  GET_PARTIAL_PROFILE_FAILURE
+  RESEND_VLINK_FAILURE
 } from "../actions/apiActions";
 
 const INITIAL_STATE = {
@@ -56,65 +45,35 @@ const INITIAL_STATE = {
     text: ""
   },
   form: {
-    question: "",
-    options: [
-      {
-        text: ""
-      },
-      {
-        text: ""
-      }
-    ],
-    voters: [],
-    error: false,
-    touched: {},
-    showFieldErrors: {},
+    city: "",
+    showFieldErrors: {
+      city: false
+    },
     validationErrors: {},
-    ownerId: "",
-    ownerName: "",
-    ownerAvatar: ""
+    touched: {},
+    error: ""
   },
-  polls: [],
-  showFormError: false,
-  voted: false
+  parks: [],
+  currentPark: {
+    parkId: "",
+    guestList: []
+  },
+  showFormError: false
 };
 
-function poll(state = INITIAL_STATE, action) {
+function park(state = INITIAL_STATE, action) {
   let error;
   let title;
-  let message;
+  let guestList;
   switch (action.type) {
     /*
-    * Called from: <Form />, <ModalSm />, <CreatePoll />
+    * Called from: <Form />, <ModalSm />, <CreatePark />
     * Payload: Form field Name and Value
     * Purpose: Update the connected form field.
     */
     case SET_FORM_FIELD:
       return update(state, {
         form: { [action.payload.id]: { $set: action.payload.value } }
-      });
-
-    /*
-    * Called from: <CreatePoll />
-    * Payload: Form field Name and Value
-    * Purpose: Update the connected form field.
-    */
-    case SET_OPTION:
-      // console.log(action.payload);
-      return update(state, {
-        form: { options: { $set: action.payload } }
-      });
-
-    case DELETE_OPTION:
-      const { options, errors, idx } = action.payload;
-      const newOptions = options.filter((item, index) => index !== idx);
-      const newErrors = { ...errors };
-      delete newErrors[idx];
-      return update(state, {
-        form: {
-          options: { $set: newOptions },
-          validationErrors: { $set: newErrors }
-        }
       });
 
     /*
@@ -132,13 +91,19 @@ function poll(state = INITIAL_STATE, action) {
       } else {
         error = "Sorry, something went wrong :( \n Please try again.";
       }
+
       return Object.assign({}, state, { errorMsg: error });
 
     case SHOW_FORM_ERROR:
-      return Object.assign({}, state, { showFormError: action.payload });
+      return update(state, {
+        showFormError: { $set: action.payload },
+        form: {
+          error: { $set: action.payload }
+        }
+      });
 
     /*
-    *  Called From: <PollOptions />, <Form />
+    *  Called From: <ParkOptions />, <Form />
     *  Payload: Field Name
     *  Purpose: Set field "touched" for validation error display logic
     */
@@ -152,7 +117,7 @@ function poll(state = INITIAL_STATE, action) {
       });
 
     /*
-    *  Called From: <PollOptions />
+    *  Called From: <ParkOptions />
     *  Payload: Field Name
     *  Purpose: Set field "touched" for validation error display logic
     */
@@ -166,7 +131,7 @@ function poll(state = INITIAL_STATE, action) {
       });
 
     /*
-    *  Called From: <PollOptions />
+    *  Called From: <ParkOptions />
     *  Payload: Validation errors object
     *  Purpose: Set validation errors object
     */
@@ -178,7 +143,7 @@ function poll(state = INITIAL_STATE, action) {
       });
 
     /*
-    *  Called From: <Login />, <Register />, <ResetPassword />, <CreatePoll />
+    *  Called From: <Login />, <Register />, <ResetPassword />, <CreatePark />
     *  Payload: none
     *  Purpose: Reset Form
     */
@@ -186,19 +151,15 @@ function poll(state = INITIAL_STATE, action) {
       return INITIAL_STATE;
 
     /*
-    *  Called From: <CreatePoll />, <ViewPoll />, <AllPolls />, <UserPolls />
+    *  Called From: <CreatePark />, <ViewPark />, <AllParks />, <UserParks />
     *  Payload: None
     *  Purpose: Activate spinner to indicates API request is in progress
     */
-    case GET_PARTIAL_PROFILE_REQUEST:
-    case DELETE_POLL_REQUEST:
-    case UPDATE_POLL_REQUEST:
-    case GET_USER_POLLS_REQUEST:
-    case GET_ALL_POLLS_REQUEST:
+
+    case GET_USER_PARKS_REQUEST:
+    case GET_ALL_PARKS_REQUEST:
     case RESEND_VLINK_REQUEST:
-    case CREATE_POLL_REQUEST:
-    case VIEW_POLL_REQUEST:
-    case VOTE_REQUEST:
+    case VIEW_PARK_REQUEST:
       return Object.assign({}, state, {
         spinnerClass: "spinner__show",
         modal: {
@@ -206,6 +167,21 @@ function poll(state = INITIAL_STATE, action) {
           text: ""
         },
         errorMsg: ""
+      });
+
+    case CHECKIN_REQUEST:
+    case GET_GUESTLIST_REQUEST:
+      return Object.assign({}, state, {
+        spinnerClass: "spinner__show",
+        modal: {
+          class: "modal__hide",
+          text: ""
+        },
+        errorMsg: "",
+        currentPark: {
+          id: { $set: "" },
+          guestList: { $set: [] }
+        }
       });
 
     /*
@@ -218,7 +194,7 @@ function poll(state = INITIAL_STATE, action) {
       });
 
     /*
-    *  Called From: <CreatePoll />
+    *  Called From: <CreatePark />
     *  Payload: Error Message
     *  Purpose: Hide spinner,
     *  Display error message in modal. Generic, called from various components
@@ -258,121 +234,65 @@ function poll(state = INITIAL_STATE, action) {
       });
 
     /*
-    *  Called from: <CreatePoll />
-    *  Payload: poll id and title
-    *  Purpose: Display a success message with link to view poll
+    *  Called from: <CardMini />
+    *  Payload: guestList array
+    *  Purpose: save mongo guestlist to currentPark
     */
-    case UPDATE_POLL_SUCCESS:
-    case CREATE_POLL_SUCCESS:
-      if (action.type === "UPDATE_POLL_SUCCESS") {
-        message = "updated";
-      } else if (action.type === "CREATE_POLL_SUCCESS") {
-        message = "created";
-      }
-      return Object.assign({}, state, {
-        spinnerClass: "spinner__hide",
-        modal: {
-          class: "modal__show",
-          type: "modal__success",
-          title: `Poll ${message}`,
-          text: `Your poll was ${message} successfully`,
-          buttonText: "View Poll",
-          redirect: `/poll/${action.payload.poll._id}`
-        }
-      });
-
-    /*
-    *  Called from: <PollCard />
-    *  Payload: success message
-    *  Purpose: Display status update on delete action
-    */
-    case DELETE_POLL_SUCCESS:
-      return Object.assign({}, state, {
-        spinnerClass: "spinner__hide",
-        modal: {
-          class: "modal__show",
-          type: "modal__success",
-          title: `Poll Deleted`,
-          text: `Your poll was deleted successfully`,
-          buttonText: "Continue",
-          redirect: `/polls`
-        }
-      });
-
-    /*
-    *  Called from: <ViewPoll />
-    *  Payload: poll object
-    *  Purpose: Display poll
-    */
-    case VIEW_POLL_SUCCESS:
+    case CHECKIN_SUCCESS:
+    case GET_GUESTLIST_SUCCESS:
+      guestList = [...action.payload.guestList];
+      // if (guestList.length) {
+      //   console.log(guestList);
+      // }
       return update(state, {
         spinnerClass: { $set: "spinner__hide" },
         modal: {
           class: { $set: "modal__hide" }
         },
-        form: { $merge: action.payload.poll }
+        currentPark: {
+          id: { $set: action.payload.parkId },
+          guestList: { $set: guestList }
+        }
       });
 
-    /*
-    *  Called from: <UserPolls />
-    *  Payload: partial user object (name and avatar only)
-    *  Purpose: Display name and avatar of poll owner
-    */
-    case GET_PARTIAL_PROFILE_SUCCESS:
+    case VIEW_PARK_SUCCESS:
+      // is this even being used ???
+      console.log("view park");
+
       return update(state, {
         spinnerClass: { $set: "spinner__hide" },
         modal: {
           class: { $set: "modal__hide" }
-        },
-        form: {
-          ownerName: { $set: action.payload.firstName },
-          ownerAvatar: { $set: action.payload.avatarUrl },
-          ownerId: { $set: action.payload.ownerId }
         }
       });
 
     /*
-    *  Called from: <PollCard />
-    *  Payload: poll object
-    *  Purpose: Display poll, set 'voted' to true
+    *  Called from: <AllParks />, <UserParks />
+    *  Payload: array of park objects
+    *  Purpose: Display parks
     */
-    case VOTE_SUCCESS:
-      return update(state, {
-        spinnerClass: { $set: "spinner__hide" },
-        modal: {
-          class: { $set: "modal__hide" }
-        },
-        form: { $merge: action.payload.poll },
-        voted: { $set: true }
-      });
-
-    /*
-    *  Called from: <AllPolls />, <UserPolls />
-    *  Payload: array of poll objects
-    *  Purpose: Display polls
-    */
-    case GET_ALL_POLLS_SUCCESS:
-    case GET_USER_POLLS_SUCCESS:
+    case GET_ALL_PARKS_SUCCESS:
+    case GET_USER_PARKS_SUCCESS:
       return Object.assign({}, state, {
         spinnerClass: "spinner__hide",
         modal: {
           class: "modal__hide"
         },
-        polls: [...action.payload.polls]
+        parks: [...action.payload]
       });
 
     /*
-    *  Called from: <CreatePoll />, <ViewPoll />, <AllPolls />, <UserPolls />
+    *  Called from: <CreatePark />, <ViewPark />, <AllParks />, <UserParks />
     *  Payload: Error message
     *  Purpose: Display error message
     */
-    case GET_PARTIAL_PROFILE_FAILURE:
-    case DELETE_POLL_FAILURE:
-    case UPDATE_POLL_FAILURE:
-    case GET_USER_POLLS_FAILURE:
-    case GET_ALL_POLLS_FAILURE:
-    case VIEW_POLL_FAILURE:
-    case CREATE_POLL_FAILURE:
+    case GET_USER_PARKS_FAILURE:
+    case GET_ALL_PARKS_FAILURE:
+    case VIEW_PARK_FAILURE:
+    case GET_GUESTLIST_FAILURE:
+      if (action.type === GET_ALL_PARKS_FAILURE) {
+        console.log(action.payload);
+      }
       if (typeof action.payload.message === "string") {
         error = action.payload.message;
       } else {
@@ -389,7 +309,7 @@ function poll(state = INITIAL_STATE, action) {
         }
       });
 
-    case VOTE_FAILURE:
+    case CHECKIN_FAILURE:
       if (typeof action.payload.message === "string") {
         error = action.payload.message;
       } else {
@@ -403,12 +323,11 @@ function poll(state = INITIAL_STATE, action) {
           text: error,
           title,
           buttonText: "Try again"
-        },
-        voted: true
+        }
       });
 
     /*
-    *  Called From: <CreatePoll />
+    *  Called From: <CreatePark />
     *  Payload: N/A
     *  Purpose: Hide spinner, show success modal about email verification.
     */
@@ -426,7 +345,7 @@ function poll(state = INITIAL_STATE, action) {
       });
 
     /*
-    *  Called from: <CreatePoll />
+    *  Called from: <CreatePark />
     *  Payload: Error message
     *  Purpose: Display an error message to the user.
     */
@@ -452,4 +371,4 @@ function poll(state = INITIAL_STATE, action) {
   }
 }
 
-export default poll;
+export default park;

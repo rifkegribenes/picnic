@@ -47,6 +47,13 @@ class Form extends React.Component {
     this.props.actions.setFormField(e.target.id, e.target.value, reducer);
   }
 
+  handleKeydown(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      this.props.formAction();
+    }
+  }
+
   handleBlur(e, reducer) {
     const field = e.target.name;
 
@@ -116,6 +123,7 @@ class Form extends React.Component {
       return (
         <div className="form__input-group" key={name}>
           <FormInput
+            handleKeydown={e => this.handleKeydown(e)}
             handleChange={e => this.handleInput(e, reducer)}
             handleBlur={e => this.handleBlur(e, reducer)}
             handleFocus={e => this.handleFocus(e, reducer)}
@@ -136,16 +144,16 @@ class Form extends React.Component {
     const buttonState = this.props[reducer].showFormError
       ? "form__button--disabled"
       : "";
-    const errorClass =
-      this.props[reducer].form.error ||
-      (this.props[reducer].showFormError &&
-        this.state.submit &&
-        Object.values(this.props[reducer].form.validationErrors).length)
-        ? "error"
-        : "hidden";
+    // const errorClass =
+    //   this.props[reducer].form.error ||
+    //   (this.props[reducer].showFormError &&
+    //     this.state.submit &&
+    //     Object.values(this.props[reducer].form.validationErrors).length)
+    //     ? "error"
+    //     : "hidden";
     return (
       <div>
-        <form className="form">
+        <form className={`form ${this.props.className || ""}`}>
           <div className="form__body">
             {(this.props.form === "reset" ||
               this.props.form === "resetPwd") && (
@@ -199,7 +207,10 @@ class Form extends React.Component {
                   className={`form__button form__button--bottom ${buttonState}`}
                   id={`btn-${reducer}`}
                   type="button"
-                  onClick={() => this.props.formAction()}
+                  onClick={e => {
+                    e.preventDefault();
+                    this.props.formAction();
+                  }}
                 >
                   <span>{this.props.buttonText}</span>
                 </button>
@@ -281,7 +292,8 @@ Form.propTypes = {
     }).isRequired,
     spinnerClass: PropTypes.string
   }).isRequired,
-  poll: PropTypes.shape({
+  className: PropTypes.string,
+  park: PropTypes.shape({
     errorMsg: PropTypes.string,
     form: PropTypes.shape({
       firstName: PropTypes.string,
@@ -326,7 +338,7 @@ Form.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  poll: state.poll,
+  park: state.park,
   appState: state.appState
 });
 

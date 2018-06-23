@@ -2,7 +2,9 @@
 
 ### [picnic.glitch.me](https://picnic.glitch.me)
 
-![picnic screenshot](https://raw.githubusercontent.com/rifkegribenes/picnic/master/client/public/img/screenshot1.png)
+![picnic screenshot](#)
+
+This was supposed to be a nightlife coordination app but I don't drink, or leave my house after dark, so it's this instead.
 
 ### User stories:
 

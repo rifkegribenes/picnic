@@ -46,7 +46,8 @@ const UserSchema = new Schema({
     exp: String,
   },
   verified: { type: Boolean, default: false },
-  role: { type: String }
+  role: { type: String },
+  savedSearch: { type: String }
 },
   {
     timestamps: true

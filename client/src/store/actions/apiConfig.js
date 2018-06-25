@@ -5,8 +5,8 @@
 
 /* ================================= SETUP ================================= */
 
-const prodUrl = "https://picnic.glitch.me";
-const devUrl = "http://localhost:3001"; // server url for local install
+const prodUrl = "https://picn1c.herokuapp.com/";
+// const devUrl = "http://localhost:3001"; // server url for local install
 
 /* ================================ EXPORTS ================================ */
 
@@ -15,5 +15,4 @@ const devUrl = "http://localhost:3001"; // server url for local install
 
 // export const BASE_URL = devUrl;
 export const BASE_URL = prodUrl;
-
 // export const BASE_URL = (ENVIRONMENT === 'PRODUCTION' ? prodUrl : devUrl);

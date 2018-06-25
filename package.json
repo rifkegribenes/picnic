@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "webpack -d | node server.js",
     "client": "cd client && yarn build && yarn start",
     "sass": "cd client && yarn sass",
     "server": "LOG_LEVEL=debug nodemon --inspect server.js",
@@ -56,5 +56,8 @@
     "sanitize-html": "^1.18.2",
     "slugify": "^1.2.9",
     "yelp-fusion": "^2.0.3"
+  },
+  "engines": {
+    "node": "10.0.0"
   }
 }

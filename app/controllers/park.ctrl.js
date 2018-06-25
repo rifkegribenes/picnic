@@ -1,7 +1,6 @@
 const Park = require('../models/park');
 const User = require('../models/user');
 const helpers = require('../utils/index');
-const update = require("immutability-helper");
 
 // Get all parks
 exports.getAllParks = (req, res, next) => {

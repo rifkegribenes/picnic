@@ -39,7 +39,7 @@ class Home extends React.Component {
         <h2 className="splash__header">
           Enter your city and click 'Search' to find parks in your area.
         </h2>
-        <p className="splash_text">
+        <p className="splash__text">
           Check in at a park to let your friends know where to find you. Plan a
           picnic.
         </p>

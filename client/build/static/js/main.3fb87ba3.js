@@ -5527,7 +5527,7 @@
     n.d(t, "a", function() {
       return r;
     });
-    var r = "https://picnic.glitch.me";
+    var r = "https://picn1c.herokuapp.com/";
   },
   function(e, t, n) {
     "use strict";
@@ -21939,8 +21939,8 @@
                     "Enter your city and click 'Search' to find parks in your area."
                   ),
                   u.a.createElement(
-                    "p",
-                    { className: "splash_text" },
+                    "center",
+                    { className: "splash__text" },
                     "Check in at a park to let your friends know where to find you. Plan a picnic."
                   ),
                   u.a.createElement(d.a, null),
@@ -26982,4 +26982,4 @@
     );
   }
 ]);
-//# sourceMappingURL=main.8c59e36b.js.map
+//# sourceMappingURL=main.3fb87ba3.js.map

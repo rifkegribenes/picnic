@@ -9,7 +9,7 @@ import ghIcon from "../img/github-white.svg";
 import fbIcon from "../img/facebook-white.svg";
 import ggIcon from "../img/google-white.svg";
 
-const serverUrl = "http://localhost:3001";
+const serverUrl = "https://picn1c.herokuapp.com";
 
 const SocialAuth = props => (
   <div className="combo__social-wrap">

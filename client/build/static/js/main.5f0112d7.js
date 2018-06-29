@@ -24711,7 +24711,7 @@
       d = n.n(p),
       h = n(274),
       m = n.n(h),
-      y = "http://localhost:3001",
+      y = "https://picn1c.herokuapp.com",
       v = function(e) {
         return o.a.createElement(
           "div",
@@ -26982,4 +26982,4 @@
     );
   }
 ]);
-//# sourceMappingURL=main.3fb87ba3.js.map
+//# sourceMappingURL=main.5f0112d7.js.map

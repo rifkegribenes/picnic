@@ -5527,7 +5527,7 @@
     n.d(t, "a", function() {
       return r;
     });
-    var r = "https://picn1c.herokuapp.com/";
+    var r = "https://picn1c.herokuapp.com";
   },
   function(e, t, n) {
     "use strict";
@@ -26982,4 +26982,4 @@
     );
   }
 ]);
-//# sourceMappingURL=main.5f0112d7.js.map
+//# sourceMappingURL=main.e78aa3ba.js.map

@@ -5,7 +5,7 @@
 
 /* ================================= SETUP ================================= */
 
-const prodUrl = "https://picn1c.herokuapp.com/";
+const prodUrl = "https://picn1c.herokuapp.com"; // NO TRAILING SLASH
 // const devUrl = "http://localhost:3001"; // server url for local install
 
 /* ================================ EXPORTS ================================ */

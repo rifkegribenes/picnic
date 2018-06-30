@@ -1,8 +1,8 @@
 ## picnic (Freecodecamp Project)
 
-### [picnic.glitch.me](https://picnic.glitch.me)
+### [picn1c.herokuapp.com](https://picn1c.herokuapp.com/)
 
-![picnic screenshot](#)
+![picnic screenshot](https://raw.githubusercontent.com/rifkegribenes/picnic/master/client/public/img/Screenshot.png)
 
 This was supposed to be a nightlife coordination app but I don't drink, or leave my house after dark, so it's this instead.
 

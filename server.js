@@ -25,7 +25,7 @@ mongoose.Promise = global.Promise;
 require('./app/config/passport')(passport); // pass passport for configuration
 
 // Basic middleware for all Express requests
-app.use(favicon(path.join(__dirname, '../client/public/favicon.ico'))); // serve favicon
+app.use(favicon(path.join(__dirname, '/client/public/favicon.ico'))); // serve favicon
 app.use(bodyParser.urlencoded({ extended: true })); // Parses urlencoded bodies
 app.use(bodyParser.json()); // Send JSON responses
 app.use(morgan('dev')); // Log requests to API using morgan

@@ -155,7 +155,7 @@ const shortEmail = (title, appName, url, preheader, headline, heroUrl, body, but
                     <tr style="max-height: 180px;">
                         <td align="center" valign="top" style="padding: 15px 0 0 0; display: flex; justify-content: center;" class="logo">
                             <a href=${CLIENT_URL} target="_blank" style="padding: 0; width: 100%; text-align: center;">
-                                <img alt="picnic" src="https://raw.githubusercontent.com/rifkegribenes/picnic/master/client/public/img/picnic.png" style="display: block; margin: auto; width:100%; max-width: 500px; height: auto; max-height: 180px;" border="0">
+                                <img alt="picnic" src="https://raw.githubusercontent.com/rifkegribenes/picnic/master/client/public/img/email-banner.png" style="display: block; margin: auto; width:100%; max-width: 500px; height: auto; max-height: 180px;" border="0">
                             </a>
                         </td>
                     </tr>

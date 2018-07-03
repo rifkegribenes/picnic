@@ -259,7 +259,7 @@ exports.pwResetTemplate = (url) => {
       url, // url
       'Click here to reset your password', // preheader
       'Forgot your password?', // headline
-      'https://raw.githubusercontent.com/rifkegribenes/picnic/master/client/public/img/email-banner.png', // heroUrl
+      'https://raw.githubusercontent.com/rifkegribenes/picnic/master/client/public/img/key_500.gif', // heroUrl
       'No problem! Click below to reset it!', // body
       'Reset Password', // buttonText
       'picnic | rifkegribenes.io' // footerText
@@ -287,7 +287,7 @@ exports.verificationTemplate = (url) => {
     url, // url
     'Click here to verify your email', // preheader
     'Welcome!', // headline
-    'https://raw.githubusercontent.com/rifkegribenes/picnic/master/client/public/img/email-banner.png', // heroUrl
+    'https://raw.githubusercontent.com/rifkegribenes/picnic/master/client/public/img/envelope_500.png', // heroUrl
     'Click below to verify your email:', // body
     'Verify Email', // buttonText
     'picnic | rifkegribenes.io' // footerText

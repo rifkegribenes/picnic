@@ -262,7 +262,7 @@ exports.pwResetTemplate = (url) => {
       'https://raw.githubusercontent.com/rifkegribenes/picnic/master/client/public/img/key_500.gif', // heroUrl
       'No problem! Click below to reset it!', // body
       'Reset Password', // buttonText
-      'picnic | rifkegribenes.io' // footerText
+      '<a href="https://picn1c.herokuapp.com/">picnic</a> | rifkegribenes.io'  // footerText
       );
  };
 
@@ -276,7 +276,7 @@ exports.pwResetConfirmation = () => {
       'https://raw.githubusercontent.com/rifkegribenes/picnic/master/client/src/img/checkbox_500x180.png', // heroUrl
       'Or somebody did...\nIf it wasn\'t you, please contact us right away and get that fixed!', // body
       'My Account', // buttonText
-      'picnic | rifkegribenes.io' // footerText
+      '<a href="https://picn1c.herokuapp.com/">picnic</a> | rifkegribenes.io' // footerText
       );
  };
 

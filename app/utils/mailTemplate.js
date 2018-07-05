@@ -290,6 +290,6 @@ exports.verificationTemplate = (url) => {
     'https://raw.githubusercontent.com/rifkegribenes/picnic/master/client/public/img/envelope_500.png', // heroUrl
     'Click below to verify your email:', // body
     'Verify Email', // buttonText
-    'picnic | rifkegribenes.io' // footerText
+    '<a href="https://picn1c.herokuapp.com/">picnic</a> | rifkegribenes.io'  // footerText
     );
 };

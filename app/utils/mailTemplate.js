@@ -259,7 +259,7 @@ exports.pwResetTemplate = (url) => {
       url, // url
       'Click here to reset your password', // preheader
       'Forgot your password?', // headline
-      'https://raw.githubusercontent.com/rifkegribenes/picnic/master/client/public/img/key_500.gif', // heroUrl
+      'https://raw.githubusercontent.com/rifkegribenes/picnic/master/client/public/img/padlock_banner.png', // heroUrl
       'No problem! Click below to reset it!', // body
       'Reset Password', // buttonText
       '<a href="https://picn1c.herokuapp.com/">picnic</a> | rifkegribenes.io'  // footerText

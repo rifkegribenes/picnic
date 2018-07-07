@@ -180,7 +180,7 @@ const shortEmail = (title, appName, url, preheader, headline, heroUrl, body, but
                                         <!-- COPY -->
                                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                             <tr>
-                                                <td align="center" style="font-size: 25px; font-family: 'Titillium Web', Helvetica, Arial, sans-serif; color: #833ab4; padding-top: 30px;" class="padding">${headline}</td>
+                                                <td align="center" style="font-size: 25px; font-family: 'Titillium Web', Helvetica, Arial, sans-serif; color: #006838; padding-top: 30px;" class="padding">${headline}</td>
                                             </tr>
                                             <tr>
                                                 <td align="center" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: 'Titillium Web', Helvetica, Arial, sans-serif; color: #666666;" class="padding">${body}</td>
